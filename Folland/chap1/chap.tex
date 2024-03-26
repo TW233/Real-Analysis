@@ -1,0 +1,833 @@
+\ifx\allfiles\undefined
+\input{../config/config}
+\begin{document}
+	% \input{../config/cover} 
+	\else
+	\fi
+	%  ############################ 正文部分
+\chapter{课程要求}
+	\begin{itemize}
+		\item \textbf{任课教师}：刘小川
+		
+		\item \textbf{辅导时间}：希腊奶
+		
+		\item \textbf{办公室}：数学楼$206$
+		
+		\item \textbf{$Email$}：$liuxiaochuan@mail.xjtu.edu.cn$
+		
+		\item \textbf{总评成绩组成}：期末$70\%$ + 平时$30\%$
+		
+		\item 考试英文题，答题中 / 英
+	\end{itemize}
+
+\chapter{集合论}
+
+\section{集合列的上下极限}
+
+\subsection{集合族的上下确界}
+\paragraph{定义}
+	首先，对于任意一族集合$\{ E_n \}_{n \in I}$，我们给出其上界和上确界的定义：
+	\begin{defn}\label{def 1.1.1}
+		对于$\{ E_n \}_{n \in I}$，若集合$F$ 满足$E_n \subseteq F , \forall n \in I$，则称$F$ 为集合族$\{ E_n \}_{n \in I}$ 的\underline{\textbf{上界}}
+	\end{defn}
+
+	\begin{defn}\label{def 1.1.2}
+		$\{ E_n \}_{n \in I}$ 的上界的交成为$\{ E_n \}_{n \in I}$ 的\underline{\textbf{上确界}}，即
+		\begin{align}
+			\sup_{n \in I}{E_n} = \bigcup_{n \in I}{E_n}
+		\end{align}
+	\end{defn}
+	类似的可给出下界及下确界的定义.\\
+	
+\paragraph{性质}
+	下面给出两条关于上下确界的显然的性质：
+	\begin{proposition}\label{prop 1.1.1}
+		若指标集$I_1 \supseteq I_2$，则：
+		\begin{align}
+			\sup_{n \in I_1}{E_n} &\supseteq \sup_{n \in I_2}{E_n}\\
+			\inf_{n \in I_1}{E_n} &\subseteq \inf_{n \in I_2}{E_n}
+		\end{align}
+	\end{proposition}
+
+\subsection{集合列的上下极限}
+\paragraph{定义}
+	我们取
+	\begin{align}
+		I_k \coloneqq \{ n \in \N \mid n \geq k \}
+	\end{align}
+	则$\{ I_k \}_{k = 1}^{\infty}$ 单调，从而根据命题\ref{prop 1.1.1}可知，集合列$\{ \sup_{n \in I_k}{E_n} \}_{k = 1}^{\infty} , \{ \inf_{n \in I_k}{E_n} \}_{k = 1}^{\infty}$ 也单调(前者递减，后者递增)，从而可定义任一集合列的上下极限：
+	\begin{defn}\label{def 1.1.3}
+		\begin{align}
+			\limsup_{n \to \infty}{E_n} 
+			= \varlimsup_{n \to \infty}{E_n} 
+			&\coloneqq \lim_{k \to \infty}{\sup_{n \in I_k}{E_n}} 
+			= \bigcap_{k = 1}^{\infty}{\bigcup_{n = k}^{\infty}{E_n}}\\
+			\liminf_{n \to \infty}{E_n} 
+			= \varliminf_{n \to \infty}{E_n} 
+			&\coloneqq \lim_{k \to \infty}{\inf_{n \in I_k}{E_n}} 
+			= \bigcup_{k = 1}^{\infty}{\bigcap_{n = k}^{\infty}{E_n}}
+		\end{align}
+	\end{defn}
+
+\paragraph{性质}
+	下面给出集合列的上下极限的性质，也可视作等价定义 / 不同观点
+	\begin{proposition}\label{prop 1.1.2}
+		\begin{align}
+			\varlimsup_{n \to \infty}{E_n} &= \{ x \mid x \in E_n \text{对无穷多个$n$ 成立} \}\\
+			\varliminf_{n \to \infty}{E_n} &= \{ x \mid x \in E_n \text{对除有限个$n$ 成立} \}
+		\end{align}
+	\end{proposition}
+
+	根据$Demorgan$ 定律可得，
+		\[\varliminf_{n \to \infty}{E_n} = (\varlimsup_{n \to \infty}{E_{n}^{c}})^c\]
+		
+\section{$Descartes$ 积的推广}
+\paragraph{引入}
+	首先我们回忆两个(有限个)集合的$Descartes$积的定义
+	\begin{align}
+		A \times B \coloneqq \{ (x , y) \mid x \in A , \,\, y \in B \}
+	\end{align}
+	此处定义的$Descartes$ 积与普通的集合的一个显著的区别就是他是\textbf{有序的}，这里的\textbf{“有序对”}$(x , y)$与$(y , x)$ 并不相同，这就引出了几个问题：
+	\begin{itemize}
+		\item 什么是$(x , y)$，即“有序对”的定义是什么？
+		
+		\item $x , \,\, y$ 的顺序是否重要？\\
+		或者对于更一般的一族集合的$Descartes$ 积是否仍可定义\textbf{“顺序”}？
+	\end{itemize}
+	在解答这些问题之前，我们先来引入一个函数
+	\begin{align}
+		f : \{ 1 , 2 \} &\longrightarrow A \cup B\\
+		1 &\longmapsto x \in A\\
+		2 &\longmapsto y \in B
+	\end{align}
+	则此时函数$f$ 已经给出了我们上面所需的\textbf{“序关系”}，即可用以表示$(x , y)$\\
+	但这时又冒出了几个新的疑惑：
+	\begin{itemize}
+		\item 指标集$\{ 1 , 2 \}$ 的选取是否重要？
+		\begin{rmk}
+			此处的回答显然为否，即我们选取指标集时不应牵扯到角标，比如此处可用$\{ 1 , 2 \}$，也可用$\{ 3 , 4 \}$，或是$\{ c , d \}$，即只需指标集中\textbf{“元素的个数”}相同，而无需考虑具体形式
+		\end{rmk}
+		
+		\item 指标集是否必须为\textbf{有限}集？或是\textbf{可数}集？
+	\end{itemize}
+	
+\paragraph{定义}
+	为了解答上述疑惑，下面我们给出更一般的$Descartes$积的定义：
+	\begin{defn}\label{def 1.2.1}
+		设$J$ 为一个指标集，$\{ E_n \}_{n \in J}$ 为一族集合，定义集合$T$
+		\begin{align}
+			T \coloneqq \left\{ f : I \longrightarrow \bigcup_{n \in J}{E_n} \,\, \Big| \,\, I \approx J \right\}
+		\end{align}
+		并在集合$T$ 上定义等价关系$\sim$：
+		\begin{align}
+			f \sim g \Longleftrightarrow \exists \text{双射} \varphi , \,\, \st f \circ \varphi = g
+		\end{align}
+		在此基础上，定义集合族$\{ E_n \}_{n \in J}$ 的\underline{\textbf{$Descartes$积}}：
+		\begin{align}
+			\prod_{n \in J}{E_n} \coloneqq \left\{ \overline{f} \,\, \Big| \,\, f : J \longrightarrow \bigcup_{n \in J}{E_n} , \,\, \forall n \in J , \,\, f(n) \in E_n \right\}
+		\end{align}
+		\begin{rmk}
+			\begin{itemize}
+				\item $I \approx J$ 表示集合$I$ 与$J$ 等势，即存在$I$ 到$J$ 的双射
+				
+				\item $\overline{f}$ 表示$f$ 在集合$T$ 上的等价类，注意此处$Descartes$积中的$\overline{f}$ 剔除了$f$ 在$T$ 的等价类中不满足条件“$\forall n \in J , \,\, f(n) \in E_n$”的部分函数
+				
+				\item 此定义可理解为：\\
+				从每个$E_n$ 中各选一者一一置于一些\textbf{不记次序}的空位中，即构成一个\textbf{多重集}
+				
+				\item 这里$T$ 上的等价关系$\sim$ 保证了$Descartes$积中函数$f$ 指标集的选取只需考虑\textbf{集合的势}相等，即\textbf{元素的个数}相同
+			\end{itemize}
+		\end{rmk}
+	\end{defn}
+	
+\paragraph{推广}
+	事实上，推广后的定义已不包含集合的序概念，此时再将推广后的$Descartes$积与传统意义上在\textbf{可列集(有限 / 可数)}上定义的$Descartes$积进行对比：\\
+	设$J$ 是可列的，可先将$J$ 中元素排序为$j_1 , \,\, j_2 , \,\, j_3 , \cdots$，由此回到“传统的”$Descartes$积：
+	\begin{align}
+		E_{j_1} \times E_{j_2} \times E_{j_3} \times \cdots
+	\end{align}
+	事实上，该定义即为定义\ref{def 1.2.1}中$\prod_{n \in J}{E_n}$ 的一个代表元集\\
+	同时，在此基础上，我们还可将传统的\textbf{二元关系}拓展为\textbf{多元关系(即为$Descartes$ 积的子集)}
+	
+\newpage
+
+\section{序关系}
+\subsection{偏序，全序，预序}
+	首先回顾关系(二元关系)的概念：
+	\begin{defn}\label{def 1.3.1}
+		设$X , \,\, Y$ 是两个集合，如果集合$R$ 是$X$ 与$Y$ 的$Descartes$ 积的子集，即
+		\begin{align}
+			R \subseteq X \times Y
+		\end{align}
+		则称$R$ 是从$X$ 到$Y$ 的一个\underline{\textbf{二元关系(一般称作关系)}}.\\
+		于是，若$(x , y) \in R$，我们称$x$ 与$y$ 是$R-$ 相关的，记作$xRy$.
+	\end{defn}
+
+\paragraph{偏序}
+	此时便能给出偏序的定义：
+	\begin{defn}
+		设$X$ 为一个集合，满足如下三条公理的关系$R \subseteq X \times X$ 称作$X$ 上的一个\underline{\textbf{偏序关系}}：
+		\begin{enumerate}
+			\item $if \,\, xRy , \,\, yRz \Rightarrow xRz \,\,$(传递性)
+			
+			\item $if \,\, xRy , \,\, yRx \Rightarrow x = y \,\,$(反对称性)
+			
+			\item $xRx , \,\, \forall x \in X \,\,$(自反性)
+		\end{enumerate}
+	\end{defn}
+
+	\begin{example}\label{ex 1.3.1}
+		常见的偏序关系有：$\leq , \,\, \geq , \,\, \subseteq , \,\, \supseteq$，通常把一般的偏序关系记作小于等于$\leq$，上述定义是对常见的偏序关系的推广.
+	\end{example}
+
+	\begin{rmk}
+		\textbf{偏序关系}是由\textbf{等价关系}所衍生出来的，即先有了相等的概念后才能定义偏序关系.每一个等价关系可以衍生出很多偏序关系，实际上由同一个等价关系所衍生出的偏序关系并不是完全独立的，而是成对出现的(类似于$\subseteq$ 与$\supseteq$).
+		\begin{example}\label{ex 1.3.2}
+			由上述定义的偏序关系$R$ 可得到一个对偶的偏序关系$R^{'}$，其有如下的关系：
+			\begin{align}
+				xRy \Leftrightarrow yR^{'}x
+			\end{align}
+		\end{example}
+	\end{rmk}
+
+	下面给出一个偏序集的例子
+	\begin{example}\label{ex 1.3.3}
+		记全体复数构成集合$\C$，则$(\C , \leq)$ 是偏序集
+	\end{example}
+	\begin{rmk}
+		在例\ref{ex 1.3.3}中，我们不能说形如$a + bi(b \neq 0)$ 的元素之间不满足传递性/反对称性，\uwave{因为形如$a + bi(b \neq 0)$ 两个元素之间没有序关系}，此处实际只需考虑$\C$ 中实数之间的序关系\\
+		(之所以称偏序集中要求部分元素之间存在序关系，是因为除了反身性以外，其前提均要求选取的对象之间存在序关系。)
+	\end{rmk}
+
+\newpage
+\paragraph{全序}
+	在偏序的基础上，可再进一步地给出全序的概念：
+	\begin{defn}\label{def 1.3.3}
+		设$X$ 为一个集合，$R$ 为$X$ 上的一个偏序关系，如果$R$ 再同时满足以下性质：
+		\begin{align}
+			\forall x , \,\, y \in X , \,\, \st xRy \,\, or \,\, yRx
+		\end{align}
+		则称$R$ 为集合$X$ 上的一个\underline{\textbf{全序关系}}
+		\begin{rmk}
+			通俗地讲，若$X$ 中任意两个元素之间都满足关系$R$，即任意两个元素之间都可比较，则$(X , R)$ 为一个全序集
+		\end{rmk}
+	\end{defn}
+	
+	下面给出一个全序集的例子
+	\begin{example}\label{ex 1.3.4}
+		设集合$P = \{ \varnothing , \{ a \} , \{a , b \} , \{ a , b , c \} \}$，则$(P , \subseteq)$ 构成全序集
+	\end{example}
+
+\paragraph{预序}
+	\begin{defn}\label{def 1.3.4}
+		设$X$ 为一个集合，$R$ 为$X$ 上的一个二元关系，若$R$ 只满足自反性和传递性，即
+		\begin{enumerate}
+			\item $xRx , \,\, \forall x \in X \,\,$(自反性)
+			
+			\item $if \,\, xRy , \,\, yRz \Rightarrow xRz \,\,$(传递性)
+		\end{enumerate}
+		则称$R$ 为集合$X$ 上的一个\underline{\textbf{预序关系}}
+		\begin{rmk}
+			由定义可知，\textbf{全序集}一定是\textbf{偏序集}，\textbf{偏序集}一定是\textbf{预序集}
+		\end{rmk}
+	\end{defn}
+
+\subsection{极大元/极小元，上界/下界，良序}
+\paragraph{极大元/极小元}
+	下面给出偏序集上极小元的定义
+	\begin{defn}\label{def 1.3.5}
+		设$X$ 为一个集合，$\prec$ 为$X$ 上的一个偏序关系，如果存在$x \in X , \,\, \st$
+		\begin{align}
+			\forall y \in X , \,\, if \,\, y \preceq x , \,\, then \,\, y = x
+		\end{align}
+		则称$x$ 为$X$ 的一个\underline{\textbf{极小元}}
+		\begin{rmk}
+			\begin{enumerate}
+				\item 极小元即表示集合中小于或等于它的元素只有它本身，以下为一个等价定义：
+				\begin{align}
+					\not\exists y \in X , \,\, y \neq x , \,\, \st y \prec x
+				\end{align}
+			
+				\item 并不一定$X$ 中所有的元素都可与$x$ 进行比较，即可以有很多元素与$x$ 没有关系(不可比较大小)
+				
+				\item 对于任一偏序集$(X , \prec)$，极小元的存在性和唯一性都不一定成立
+			\end{enumerate}
+		\end{rmk}
+	\end{defn}
+	同理可给出极大元的定义.
+	
+\paragraph{上界/下界}
+	下面给出下界的定义
+	\begin{defn}\label{def 1.3.6}
+		设$X$ 为一个集合，$\prec$ 为$X$ 上的一个偏序关系，子集$E \subseteq X$，如果存在$x \in X , \,\, \st$
+		\begin{align}
+			x \preceq y , \,\, \forall y \in E
+		\end{align}
+		则称$E$ (在$X$ 中)有下界，$x$ 称为$E$ 的一个\underline{\textbf{下界}}
+		\begin{rmk}
+			集合$E$ 中的每一个元素$y$ 都与下界$x$ 有关系(与极小元的区别)
+		\end{rmk}
+	\end{defn}
+	同理可给出上界的定义.
+	
+\paragraph{良序}
+	在定义了极小元的基础上，可以进一步来给出良序的定义.
+	\begin{defn}\label{def 1.3.7}
+		设$(X , \prec)$ 为全序集，如果对于$\forall Y \subseteq X , \,\, Y \neq \varnothing$，$Y$ 有极小元，则称$\prec$ 为$X$ 上的一个\underline{\textbf{良序关系}}
+	\end{defn}
+	
+\subsection{保序同构，序型}
+
+
+
+
+
+\newpage
+\section{$Hausdorff$ 极大原理，$Zorn$ 引理}
+	\begin{center}
+		注意这两个都是\textbf{公理}性质，是无法被证明的，只能互相推导
+	\end{center}
+
+\paragraph{$Hausdorff$ 极大原理}
+	下面给出$Hausdorff$ 极大原理的叙述.
+	\begin{thm}\label{thm 1.4.1}
+		任一偏序集都有极大的全序子集.
+		\begin{rmk}
+			此处的\textbf{“极大”}指的是，对于集合$\{ \text{该偏序集的所有全序子集} \}$，在包含$\subseteq$ 的偏序关系下的极大元
+		\end{rmk}
+	\end{thm}
+
+\vspace*{2em}
+\paragraph{$Zorn$ 引理}
+	下面给出$Zorn$ 引理的叙述.
+	\begin{thm}\label{thm 1.4.2}
+		若偏序集$X$ 的每个全序子集都有上界，则$X$ 有极大元.
+		\begin{rmk}
+			此处的上界只需满足存在性，而无需满足唯一性.
+		\end{rmk}
+	\end{thm}
+
+\vspace*{2em}
+\paragraph{相互推导}
+	事实上，$Hausdorff$ 极大原理和$Zorn$ 引理是等价的.
+	\begin{proof}
+		\begin{enumerate}
+			\item[“$\Rightarrow$”：] 设$(X , \prec)$ 为一个偏序集，\\
+			根据$Hausdorff$ 极大原理，在包含关系$\subseteq$ 下，得到极大全序子集$Y$.\\
+			根据$Zorn$ 引理的假设，$Y \subseteq X$ 存在上界$x$，则$x \in Y$\\
+			(否则$Y \cup \{ x \}$ 构成的全序子集与$Y$ 的极大性矛盾)\\
+			从而$x$ 即为$X$ 的极大元.(否则若存在更大的$y$，则同理$Y \cup \{ y \}$与$Y$ 极大性矛盾)
+			
+			\vspace*{1em}
+			
+			\item[“$\Leftarrow$”：] 设$(X , \prec)$ 为一个偏序集，下面证明$X$ 有极大的全序子集：\\
+			记集合$Z$
+			\begin{align}
+				Z = \{ X \text{的所有全序子集} \}
+			\end{align}
+			从而集合$Z$ 与包含关系$\subseteq$ 构成了一个偏序集.令
+			\begin{align}
+				A = \bigcup_{U \in Z}{U}
+			\end{align}
+			从而$A \subseteq X$ 即为$Z$ 中所有元素的上界.\\
+			根据$Zorn$ 引理，$Z$ 在偏序关系$\subseteq$ 下有极大元，也就说明了$X$ 有极大的偏序子集.
+			
+		\end{enumerate}
+	\end{proof}
+
+
+\newpage
+\section{良序原理，选择公理}
+	\begin{center}
+		对这两个\textbf{公理}的证明需要首先承认$Hausdorff$ 极大原理 / $Zorn$ 引理
+	\end{center}
+\subsection{良序原理}
+	下面给出良序原理的叙述.
+	\begin{thm}\label{thm 1.5.1}
+		任一非空集必为良序集.(任一非空集存在良序)
+	\end{thm}
+	\begin{proof}
+		设$X$ 是个非空集，考虑$X$ 的所有子集的良序构成的集合$W$.\\
+		注意到$W$ 中的每个元素，即为各良序关系$\prec_1 , \,\, \prec_2$，都附着着其对应的$X$ 的子集$E_1 , \,\, E_2$\\
+		(因为对于不同的子集$E_1 , \,\, E_2$，即使在相同的位置其良序关系相同(即$x_1 \prec_1 x_2 \,\, \&\& \,\, x_1 \prec_2 x_2$)，但其在整个子集上的良序关系还是不同的)\\
+		因此$W$ 中的元素应当表述为各良序关系(主体)与其对应的子集构成的有序对$(\prec , E)$\\
+		在$W$ 中引入这样的偏序关系，记作$\leq$：
+		\begin{align}
+			(\prec_1 , E_1) \leq (\prec_2 , E_2) \Leftrightarrow 
+			\begin{cases}
+				E_1\subseteq E_2\\
+				\prec_2\mid_{E_1}^{}=\prec_1\\
+				\forall x\in E_2 \backslash E_1, \,\, y\in E_1, \,\, y \prec_2 x\\
+			\end{cases}
+		\end{align}
+		也就是说，$\prec_2$ 是$\prec_1$ 的延拓，$\prec_1$ 是$\prec_2$ 在$E_1$ 上的限制，同时$E_2$ 超出$E_1$ 的部分在$\prec_2$ 的意义下总是比$E_1$ 中的元素更大.\\
+		下面我们尝试运用$Zorn$ 引理(定理\ref{thm 1.4.2})来证明.任取$W$ 的全序子集$Y$，记
+		\begin{align}
+			Y = \{ \prec_{\alpha} \}_{\alpha \in I}
+		\end{align}
+		令
+		\begin{align}
+			E_Y = \bigcup_{\alpha \in I}{E_\alpha}
+		\end{align}
+		同理可得到该$X$ 的子集$E_Y$ 下的良序关系$\prec_Y$，此$\prec_Y$ 即为$W$ 的全序子集$Y$ 的上界.\\
+		根据$Zorn$ 引理(定理\ref{thm 1.4.2})，$W$ 中有极大元$(\prec , E)$.\\
+		事实上，此处$E = X$，$\prec$ 即为$X$ 上的一个良序关系.\\
+		(反证法.假设$E \neq X$，设$x \in X \backslash E$，此时可定义$x \prec y , \,\, \forall y \in E$，则$E \cup \{ x \}$ 即可得到$X$ 的一个全序子集，$E \cup \{ x \} \in W$，这与$E$ 的极大性矛盾.)
+	\end{proof}
+
+\newpage
+\subsection{选择公理}
+	下面给出选择公理的叙述.
+	\begin{thm}\label{thm 1.5.2}
+		非空的非空集族的$Descartes$ 积非空.
+		\begin{rmk}
+			\begin{itemize}
+				\item \textbf{“非空的非空集族”}就是指有一族非空集，其中这一族非空集的个数至少为1
+				
+				\item \textbf{“$Descartes$ 积非空”}大致上说的是可以不计次序从每个非空集中取出一个元素，构成一个多重集(具体可见定义\ref{def 1.2.1})
+			\end{itemize}
+		\end{rmk}
+	\end{thm}
+
+\vspace*{1em}
+	下面我们利用良序原理来对选择公理进行证明.
+	\begin{proof}
+		设$\{ X_\alpha \}_{\alpha \in I}$ 为一族非空集，其中$X_\alpha \neq \varnothing , \,\, I \neq \varnothing$.\\
+		根据良序原理(定理\ref{thm 1.5.1})，集合$\underset{\alpha \in I}{\bigcup}{X_\alpha}$ 存在一个良序关系$\prec$\\
+		由于$(\underset{\alpha \in I}{\bigcup}{X_\alpha} , \prec)$ 为良序集，因此其非空子集$X_\alpha \subseteq \underset{\alpha \in I}{\bigcup}{X_\alpha}$均有极小元.
+		定义映射$f$
+		\begin{align}
+			f : I &\longrightarrow \bigcup_{\alpha \in I}{X_\alpha}\\
+			\alpha &\longmapsto \min_{\prec}{X_\alpha}
+		\end{align}
+		从而
+		\begin{align}
+			\overline{f} \in \prod_{\alpha \in I}{X_\alpha} , \,\, \prod_{\alpha \in I}{X_\alpha} \neq \varnothing
+		\end{align}
+	\end{proof}
+
+\newpage
+\section{集合的势$Cardinality$}
+\paragraph{引入}
+	为了更好地理解势的概念，我们先给出势的比较关系.对于非空集$X , \,\, Y$，我们定义.
+	\begin{align}
+		\begin{cases}
+			card\left( X \right) \leqslant card\left( Y \right)\\
+			card\left( X \right) =card\left( Y \right)\\
+			card\left( X \right) \geqslant card\left( Y \right)\\
+		\end{cases}
+	\end{align}
+	分别表示存在从$X$ 到$Y$ 的\textbf{单射、双射、满射}.这与常规下集合元素个数的比较是吻合的.
+	
+\vspace*{2em}
+\paragraph{定义}
+	此时再去赋予势$card$ 的意义.
+	\begin{defn}\label{def 1.6.1}
+		设$X$ 为一个集合，定义$X$的\underline{\textbf{势($Cardinality$)}}.
+		\begin{align}
+			card(X) \coloneqq \{ Y \text{为集合} \mid \text{存在由$X$ 到$Y$ 的单射} \}
+		\end{align}
+		记$S$ 为全体集合构成的真类，$S^*$ 为全体非空集合构成的真类.在$S^*$ 上定义等价关系$R$：
+		\begin{align}
+			xRy \Leftrightarrow \text{存在由$X$ 到$Y$ 的双射}
+		\end{align}
+		则势的概念自然即为$X$ 在关系$R$ 下的等价类，即
+		\begin{align}
+			card(X) = \overline{X}
+		\end{align}
+		\begin{rmk}
+			规定$card(\varnothing) < card(X) , \,\, card(X) > card(\varnothing) , \,\, \forall X \neq \varnothing$，进而定义中的$S^*$ 可修正为$S$.其中$card(\varnothing) = \{ \varnothing \}$.
+		\end{rmk}
+	\end{defn}
+
+\vspace*{2em}
+\paragraph{严格证明}
+	在大致给出了集合的势的概念后，下面对其中的一些概念进行严格的定义和证明.\\
+	对于最开始在全集合类$S$ 中引入的关系$\leq$，下面证明其为$S$ 上的一个偏序关系.\\
+	事实上，我们还会证明$\leq$ 是$S$ 上的全序关系，即任意两个集合的势都可比较.
+	
+	\vspace*{1em}
+	对偏序关系的三条公理进行一一验证.即\textbf{传递性、自反性、反对称性}.同时证明\textbf{$\leq$ 与$\geq$ 互为逆关系}，$\leq$ 同时为\textbf{全序关系}.
+	
+	\subparagraph{自反性、传递性}
+		事实上自反性和传递性的证明是显然的.
+		
+	\vspace*{2em}
+	\subparagraph{逆关系}
+		下面的引理证明了$\leq$ 与$\geq$ 互为逆关系.
+		\begin{lemma}\label{lemma 1.6.1}
+			设$X , \,\, Y \in S^*$，则
+			\begin{align}
+				card(X) \leq card(Y) \Leftrightarrow card(Y) \geq card(X)
+			\end{align}
+			\begin{proof}
+				即证：存在$X$ 到$Y$ 的单射$f \,\, \Leftrightarrow \,\,$ 存在$Y$ 到$X$ 的满射$g$.
+				\begin{enumerate}
+					\item[$\Rightarrow$：]由于$f$ 为单设，因此$\forall y \in f(X) , \,\, \exists$ 唯一的$x \in X , \,\, \st y = f(x)$.\\
+					于是可构造
+					\begin{align}
+						g : Y &\longrightarrow X\\
+						y &\longmapsto \begin{cases}
+							x , \,\, y=f\left( x \right) \hspace*{3em} &y\in f\left( X \right)\\
+							x_0 , \,\, \forall x_0\in X                &y\notin f\left( X \right)
+						\end{cases}
+					\end{align}
+					从而$g$ 即为$Y$ 到$X$ 的满射.
+					
+					\item[$\Leftarrow$：]由于$g$ 为$Y$ 到$X$ 的满射，因此对于$\forall x \in X , \,\, g^{-1}(x) \subseteq Y$ 为$Y$ 的一个非空子集.\\
+					记$Y$ 的子集族$Z$为
+					\begin{align}
+						Z = \{ g^{-1}(x) \mid x \in X \} = \{ g^{-1}(x) \}_{x \in X}
+					\end{align}
+					由于$X , \,\, Y \in S^*$ 非空，因此$Z$ 为非空的非空集族.\\
+					根据选择公理(定理\ref{thm 1.5.2})，$Z$ 的$Descartes$ 积非空，\\
+					即存在一个由指标集$X$ 到$\underset{x \in X}{\bigcup}{g^{-1}(x)}$ 的单射$f$
+					\begin{align}
+						f : X &\longrightarrow \bigcup_{x \in X}{g^{-1}(x)} \subseteq Y\\
+						x &\longmapsto f(x)
+					\end{align}
+					此选择映射$f$ 即为所求单射.
+				\end{enumerate}
+			\end{proof}
+		\end{lemma}
+	
+		\vspace*{2em}
+		\subparagraph{全序关系}
+		下面的引理说明了$\leq$ 实际上还是$S$ 上的一个全序关系，其证明具有一定技巧性.
+		\begin{lemma}\label{lemma 1.6.2}
+			$\forall X , \,\, Y \in S$
+			\begin{align}
+				card(X) \leq card(Y) \,\, \text{或} \,\, card(Y) \leq card(X)
+			\end{align}
+			\begin{proof}
+				不妨设$X , \,\, Y \in S^*$.(映射实际上为特殊的二元关系).令
+				\begin{align}
+					\mathcal{I} = \{ f : X_0 \longrightarrow Y \mid X_0 \subseteq X , \,\, f \text{为单射} \} \subseteq X \times Y
+				\end{align}
+				类比良序原理(定理\ref{thm 1.5.1})的证明，在集合$\mathcal{I}$ 上定义偏序$\subseteq$.
+				\begin{align}
+					f \subseteq g \Leftrightarrow \begin{cases}
+						X_f \subseteq X_g\\
+						g \, \Big|_{X_f} = f
+					\end{cases}
+				\end{align}
+				从而对于$\mathcal{I}$ 的每个全序子集$E$，取$X_E = \underset{f \in E}{\bigcup}{X_f}$，其对应的映射$f_E$ 即为$E$ 的上界.\\
+				于是偏序集$(\mathcal{I} , \subseteq)$ 满足$Zorn$ 引理(定理\ref{thm 1.4.2})的条件，存在极大元$f : X_0 \longrightarrow Y$.\\
+				假设$X_0 \neq X$ 且$f(X_0) \neq Y$，则$\exists x \in X \backslash X_0 , \,\, y \in Y \backslash f(X)$，此时令
+				\begin{align}
+					f^{'} \mid_{X_0} &= f\\
+					f^{'} : x &\longmapsto y
+				\end{align}
+				从而得到单射$f^{'} \in I$，且$f \subseteq f^{'}$，这与$f$ 的极大性矛盾.\\
+				综上，$X_0 = X$ 或$f(X_0) = Y$，即必定存在$X$ 到$Y$的单射或满射.
+			\end{proof}
+		\end{lemma}
+	
+	\vspace*{2em}
+	\subparagraph{反对称性($Schr\ddot{o}der-Bernstein$ 定理)}
+		下面的定理说明了$\leq$ 具有反对称性.其证明技巧性比较强.
+		\begin{thm}\label{thm 1.6.3}
+			($Schr\ddot{o}der-Bernstein$ 定理)\\
+			设$X , \,\, Y \in S$，若$card(X) \leq card(Y)$ 且$card(Y) \leq card(X)$，则
+			\begin{align}
+				card(X) = card(Y)
+			\end{align}
+			\begin{proof}
+				即已知存在单射$f : X \longrightarrow Y , \,\, g : Y \longrightarrow X$，证明$X$ 与$Y$ 之间存在双射：\\
+				考虑$X , \,\, Y$ 的如下划分：\\
+				$\forall x \in X$，构造序列
+				\begin{align}
+					\{ x_n \}_{n = 1}^{\infty} = \{ x , \,\, g^{-1}(x) , \,\, (f^{-1} \circ g^{-1})(x) , \,\, (g^{-1} \circ f^{-1} \circ g^{-1})(x) , \cdots \}
+				\end{align}
+				则称
+				\begin{align}
+					\begin{cases}
+						x\in X_{\infty}:x_n\neq \varnothing ,\forall n\in \N\\
+						x\in X_X:x_{n_0}\in X\\
+						x\in X_Y:x_{n_0}\in Y\\
+					\end{cases}, \,\, n_0 \coloneqq \max_{x_n \neq \varnothing}{n}
+				\end{align}
+				类似的，也有$Y_{\infty} , \,\, Y_X , \,\, Y_Y$.容易证明
+				\begin{align}
+					f(X_\infty) = Y_\infty , \,\, f(X_X) = Y_X , \,\, f(X_Y) = Y_Y
+				\end{align}
+				从而$X , \,\, Y$ 的三个部分分别可以建立双射，最终$X , \,\, Y$ 之间存在双射.
+			\end{proof}
+		\end{thm}
+	
+\newpage
+\section{幂集的势，可数}
+\subsection{幂集的势}
+	通过比较任一集合与其幂集的势，可以得到全集合类$S$ 上的势关系$\leq$ 不存在极大元，即\textbf{不存在某个集合的势最大}.
+	\begin{proposition}\label{prop 1.7.1}
+		$\forall X \in S^* ,$
+		\begin{align}
+			card(X) < card(2^X)
+		\end{align}
+		\begin{proof}
+			\begin{itemize}
+				\item 首先，$card(X) \leq card(2^X)$.存在$X$ 到$2^X$ 的映射$f$，
+				\begin{align}
+					f : X &\longrightarrow 2^X\\
+					x &\longmapsto \{ x \}
+				\end{align}
+				从而$f$ 为单射，$card(X) \leq card(2^X)$.
+				
+				\item 其次，不存在$X$ 到$2^X$ 的满射.$\forall g : X \longrightarrow 2^X$，令
+				\begin{align}
+					Y \coloneqq \{ x \in X \mid x \notin g(x) \}
+				\end{align}
+				下面证明：$\not\exists y \in X , \,\, \st g(y) = Y \in 2^X$.\\
+				反证法.假设$\exists x_0 \in X , \,\, \st g(x_0) = Y$，则
+				\begin{enumerate}
+					\item[\rmnum{1}.] 若$x_0 \in Y$，则根据$Y$ 的定义，$x_0 \notin g(x_0) = Y$，这与$x_0 \in Y$ 矛盾.
+					
+					\item[\rmnum{2}.] 若$x_0 \notin Y$，则$x_0 \notin g(x_0) = Y$，根据$Y$ 的定义，$x_0 \in Y$，矛盾.
+				\end{enumerate}
+				综上，不存在$X$ 到$2^X$ 的满射.
+			\end{itemize}
+			$Therefore ,$
+			\begin{align}
+				card(X) < card(2^X)
+			\end{align}
+		\end{proof}
+	\end{proposition}
+
+\newpage
+\subsection{可数}
+\paragraph{定义}
+	\begin{defn}\label{def 1.7.1}
+		设$X$ 为一个集合，则称
+		\begin{align}
+			X \,\, \text{可数} \Leftrightarrow card(X) \leq card(\N)
+		\end{align}
+		\begin{rmk}
+			常将上述定义的集合称为\textbf{至多可数}，即包含\textbf{有限}和\textbf{无限可数}两种情况.
+		\end{rmk}
+	\end{defn}
+
+\vspace*{2em}
+\paragraph{性质}
+	下面是可数集的两条重要的性质.
+	\begin{proposition}\label{prop 1.7.2}
+		\begin{enumerate}
+			\item[(\rmnum{1})]\textbf{(可数个可数集的并集是可数集)}\\
+			若$\{ X_\alpha \}_{\alpha \in I}$ 满足$\begin{cases}
+				I \,\, \text{可数}\\
+				\forall \alpha \in I , \,\, X_{\alpha} \,\, \text{可数}
+			\end{cases}$，则$\underset{\alpha \in I}{\bigcup}{X_\alpha}$ 可数.
+			
+			\vspace*{1em}
+			
+			\item[(\rmnum{2})]\textbf{(无限可数集与自然数集$\N$ 等势)}\\
+			若$X$ 可数且$X$ 为无限集，则$card(X) = card(\N)$.
+		\end{enumerate}
+	\end{proposition}
+	
+	\begin{example}\label{ex 1.7.1}
+		$\Z , \,\, \Q$ 是可数集.
+	\end{example}
+
+\newpage
+\section{可数集的幂集，连续统}
+\paragraph{定义}
+	下面给出连续统的定义.
+	\begin{defn}\label{def 1.8.1}
+		设$X \in S$，则
+		\begin{align}
+			X \textbf{为\underline{\textbf{连续统}}} \,\, \Leftrightarrow \,\, card(X) = card(\R) \coloneqq c
+		\end{align}
+	\end{defn}
+	\begin{rmk}
+		提及连续统，就不得不谈到\textbf{连续统假设($Continuum \,\, Hypothesis$，简记$CH$)}.
+		\begin{thm}[\textbf{连续统假设$CH$}]\label{thm 1.8.1}
+			$\not\exists X \subseteq \R , \,\, \st$
+			\begin{align}
+				card(\N) < card(X) < card(\R)
+			\end{align}
+		\end{thm}
+		而对于康托尔提出的这样一个假设，美国数学家科恩在1963年证明：
+		\begin{center}
+			\textbf{在$ZFC$ 公理系统上，$CH$ 既不可被证明，也不可被证伪}.
+		\end{center}
+	\end{rmk}
+
+\vspace*{2em}
+\paragraph{连续统的势}
+	下面给出有关连续统的一个重要的命题，它刻画了连续统与可数集的幂集之间的关系.
+	\begin{proposition}\label{prop 1.8.1}
+		\begin{align}
+			card(2^{\N}) = card(\R) = c
+		\end{align}
+		\begin{proof}
+			具体证明过程见视频\href{https://www.bilibili.com/video/BV1RX4y1R7Yc}{可数集的幂集与连续统}.
+		\end{proof}
+	\end{proposition}
+	由此可得到推论.
+	\begin{corollary}\label{cor 1.8.2}
+		设$X \in S$，若$card(X) \geq c$，则$X$ 不可数.
+	\end{corollary}
+
+\vspace*{2em}
+\paragraph{性质}
+\begin{proposition}\label{prop 1.8.2}
+	若$\{ X_\alpha \}_{\alpha \in I}$ 满足
+	\begin{align}
+		\begin{cases}
+			card\left( I \right) =card\left( \R \right) \,\, (\leq)\\
+			\forall \alpha \in I , \,\, card\left( X_{\alpha} \right) = card\left( \R \right) \,\, (\leq)
+		\end{cases}
+	\end{align}
+	则
+	\begin{align}
+		card\left(\bigcup_{\alpha \in I}{X_\alpha}\right) = card(\R) \,\, (\leq)
+	\end{align}
+\end{proposition}
+
+	在进行证明之前，先证明以下引理.
+	\begin{lemma}\label{lemma 1.8.3}
+		若$card(X) \leq card(\R) , \,\, card(Y) \leq card(\R)$，则$card(X \times Y) \leq card(\R)$
+	\end{lemma}
+	\begin{proof}
+		由于$card(X \times Y) \leq card(X \times \R) \leq card(\R \times \R)$，因此\\
+		即证$card(\R \times \R) = card(\R)$.由于可列集的幂集与连续统等势(命题\ref{prop 1.8.1})，因此\\
+		即证$card(2^{\N} \times 2^{\N}) = card(2^{\N})$.下面分别构造$2^{\N} \times 2^{\N}$ 到$2^{\N}$ 的单射和满射：
+		\begin{itemize}
+			\item 令
+			\begin{align}
+				f : 2^{\N} \times 2^{\N} &\longrightarrow 2^{\N} \\
+				A \times B &\longmapsto C
+			\end{align}
+			其中
+			\begin{align}
+				C \coloneqq \left\{ c \,\, \Big| \,\, c = 
+				\begin{cases}
+					2a+1,&\forall a\in A\\
+					2b,&\forall b\in B
+				\end{cases} \right\}
+			\end{align}
+			从而得到了单射$f : 2^{\N} \times 2^{\N} \longrightarrow 2^{\N}$.
+			
+			\item 令
+			\begin{align}
+				g : 2^{\N} \times 2^{\N} &\longrightarrow 2^{\N} \\
+				A \times B &\longmapsto C
+			\end{align}
+			其中
+			\begin{align}
+				A &\coloneqq \{ a \mid a = \frac{c + 1}{2} , \,\, \forall c \in C \,\, \text{为奇数} \} \\
+				B &\coloneqq \{ b \mid b = \frac{c}{2} , \,\, \forall c \in C \,\, \text{为偶数} \}
+			\end{align}
+			容易证明，$g : 2^{\N} \times 2^{\N} \longrightarrow 2^{\N}$ 为满射，从而得证.
+		\end{itemize}
+	\end{proof}
+
+	下面对命题\ref{prop 1.8.2}进行证明.
+	\begin{proof}
+		由于$\forall \alpha \in I , \,\, card\left( X_{\alpha} \right) \leq card\left( \R \right)$，因此存在满射$f_\alpha : \R \longrightarrow X_\alpha$.\\
+		令
+		\begin{align}
+			f : I \times \R &\longrightarrow \bigcup_{\alpha \in I}{X_\alpha} \\
+			(\alpha , r) &\longmapsto f_{\alpha}(r)
+		\end{align}
+		由于$f_\alpha$ 为满射，因此$f : I \times \R \longrightarrow \underset{\alpha \in I}{\bigcup}{X_\alpha}$ 为满射，从而根据引理\ref{lemma 1.8.3}
+		\begin{align}
+			card(\bigcup_{\alpha \in I}{X_\alpha}) \leq card(I \times \R) \leq card(\R)
+		\end{align}
+	\end{proof}
+	
+\newpage
+\section{理想实数系及上面的求和}
+\subsection{实数系的推广}
+	\begin{defn}\label{def 1.9.1}
+		\underline{\textbf{理想实数系$\overline{\R}$}} 是对实数系的推广.
+		\begin{align}
+			\overline{\R} \coloneqq \R \cup \{ -\infty , +\infty \}
+		\end{align}
+		其中我们规定实数系$\R$ 中，
+		\begin{align}
+			-\infty < x < +\infty , \,\, \forall x \in \R
+		\end{align}
+		这样我们便可自然地将$\R$ 上的偏序关系延拓到$\overline{\R}$ 中.
+	\end{defn}
+
+\subsection{$\overline{\R}_{\geq 0}$ 中的和}
+\paragraph{引入}
+	在实数系$\R$ 中，我们所定义的级数求和$\sum$ 都是建立在\textbf{至多可数项}的基础之上，并且它对于\textbf{求和顺序}大多时候是有关系的.\\
+	而对于任意一族数，我们就会面临以下的问题：
+	\begin{itemize}
+		\item 这族数能否求和？
+		
+		\item 若能求和，则其结果是否与求和顺序有关？
+	\end{itemize}
+
+\vspace*{2em}
+\paragraph{定义}
+	为了解决上述问题，我们在对实数系$\R$ 进行延拓后，在理想实数系$\overline{\R}$ 上对求和$\sum$ 进行推广.\\
+	首先考虑非负理想实数系$\overline{\R}_{\geq 0}$ 中的和.(排除了\textbf{求和顺序}的考虑)
+	\begin{defn}\label{def 1.9.2}
+		$\forall I \in S^* , \,\, f : I \longrightarrow \overline{\R}_{\geq 0}$.定义$f$ 的和$\sideset{}{_f}{\sum}$ 是这样一个映射.
+		\begin{align}
+			\sideset{}{_f}{\sum} : \mathcal{P}(I) &\longrightarrow \overline{\R}_{\geq 0} \\
+			X &\longmapsto \sum_{x \in X}{f(x)} \coloneqq 
+			\sup_{F \subseteq X , \,\, F \text{有限}}{\left( \sum_{x \in F}{f(x)} \right)}
+		\end{align}
+		\begin{rmk}
+			\begin{enumerate}
+				\item 当$I$ 为可数集时，映射$f : I \longrightarrow \overline{\R}_{\geq 0}$ 可视作非负数列，而此处定义的$\underset{x \in X}{\sum}{f(x)}$ 与正项级数的定义吻合.
+				
+				\item 此处对于任意一族数的和$\underset{x \in X}{\sum}{f(x)}$ 的定义事实上与$Lesbesgue$ 积分的定义是吻和的.
+			\end{enumerate}
+		\end{rmk}
+	\end{defn}
+
+\newpage
+\paragraph{性质}
+	下面给出$\overline{\R}_{\geq 0}$ 中的和的几条重要的性质.
+	\begin{proposition}\label{prop 1.9.1}
+		$Let \,\, X \in S^* , \,\, \forall f : X \longrightarrow \overline{\R}_{\geq 0}$，
+		若集合$A \coloneqq \{ x \mid f(x) > 0 \}$ 为不可数集，则
+		\begin{align}
+			\sum_{x \in X}{f(x)} = +\infty
+		\end{align}
+		
+		\vspace*{2em}
+		\begin{proof}
+			反证法.假设$\underset{x \in X}{\sum}{f(x)} = \underset{x \in A}{\sum}{f(x)} = M < +\infty$，记
+			\begin{align}
+				A_n \coloneqq \{ x \in X \mid f(x) \in (\frac{1}{n + 1} , \frac{1}{n}) \}
+			\end{align}
+			由于$\underset{x \in A}{\sum}{f(x)} = M$ 有界，因此
+			\begin{align}
+				A \backslash \bigcup_{n = 1}^{+\infty}{A_n} = \{ x \in X \mid f(x) \geq 1 \} &\preceq \N \\
+				A_n &\preceq \N 
+			\end{align}
+			从而
+			\begin{align}
+				\bigcup_{n = 1}^{+\infty}{A_n} &\preceq \N \\
+				A = \left( A \backslash \bigcup_{n = 1}^{+\infty}{A_n} \right) \cup 
+				\left( \bigcup_{n = 1}^{+\infty}{A_n} \right) &\preceq \N
+			\end{align}
+			而这与$A$ 不可数矛盾.
+		\end{proof}
+	\end{proposition}
+
+	\vspace*{3em}
+	下面的这个命题是对\textbf{正项级数的可交换性}在理想实数系$\overline{\R}_{\geq 0}$ 上的推广形式.
+	\begin{proposition}\label{prop 1.9.2}
+		$Let \,\, X \in S^* , \,\, \forall f : X \longrightarrow \overline{\R}_{\geq 0}$，
+		若集合$A \coloneqq \{ x \mid f(x) > 0 \}$ 无穷可数，则
+		\begin{align}
+			\sum_{x \in X}{f(x)} = \sum_{n = 0}^{+\infty}{f \circ g(n)}
+		\end{align}
+		其中$g : \N \longrightarrow A$ 为双射.
+		
+		\vspace*{2em}
+		\begin{proof}
+			易证.
+		\end{proof}
+	\end{proposition}
+	%  ############################
+	\ifx\allfiles\undefined
+\end{document}
+\fi
