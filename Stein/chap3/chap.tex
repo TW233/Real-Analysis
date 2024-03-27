@@ -1,0 +1,752 @@
+\ifx\allfiles\undefined
+\input{../config/config}
+\begin{document}
+	% \input{../config/cover} 
+	\else
+	\fi
+	%  ############################ 正文部分
+\chapter{$Integration \,\, Theory$}
+\section{$The \,\, Lebesgue \,\, integral$}
+	$Lebesgue$ $Integral$ 的构造可以分为三步，分别为构造下列函数的积分:
+	\begin{enumerate}
+		\item \textbf{Simple functions} 
+	
+		\item \textbf{Non-negative measurable functions}
+		\begin{align}
+			\int f \coloneqq \sup{\{ \int \varphi \mid \varphi \,\, simple , \,\, 0 \leq \varphi \leq f \}}
+		\end{align}
+	
+		\item \textbf{General case}
+		\begin{align}
+			f &= f^{+} - f^{-} \\
+			\int f &\coloneqq \int f^{+} - \int f^{-}
+		\end{align}
+	\end{enumerate}
+
+\subsection{$Simple \,\, functions$}
+\paragraph{定义}
+	下面先给出非负简单函数在\textbf{标准形式}下的\textbf{积分}定义.
+	\begin{defn}\label{def 3.1.1}
+		If $\varphi$ is a non-negative simple function with \textbf{standard representation}
+		\begin{align}
+			\varphi(x) = \sum_{k = 1}^{M}{a_k \chi_{E_k}(x)}
+		\end{align}
+		We define the \underline{\textcolor{blue}{\textbf{Lebesgue integral}}} of $\varphi$ by
+		\begin{align}
+			\int_{\R^d}{\varphi(x) dx} = \sum_{k = 1}^{M}{a_k m(E_k)}
+		\end{align}
+		If $E$ is a measurable subset of $\R^d$ with finite measure, then
+		\begin{align}
+			\varphi(x) \chi_{E}(x) = \sum_{k = 1}^{M}{a_k \chi_{E_k}(x) \chi_{E}(x)} = \sum_{k = 1}^{M}{a_k \chi_{E_k \cap E}(x)}
+		\end{align}
+		is also a simple function, and define
+		\begin{align}
+			\int_{E}{\varphi(x) dx} = \int_{\R^d}{\varphi(x) \chi_{E}(x) dx}
+		\end{align}
+		
+		\newpage
+		\begin{rmk}
+			\begin{itemize}
+				\item 此处仅对\textbf{标准形式}定义了积分. 事实上，此处定义的积分与简单函数的表达形式无关(即\textcolor{red}{\textbf{Property 1.}}).
+				
+				\item 关于记号，当测度非常明确时，大多数情况下可简写，如
+				\begin{align}
+					\int_{E}{\varphi(x) dx} \,\, &\Rightarrow \,\, \int_{E}{\varphi} \\
+					\int_{\R^d}{\varphi(x) dx} &\Rightarrow \,\, \int{\varphi}
+				\end{align}
+				当为了强调我们选择了何种测度$\mu$ 时，还可用以下的记号：
+				\begin{align}
+					\int_{E}{\varphi(x) d\mu(x)}
+				\end{align}
+			\end{itemize}
+		\end{rmk}
+	\end{defn}
+
+\vspace{2em}
+\paragraph{Property}
+	下面给出简单函数积分的性质.
+	
+	\begin{enumerate}
+		\item[\textcolor{red}{\textbf{Property 1.}}]\textbf{Independence of the representation}.\\
+		If $\varphi = \overset{N}{\underset{k = 1}{\sum}}{a_k \chi_{E_k}}$ is any representation of $\varphi$, then
+		\begin{align}
+			\int \varphi = \sum_{k = 1}^{N}{a_k m(E_k)}
+		\end{align}
+		
+		\vspace{2em}
+		在证明这个性质之前，先来证明一条引理.(书\footnote{参考书籍：\textbf{《$Real \,\, Analysis -- Measure \,\, Theroy, \,\, Integration, \,\, \& \,\, Hilbert \,\, Spaces$》--- $Elias \,\, M. \,\, Stein$}}Exercises Of Chapter 2 的第1题)
+		
+		\begin{lemma}\label{lemma 3.1.1}
+			Given a collection of sets $\{ F_k \}_{k = 1}^{n}$, there exists another collection $\{ \widetilde{F}_j \}_{j = 1}^{N}$ \\
+			with $N = 2^n - 1$, so that
+			\begin{align}
+				(\rmnum{1})&. \hspace*{2em} \bigcup_{k = 1}^{n}{F_k} = \bigcup_{j = 1}^{N}{\widetilde{F}_j} \\
+				(\rmnum{2})&. \hspace*{2em} \{ \widetilde{F}_j \}_{j = 1}^{N} \,\, are \,\, disjoint \\
+				(\rmnum{3})&. \hspace*{2em} F_k = \bigcup_{\widetilde{F}_j \subset F_k}{\widetilde{F}_j}
+			\end{align}
+		
+			\vspace{2em}
+			\begin{proof}
+				Consider the collection
+				\begin{align}
+					\mathcal{F} \coloneqq \{ \bigcup_{k = 1}^{n}{G_k} - \bigcap_{k = 1}^{n}{F_{k}^{c}} \,\, \Big| \,\, G_k \,\, denotes \,\, F_k \,\, or \,\, F_{k}^c \}
+				\end{align}
+			\end{proof}
+		\end{lemma}
+	
+		\newpage	
+		下面来证明原命题.
+		\begin{proof}
+			 According to Lemma \ref{lemma 3.1.1}, there exists another decompositon of $\overset{N}{\underset{k = 1}{\bigcup}}{E_k}$, i.e.
+			 \begin{align}
+			 	\bigcup_{j = 1}^{M}{\widetilde{E}_j} = \bigcup_{k = 1}^{N}{E_k}
+			 \end{align}
+		 	where $\{ \widetilde{E}_j \}_{j = 1}^M$ are disjoint, and for each $1 \leq k \leq M$,
+		 	\begin{align}
+		 		E_k = \bigcup_{\widetilde{E}_j \subset E_k}{\widetilde{E}_j}
+		 	\end{align}
+	 		Let
+	 		\begin{align}
+	 			\widetilde{a}_j \coloneqq \sum_{\widetilde{E}_j \subset E_k}{a_k}
+	 		\end{align}
+ 			Then clearly
+ 			\begin{align}
+ 				\varphi = \sum_{j = 1}^{M}{\widetilde{a}_j \chi_{\widetilde{E}_j}}
+ 			\end{align}
+ 			Since $\{ \widetilde{E}_j \}_{j = 1}^M$ are disjoint, we get
+ 			\begin{align}
+ 				\int{\varphi} = \sum_{j = 1}^{M}{\widetilde{a}_j m(\widetilde{E}_j)} = \sum_{j = 1}^{M}{\sum_{\widetilde{E}_j \subset E_k}{a_k m(\widetilde{E}_j)}} = \sum_{k = 1}^{N}{a_k m(E_k)}
+ 			\end{align}
+		\end{proof}
+		
+		\vspace{2em}
+		\item[\textcolor{red}{\textbf{Property 2.}}]\textbf{Linearity}.\\
+		If $\varphi$ and $\psi$ are non-negative simple, and $a , b \geq 0$, then
+		\begin{align}
+			\int{(a \varphi + b \psi)} = a\int{\varphi} + b\int{\psi}
+		\end{align}
+		
+		\vspace{2em}
+		\begin{proof}
+			下面分为两步来证明.
+			\begin{enumerate}
+				\item[(a)]$\forall c \geq 0$, $\int{c \varphi} = c \int{\varphi}$.\\
+				Suppose $\varphi = \overset{M}{\underset{k = 1}{\sum}}{a_k \chi_{E_k}}$, where $\{ E_k \}_{k = 1}^{M}$ are disjoint. Then
+				\begin{align}
+					c\varphi = \sum_{k = 1}^{M}{c a_k \chi_{E_j}}
+				\end{align}
+				is also a non-negative simple function. Therefore,
+				\begin{align}
+					\int{c\varphi} = \sum_{k = 1}^{M}{c a_k m(E_k)} = c\sum_{k = 1}^{M}{a_k m(E_k)} = c\int{\varphi}
+				\end{align}
+			
+				\item[(b)]$\int{(\varphi + \psi)} = \int{\varphi} + \int{\psi}$.\\
+				Suppose
+				\begin{align}
+					\varphi = \sum_{k = 1}^{M}{a_k \chi_{E_k}} , \,\, \psi = \sum_{j = 1}^{N}{b_j \chi_{F_j}}
+				\end{align}
+				where both $\{ E_k \}_{k = 1}^{M}$ and $\{ F_j \}_{j = 1}^{N}$ are disjoint and $\R^d = \overset{M}{\underset{k = 1}{\bigcup}}{E_k} = \overset{N}{\underset{j = 1}{\bigcup}}{F_j}$. Since
+				\begin{align}
+					E_k = E_k \cap \R^d = E_k \cap \bigsqcup_{j = 1}^{N}{F_j} = \bigsqcup_{j = 1}^{N}{(E_k \cap F_j)}
+				\end{align}
+				Then
+				\begin{align}
+					\varphi = \sum_{k = 1}^{M}{a_k \chi_{E_k}} = \sum_{k = 1}^{M}{a_k \chi_{\bigsqcup_{j = 1}^{N}{(E_k \cap F_j)}}} = \sum_{k = 1}^{M}{\sum_{j = 1}^{N}{a_k \chi_{E_k \cap F_j}}}
+				\end{align}
+				Similarly
+				\begin{align}
+					\psi = \sum_{j = 1}^{N}{b_j \chi_{F_j}} = \sum_{j = 1}^{N}{b_k \chi_{\bigsqcup_{k = 1}^{M}{(E_k \cap F_j)}}} = \sum_{j = 1}^{N}{\sum_{k = 1}^{M}{b_k \chi_{E_k \cap F_j}}}
+				\end{align}
+				Therefore
+				\begin{align}
+					\varphi + \psi &= \sum_{j , k}{(a_k + b_j)\chi_{E_k \cap F_j}} \\
+					\int{(\varphi + \psi)} &= \sum_{j , k}{(a_k + b_j)m(E_k \cap F_j)} \\
+					&= \sum_{j , k}{a_k m(E_k \cap F_j)} + \sum_{j , k}{b_j m(E_k \cap F_j)} \\
+					&= \int{\varphi} + \int{\psi}
+				\end{align}
+			\end{enumerate}
+		\end{proof}
+		
+		\vspace{2em}
+		\item[\textcolor{red}{\textbf{Property 3.}}]\textbf{Monotonicity}.\\
+		If $\varphi \leq \psi$ are non-negative and simple, then
+		\begin{align}
+			\int{\varphi} \leq \int{\psi}
+		\end{align}
+	
+		\vspace{2em}
+		\begin{proof}
+			Suppose
+			\begin{align}
+				\varphi = \sum_{k = 1}^{M}{a_k \chi_{E_k}} , \,\, \psi = \sum_{j = 1}^{N}{b_j \chi_{F_j}}
+			\end{align}
+			where both $\{ E_k \}_{k = 1}^{M}$ and $\{ F_j \}_{j = 1}^{N}$ are disjoint. Similar to the proof in Property 2, we get
+			\begin{align}
+				\psi - \varphi = \sum_{j , k}{(b_j - a_k) \chi_{E_k \cap F_j}}
+			\end{align}
+			Since $\varphi(x) \leq \psi(x)$, $\forall x \in \R^d$, then $\psi - \varphi$ is non-negative and simple. Therefore,
+			\begin{align}
+				\int{(\psi - \varphi)} = \sum_{j , k}{(b_j - a_k) m(E_k \cap F_j)} \geq 0 \,\, \Rightarrow \,\, \int{\varphi} \leq \int{\psi}
+			\end{align}
+		\end{proof}
+	
+		\vspace{2em}
+		\item[\textcolor{red}{\textbf{Property 4.}}]\textbf{Additivity}.\\
+		If $\{ E_k \}_{k = 1}^{\infty}$ are disjoint subsets of $\R^d$ with finite measure, then
+		\begin{align}
+			\int_{\bigcup_{k = 1}^{\infty}{E_k}}{\varphi} = \sum_{k = 1}^{\infty}{\int_{E_k}{\varphi}}
+		\end{align}
+		
+		\vspace{2em}
+		\begin{rmk}
+			首先回顾$abstract$ $measure$ 的定义.
+			\begin{defn}\label{def 3.1.2}
+				Let $X$ be a set and let $\mathcal{M}$ be a $\sigma-algebra$ on $X$.\\
+				A \underline{\textcolor{blue}{\textbf{measure}}} on $\mathcal{M}$ is a function $\mu : \mathcal{M} \longrightarrow [0 , \infty]$, $\st$
+				\begin{enumerate}
+					\item[(\rmnum{1})]$\mu(\varnothing) = 0$.
+					
+					\item[(\rmnum{2})]If $\{ E_j \}_{j = 1}^{\infty} \subset \mathcal{M}$ are disjoint, then
+					\begin{align}
+						\mu(\bigcup_{j = 1}^{\infty}{E_j}) = \sum_{j = 1}^{\infty}{\mu(E_j)}
+					\end{align}
+				\end{enumerate}
+			\end{defn}
+			
+			\vspace{2em}
+			回到我们积分的性质上来. 下面我们将说明，对于任一给定的非负简单函数$\varphi$，将$\varphi$ 在任一可测集$A$ 上的积分看作$Lebesgue \,\, \sigma-algebra \,\, \mathcal{L}$ 上的映射，则该映射为定义在$\mathcal{L}$ 上的测度.(从而Property 4.作为测度的必要条件自然成立)
+			
+			\vspace{2em}
+			\begin{proposition}\label{prop 3.1.1}
+				For any fixed non-negative and simple function $\varphi$, the map
+				\begin{align}
+					\mu : \mathcal{L} &\longrightarrow [0 , \infty] \\
+					A &\longmapsto \int_{A}{\varphi}
+				\end{align}
+				is a measure on $\mathcal{L}$.
+				
+				\newpage
+				\begin{proof}
+					Suppose $\{ A_j \}_{j = 1}^{\infty} \subset \mathcal{L}$ are disjoint, and
+					\begin{align}
+						\varphi = \sum_{k = 1}^{M}{a_k \chi_{E_k}} , \,\, where \,\, \{ E_k \}_{k = 1}^{M} \,\, are \,\, disjoint
+					\end{align}
+					Let $A = \overset{\infty}{\underset{j = 1}{\bigcup}}{A_j}$, then
+					\begin{align}
+						\int_{\bigcup_{j = 1}^{\infty}{A_j}}{\varphi} 
+						= \int_{A}{\varphi} 
+						= \int{\varphi \chi_A} 
+						&= \int{(\sum_{k = 1}^{M}{a_k \chi_{E_k \cap A}})} \\
+						&= \sum_{k = 1}^{M}{a_k m(E_k \cap A)} \\
+						&= \sum_{k = 1}^{M}{a_k m(E_k \cap (\bigcup_{j = 1}^{\infty}{A_j}))} \\
+						&= \sum_{k = 1}^{M}{a_k m(\bigsqcup_{j = 1}^{\infty}{(E_k \cap A_j)})} \\
+						&= \sum_{k = 1}^{M}{a_k \sum_{j = 1}^{\infty}{m(E_k \cap A_j)}} \\
+						&= \sum_{k = 1}^{M}{\sum_{j = 1}^{\infty}{a_k m(E_k \cap A_j)}}
+					\end{align}
+					Since positive series always converges in $[0 , \infty]$, then
+					\begin{align}
+						\int_{A}{\varphi} 
+						= \sum_{k = 1}^{M}{\sum_{j = 1}^{\infty}{a_k m(E_k \cap A_j)}} 
+						= \sum_{j = 1}^{\infty}{\sum_{k = 1}^{M}{a_k m(E_k \cap A_j)}} 
+						= \sum_{j = 1}^{\infty}{\int_{A_j}{\varphi}}
+					\end{align}
+					Therefore, \uwave{\textbf{the integral on any non-negative simple function is accually a measure on $\mathcal{L}$}}.
+				\end{proof}
+			\end{proposition}
+		\end{rmk}
+	\end{enumerate}
+
+\newpage
+\subsection{$Non-negative \,\, measurable \,\, functions$}
+	为了讨论的方便，先给出\textbf{非负可测函数}的一个记号.
+	\begin{align}
+		\mathcal{M}^{+} \coloneqq \{ all \,\, non-negative \,\, measurable \,\, functions \}
+	\end{align}
+
+\vspace{2em}
+\paragraph{定义}
+	下面给出非负可测函数的积分的定义.
+	\begin{defn}\label{def 3.1.3}
+		For $f \in \mathcal{M}^{+}$, we define
+		\begin{align}
+			\int{f(x) dx} \coloneqq \sup{\{ \int{\varphi(x) dx} \mid 0 \leq \varphi \leq f , \,\, \varphi \,\, simple \}}
+		\end{align}
+		
+		\begin{rmk}
+			此处对Non-negative measurable function 积分的定义兼容定义 \ref{def 3.1.1} 中对Non-negative simple function 积分的定义，具体表现为：$\forall \varphi_0$ non-negative and simple,
+			\begin{align}
+				\sup{\{ \int{\varphi(x) dx} \mid 0 \leq \varphi \leq \varphi_0 , \,\, \varphi \,\, simple \}} = \int{\varphi_0 (x) dx}
+			\end{align}
+		\end{rmk}
+	\end{defn}
+
+\vspace{2em}
+\paragraph{性质}
+	下面来验证定义 \ref{def 3.1.3} 中定义的积分满足几条基本性质.
+	\begin{enumerate}
+		\item[\textcolor{red}{\textbf{Property 1.}}]\textbf{Monotonicity}.\\
+		Let $f , g \in \mathcal{M}^{+}$. Then
+		\begin{align}
+			\int{f} \leq \int{g} \,\,\,\, if \,\,\,\, f \leq g
+		\end{align}
+		
+		\vspace{2em}
+		\begin{proof}
+			Let
+			\begin{align}
+				A &= \{ \varphi \,\, simple \mid 0 \leq \varphi \leq f \} \\
+				B &= \{ \psi \,\, simple \mid 0 \leq \psi \leq g \}
+			\end{align}
+			Then for all $\varphi \in A$, $0 \leq \varphi \leq f \leq g$ $\Rightarrow$ $\varphi \in B$ $\Rightarrow$ $A \subset B$. Since
+			\begin{align}
+				\int{f} = \sup_{\varphi \in A}{\{ \int{\varphi} \}} , \,\, \int{g} = \sup_{\psi \in B}{\{ \int{\psi} \}}
+			\end{align}
+			Therefore
+			\begin{align}
+				\int{f} \leq \int{g}
+			\end{align}
+		\end{proof}
+	
+		\newpage
+		
+		\item[\textcolor{red}{\textbf{Property 2.}}]\textbf{齐次性}.\\
+		Let $f \in \mathcal{M}^{+}$. If $c \geq 0$, then
+		\begin{align}
+			\int{cf} = c\int{f}
+		\end{align}
+	
+		\vspace{2em}
+		\begin{proof}
+			Assume $c > 0$. Then
+			\begin{align}
+				\int{cf} 
+				&= \sup{\{ \int{\varphi} \mid 0 \leq \varphi \leq cf , \,\, \varphi \,\, simple \}} \\
+				&= \sup{\{ \int{\varphi} \mid 0 \leq \frac{\varphi}{c} \leq f , \,\, \varphi \,\, simple \}} \\
+				&\overset{\psi \, = \, \frac{\varphi}{c}}{=} \sup{\{ \int{c\psi} \mid 0 \leq \psi \leq f , \,\, \psi \,\, simple \}} \\
+				&= c \sup{\{ \int{\psi} \mid 0 \leq \psi \leq f , \,\, \psi \,\, simple \}} \\
+				&= c \int{f}
+			\end{align}
+		\end{proof}
+	\end{enumerate}
+
+\paragraph{单调收敛定理}
+	下面我们正式迈入实分析的\textbf{“大门”}，介绍第一个\textbf{收敛定理}.
+	\begin{thm}\label{thm 3.1.2}
+		\textbf{The Monotone Convergence Theorem}.\\
+		If $\{ f_n \}_{n = 1}^{\infty} \subset \mathcal{M}^{+}$, $f_j \leq f_{j + 1}$ for all $j$, and $\underset{n \to \infty}{\lim}{f_n} = f$, then
+		\begin{align}
+			\int{f} = \lim_{n \to \infty}{\int{f_n}}
+		\end{align}
+		
+		\vspace{1em}
+		\begin{rmk}
+			\begin{itemize}
+				\item 此即为\textbf{“单调收敛定理”}，这个定理说明了对于\textbf{单调递增}的\textbf{非负可测}函数列，\\
+				其\uwave{\textcolor{red}{\textbf{积分与极限可交换次序}}}. 具体表现为
+				\begin{align}
+					\int{f} = \int{\lim_{n \to \infty}{f_n}} = \lim_{n \to \infty}{\int{f_n}}
+				\end{align}
+				
+				\vspace{2em}
+				\item 该定理还说明了，我们可以给出非负可测函数的另一个更自然的等价定义，即用非负简单函数列的积分逼近非负可测函数的积分.
+				\begin{defn}\label{def 3.1.4}
+					For $f \in \mathcal{M}^{+}$, we can also define
+					\begin{align}
+						\int{f} \coloneqq \lim_{n \to \infty}{\int{\varphi_n}}
+					\end{align}
+					where $\varphi_n \to f$ and $0 \leq \varphi_1 \leq \varphi_2 \leq \cdots \leq f$ by Thm \ref{thm 2.2.1}.
+				\end{defn}
+				并且该定理说明了该积分定义的\textbf{唯一性}及\textbf{well-defined}.
+			\end{itemize}
+		\end{rmk}
+	
+		\newpage
+		在证明定理前，先来证明一个引理(将定理 \ref{thm 1.3.3} (\rmnum{1}) 拓展到一般的抽象测度上).
+		\begin{lemma}\label{lemma 3.1.3}
+			Let $X$ be a set, $\mathcal{M}$ be a $\sigma-algebra$ on $X$, $\mu : \mathcal{M} \longrightarrow [0 , \infty]$ be a measure on $\mathcal{M}$.\\
+			If $\{ E_n \}_{n = 1}^{\infty} \subset \mathcal{M}$, $E_n \nearrow E$, then
+			\begin{align}
+				\lim_{n \to \infty}{\mu(E_n)} = \mu(E)
+			\end{align}
+		
+			\vspace{2em}
+			\begin{proof}
+				证明过程与Thm \ref{thm 1.3.3} 完全一致(仅用到了测度的可数可加性).\\
+				Let $S_1 = E_1$, $S_k = E_k - E_{k - 1}$, $\forall k \geq 2$. Then $\{ S_k \}_{n = 1}^{\infty} \subset \mathcal{M}$ are disjoint.\\
+				Since $E = \overset{\infty}{\underset{k = 1}{\bigcup}}{E_k} = \overset{\infty}{\underset{k = 1}{\bigcup}}{S_k}$, then
+				\begin{align}
+					\mu(E) 
+					= \mu(\bigsqcup_{k = 1}^{\infty}{S_k}) 
+					= \sum_{k = 1}^{\infty}{\mu(S_k)} 
+					= \lim_{n \to \infty}{\sum_{k = 1}^{n}{\mu(S_k)}} 
+					= \lim_{n \to \infty}{\mu(\bigsqcup_{k = 1}^{n}{S_k})} 
+					= \lim_{n \to \infty}{\mu(E_n)}
+				\end{align}
+			\end{proof}
+		\end{lemma}
+		
+		\vspace{2em}
+		下面证明原定理.
+		\begin{proof}
+			\begin{itemize}
+				\item $\underset{n \to \infty}{\lim}{\int{f_n}} \leq \int{f}$.\\
+				Since $f_n \leq f$, $\forall n$, then
+				\begin{align}
+					\int{f_n} \leq \int{f} , \,\, \forall n
+				\end{align}
+				Since $\{ \int{f_n} \}_{n = 1}^{\infty}$ always converges in $[0 , \infty]$, then let $n \to \infty$, we get
+				\begin{align}
+					\lim_{n \to \infty}{\int{f_n}} \leq \int{f}
+				\end{align}
+				
+				\vspace{2em}
+				\item $\underset{n \to \infty}{\lim}{\int{f_n}} \geq \int{f}$.\\
+				Fix $0 < \alpha < 1$, for any $0 \leq \varphi \leq f$ simple, let
+				\begin{align}
+					E_n = \{ x \mid f_{n}(x) \geq \alpha \varphi(x) \}
+				\end{align}
+				Then since $\forall x \in E_n$, we have $f_{n + 1}(x) \geq f_{n}(x) \geq \alpha \varphi(x)$ $\Rightarrow$ $x \in E_{n + 1}$ $\Rightarrow$ $E_n \subset E_{n + 1}$.\\
+				Then $E_n \nearrow$. Since
+				\begin{align}
+					\int_{\R^d}{f_n} \geq \int_{E_n}{f_n} \geq \int_{E_n}{\alpha \varphi} ,  \,\, \forall n
+				\end{align}
+				Let $n \to \infty$, we get
+				\begin{align}
+					\lim_{n \to \infty}{\int_{\R^d}{f_n}} \geq \lim_{n \to \infty}{\int_{E_n}{\alpha \varphi}}
+				\end{align}
+				\newpage
+				Then we have to calculate \textcolor{red}{$\underset{n \to \infty}{\lim}{\int_{E_n}{\alpha \varphi}}$}:
+				
+				\vspace{2em}
+				\begin{itemize}
+					\item Since $\alpha \varphi$ is non-negative and simple, by Prop \ref{prop 3.1.1}, the map
+					\begin{align}
+						\mu : \mathcal{L} &\longrightarrow [0 , \infty] \\
+						E &\longmapsto \int_{E}{\alpha \varphi}
+					\end{align}
+					is a measure on the collection of Lebesgue measurable sets $\mathcal{L}$. (\textcolor{red}{\textbf{将积分视作测度}}) \\
+					Since $\{ E_n \}_{n = 1}^{\infty} \subset \mathcal{L}$ and $E_n \nearrow$, by Lemma \ref{lemma 3.1.3}, we get
+					\begin{align}
+						\lim_{n \to \infty}{\mu(E_n)} = \mu(\bigcup_{n = 1}^{\infty}{E_n})
+					\end{align}
+					i.e.
+					\begin{align}
+						\lim_{n \to \infty}{\int_{E_n}{\alpha \varphi}} = \int_{\bigcup_{n = 1}^{\infty}{E_n}}{\alpha \varphi}
+					\end{align}
+					For all $x \in \R^d$, since $\alpha \varphi(x) < f(x)$ and $f_n \to f$, there exists $N_x \in \N$, $\st$
+					\begin{align}
+						f_{n}(x) \geq \alpha \varphi(x) , \,\, \forall n \geq N_x
+					\end{align}
+					which indicates $x \in E_{N_x}$ for some $N_x$. Therefore
+					\begin{align}
+						\bigcup_{n = 1}^{\infty}{E_n} = \R^d \,\, \Rightarrow \,\, 
+						\textcolor{red}{\lim_{n \to \infty}{\int_{E_n}{\alpha \varphi}}} 
+						= \int_{\bigcup_{n = 1}^{\infty}{E_n}}{\alpha \varphi} 
+						= \textcolor{red}{\int_{\R^d}{\alpha \varphi}}
+					\end{align}
+				\end{itemize}
+			
+				\vspace{2em}
+				Therefore, we get
+				\begin{align}
+					\lim_{n \to \infty}{\int_{\R^d}{f_n}} 
+					\geq \lim_{n \to \infty}{\int_{E_n}{\alpha \varphi}} 
+					= \int_{\R^d}{\alpha \varphi}
+				\end{align}
+				Let $\alpha \to 1$, then
+				\begin{align}
+					\lim_{n \to \infty}{\int_{\R^d}{f_n}} 
+					\geq \int_{\R^d}{\varphi}
+				\end{align}
+				Since $\varphi$ is arbitratry, taking the supremum over $\varphi$, we get
+				\begin{align}
+					\lim_{n \to \infty}{\int_{\R^d}{f_n}} 
+					\geq \sup{\{ \int_{\R^d}{\varphi} \mid 0 \leq \varphi \leq f , \,\, \varphi \,\, simple \}}
+					= \int{f}
+				\end{align}
+			\end{itemize}
+		\end{proof}
+	\end{thm}
+
+\newpage
+\paragraph{函数项级数的可数可加性}
+	接下来我们将给出\textbf{单调收敛定理}在\textbf{函数项级数}上的表达形式，它说明了对于\textbf{非负可测函数项级数}，其\uwave{\textbf{积分与求和可交换次序}}.
+	
+	\vspace{2em}
+	在此之前，先来证明有限项的情况.
+	\begin{center}
+		(此也可视作非负可测函数积分的\textcolor{red}{\textbf{Property}} \textbf{线性性}的一部分.)
+	\end{center}
+	\begin{proposition}\label{prop 3.1.2}
+		\textbf{Linearity}.\\
+		If $f , g \in \mathcal{M}^{+}$, then
+		\begin{align}
+			\int{(f + g)} = \int{f} + \int{g}
+		\end{align}
+	
+		\vspace{2em}
+		\begin{proof}
+			By Thm \ref{thm 2.2.1} and Thm \ref{thm 3.1.2}, there exists sequences of non-negative and simple functions $\{ \varphi_n \}_{n = 1}^{\infty}$ and $\{ \psi_n \}_{n = 1}^{\infty}$, $\varphi_n \to f$ and $\psi_n \to g$, $\st$
+			\begin{align}
+				\int{f} = \lim_{n \to \infty}{\int{\varphi_n}} , \,\, \int{g} = \lim_{n \to \infty}{\int{\psi_n}}
+			\end{align}
+			Since $\varphi_n + \psi_n$ is still non-negative and simple, then \\
+			By the Linearity of integral on non-negative and simple functions, (\textcolor{red}{\textbf{Property 2.}} in $\S 3.1.1$)
+			\begin{align}
+				\int{(\varphi_n + \psi_n)} = \int{\varphi_n} + \int{\psi_n}
+			\end{align}
+			Let $n \to \infty$, by Thm \ref{thm 3.1.2}, we get (\textbf{极限与积分交换次序})
+			\begin{align}
+				\int{(f + g)} = \int{f} + \int{g}
+			\end{align}
+		\end{proof}
+	\end{proposition}
+	
+	根据Prop \ref{prop 3.1.2}，由归纳法，容易得到其对任意\textbf{有限项}函数项级数都成立.
+	
+	\newpage
+	下面给出\textbf{函数项级数}上的\textbf{单调收敛定理}.
+	\begin{thm}\label{thm 3.1.4}
+		\textbf{Monotone Convergence Theorem (MCT , series version)}.\\
+		If $\{ f_n \}_{n = 1}^{\infty} \subset \mathcal{M}^{+}$ and $f = \overset{\infty}{\underset{n = 1}{\sum}}{f_n}$, then
+		\begin{align}
+			\int{f} = \sum_{n = 1}^{\infty}{\int{f_n}}
+		\end{align}
+	
+		\vspace{1em}
+		\begin{rmk}
+			该定理说明了对于\textbf{非负可测函数项级数}，其\uwave{\textcolor{red}{\textbf{积分与求和可交换次序}}}.
+		\end{rmk}
+	
+		\vspace{1em}
+		\begin{proof}
+			Let $F_n = \overset{n}{\underset{k = 1}{\sum}}{f_k}$, then $F_n \nearrow \overset{\infty}{\underset{k = 1}{\sum}}{f_k} = f$. By \textbf{MCT} (Thm \ref{thm 3.1.2}),
+			\begin{align}
+				\lim_{n \to \infty}{\int{F_n}} = \int{f}
+			\end{align}
+			i.e.
+			\begin{align}
+				\lim_{n \to \infty}{\int{\sum_{k = 1}^{n}{f_k}}} = \int{f}
+			\end{align}
+			By the \textbf{Linearity} of integral on non-negative functions (Prop \ref{prop 3.1.2}),
+			\begin{align}
+				\lim_{n \to \infty}{\int{\sum_{k = 1}^{n}{f_k}}} = \lim_{n \to \infty}{\sum_{k = 1}^{n}{\int{f_k}}} = \sum_{k = 1}^{\infty}{\int{f_k}} = \int{f}
+			\end{align}
+		\end{proof}
+	\end{thm}
+
+\newpage
+\paragraph{积分的唯一性}
+	 在实分析中，我们并不关心零测集上的各种性质，进而常常忽略函数在零测集上的情况. 在给出\textbf{单调收敛定理} 的更一般版本前，我们先来给出\textbf{几乎处处}意义下，函数\textbf{积分的唯一性}.
+	 
+	 \vspace{2em}
+	 下面的命题说明了，若两个非负可测函数\textbf{几乎处处}相等，则其积分相等.
+	 \begin{proposition}\label{prop 3.1.3}
+	 	\textbf{Uniqueness}.\\
+	 	If $f \in \mathcal{M}^{+}$, then
+	 	\begin{align}
+	 		\int{f} = 0 \,\, \Leftrightarrow \,\, f = 0 \,\, a.e.
+	 	\end{align}
+ 		
+ 		\vspace{1em}
+ 		\begin{rmk}
+ 			根据该命题，对于任意非负可测函数$f , g$
+ 			\begin{align}
+ 				\int{f} = \int{g} \,\, \Leftrightarrow \,\, \int{(f - g)} = 0 \,\, \Leftrightarrow \,\, f - g = 0 \,\, a.e. \,\, \Leftrightarrow \,\, f = g \,\, a.e.
+ 			\end{align}
+ 		\end{rmk}
+ 	
+ 		\vspace{2em}
+ 		\begin{proof}
+ 			\begin{itemize}
+ 				\item 充分性“$\Leftarrow$”: If $f = 0$ a.e.\\
+ 				$\forall 0 \leq \varphi \leq f$ simple, $\varphi = 0$ a.e. . Let $E = \{ x \mid \varphi(x) = 0 \}$, then $m(E^c) = 0$.
+ 				\begin{align}
+ 					\int{\varphi} = \int_{E}{\varphi} + \int_{E^c}{\varphi} = 0 + 0 = 0
+ 				\end{align}
+ 				Taking the supremum of $\varphi$, we get
+ 				\begin{align}
+ 					\int{f} = \sup{\{ \int{\varphi} \mid 0 \leq \varphi \leq f , \,\, \varphi \,\, simple \}} = 0
+ 				\end{align}
+ 				
+ 				\vspace{1em}
+ 				\item 必要性“$\Rightarrow$”: If $\int{f} = 0$, let
+ 				\begin{align}
+ 					E_n \coloneqq \{ x \mid f(x) > \frac{1}{n} \}
+ 				\end{align}
+ 				Then
+ 				\begin{align}
+ 					\bigcup_{n = 1}^{\infty}{E_n} = \{ x \mid f(x) > 0 \} = \{ f \neq 0 \}
+ 				\end{align}
+ 				Suppose $m(\overset{\infty}{\underset{n = 1}{\bigcup}}{E_n}) > 0$, then there exists $N \in \N$, $\st$ $m(E_N) > 0$. Then
+ 				\begin{align}
+ 					\int{f} \geq \int_{E_N}{f} > \frac{1}{N}m(E_N) > 0
+ 				\end{align}
+ 				which is a contradiction to $\int{f} = 0$.\\
+ 				Therefore, $m(\overset{\infty}{\underset{n = 1}{\bigcup}}{E_n}) = m(\{ f \neq 0 \}) = 0$, $f = 0$ a.e.
+ 			\end{itemize}
+ 		\end{proof}
+	 \end{proposition}
+ 
+ \newpage
+ \paragraph{“几乎处处”版\textbf{MCT}}
+ 	根据积分的唯一性(命题 \ref{prop 3.1.3})，下面说明在\textbf{“几乎处处收敛”}条件下，\textbf{单调收敛定理}成立 (积分与极限仍可交换次序).
+ 	\begin{corollary}\label{cor 3.1.5}
+ 		\textbf{a.e. MCT}.\\
+ 		If $\{ f_n \}_{n = 1}^{\infty} \subset \mathcal{M}^{+}$, $f \in \mathcal{M^{+}}$, $f_n \nearrow f$ a.e. , then
+ 		\begin{align}
+ 			\int{f} = \lim_{n \to \infty}{\int{f_n}}
+ 		\end{align}
+ 	
+ 		\vspace{2em}
+ 		\begin{proof}
+ 			Let $f_n \nearrow f$ on $E$, then $m(E^c) = 0$ and $f_{n} - f_{n}\chi_E = 0$ a.e. \\
+ 			By Prop \ref{prop 3.1.3}, we get
+ 			\begin{align}
+ 				\int{f_n} = \int{f_n \chi_E}
+ 			\end{align}
+ 			Since $f_n \chi_E \nearrow f \chi_E$, then by \textbf{MCT} (Thm \ref{thm 3.1.2}, 单调收敛定理)
+ 			\begin{align}
+ 				\lim_{n \to \infty}{\int{f_n}} = \lim_{n \to \infty}{\int{f_n \chi_E}} = \int{f \chi_E} = \int_{E}{f}
+ 			\end{align}
+ 			Since $m(E^c) = 0$, then
+ 			\begin{align}
+ 				\int{f} = \int_{E}{f} = \lim_{n \to \infty}{\int{f_n}}
+ 			\end{align}
+ 		\begin{center}
+ 			($\forall 0 \leq \varphi \leq f$ simple, $\int{\varphi} = \int_{E}{\varphi} + \int_{E_c}{\varphi} = \int_{E}{\varphi}$. Taking the supremum of $\varphi$ $\Rightarrow$ $\int{f} = \sup{\{ \int{\varphi} \}} = \int_{E}{f}$)
+ 		\end{center}
+ 		\end{proof}
+ 	\end{corollary}
+ 
+ \vspace{2em}
+ \paragraph{Fatou's Lemma}
+ 	我们首先来考虑一个问题，若我们将\textbf{单调收敛定理 (MCT)} 中的\textbf{“单调”}条件去掉，结论是否仍然成立 (积分与极限是否仍可交换次序)？即
+ 	\begin{center}
+ 		Suppose $f_n \to f$ a.e. , do we have $\int{f_n} \to \int{f}$?
+ 	\end{center}
+ 
+ 	事实上答案为absolutely no. 下面给出一个反例.
+ 	
+ 	\begin{example}\label{ex 3.1.1}
+ 		Consider $f_n = n\chi_{(0 , \frac{1}{n})}$. Then $f_n \to 0$ a.e. on $[0 , 1]$. However,
+ 		\begin{align}
+ 			\int{f_n} = n \cdot \frac{1}{n} = 1 , \,\, \forall n \in \N \not\to 0
+ 		\end{align}
+ 	\end{example}
+ 
+ 	\newpage
+ 	事实上，将\textbf{“单调收敛”}条件整个去除，我们将得到如下的更一般的 \textbf{Fatou's Lemma}.
+ 	\begin{thm}\label{thm 3.1.6}
+ 		\textbf{Fatou's Lemma}.\\
+ 		If $\{ f_n \}_{n = 1}^{\infty} \subset \mathcal{M}^{+}$, then
+ 		\begin{align}
+ 			\int{\liminf_{n \to \infty}{f_n}} \leq \liminf_{n \to \infty}{\int{f_n}}
+ 		\end{align}
+ 		
+ 		\vspace{1em}
+ 		\begin{rmk}
+ 			\begin{itemize}
+ 				\item 回顾函数列下极限的定义.
+ 				\begin{align}
+ 					\liminf_{n \to \infty}{f_n} = \lim_{n \to \infty}{\left( \inf_{k \geq n}{f_k} \right)}
+ 				\end{align}
+ 				即对定义域上每一点$x$，取数列$\{ f_{n}(x) \}_{n = 1}^{\infty}$ 的下极限，再将所有的$x$ 所对应的下极限拼成一个函数，即定义为函数列$\{ f_n \}_{n = 1}^{\infty}$ 的下极限.
+ 				\begin{center}
+ 					(上式右侧作用在固定的$x$ 上，即为数列$\{ f_{n}(x) \}_{n = 1}^{\infty}$ 下极限的定义.)
+ 				\end{center} 
+ 			
+ 			\vspace{1em}
+ 			\item \textbf{Fatou's Lemma} 告诉我们，对于任意一列非负可测函数列，其\textbf{函数列的下极限的积分}，要小于每个函数积分后得到的\textbf{积分数列的下极限}.
+ 			\end{itemize}
+ 		\end{rmk}
+ 	
+ 		\vspace{2em}
+ 		\begin{proof}
+ 			Since
+ 			\begin{align}
+ 				\liminf_{n \to \infty}{f_n} = \lim_{n \to \infty}{(\inf_{k \geq n}{f_k})}
+ 			\end{align}
+ 			Let $g_n = \underset{k \geq n}{\inf}{f_k}$, then $g_n \nearrow \underset{n \to \infty}{\lim}{g_n}$. By \textbf{MCT} (Thm \ref{thm 3.1.2}, 单调收敛定理),
+ 			\begin{align}
+ 				\int{\lim_{n \to \infty}{g_n}} = \lim_{n \to \infty}{\int{g_n}}
+ 			\end{align}
+ 			i.e.
+ 			\begin{align}
+ 				\int{\liminf_{n \to \infty}{f_k}} = \lim_{n \to \infty}{(\int{\inf_{k \geq n}{f_k}})}
+ 			\end{align}
+ 			For each $n$, since $\underset{k \geq n}{\inf}{f_k} \leq f_j$, $\forall j \geq n$, then
+ 			\begin{align}
+ 				\int{\inf_{k \geq n}{f_k}} \leq \int{f_j} , \,\, \forall j \geq n
+ 			\end{align}
+ 			Taking the infimum of $\{ \int{f_j} \}_{j = n}^{\infty}$, then
+ 			\begin{align}
+ 				\int{\inf_{k \geq n}{f_k}} \leq \inf_{j \geq n}{\int{f_j}} , \,\, \forall n \in \N
+ 			\end{align}
+ 			For $n$ is arbitrary, let $n \to \infty$, we get
+ 			\begin{align}
+ 				\lim_{n \to \infty}{(\int{\inf_{k \geq n}{f_k}})} \leq \lim_{n \to \infty}{(\inf_{k \geq n}{\int{f_k}})} = \liminf_{n \to \infty}{\int{f_n}}
+ 			\end{align}
+ 			Therefore
+ 			\begin{align}
+ 				\int{\liminf_{n \to \infty}{f_k}} = \lim_{n \to \infty}{(\int{\inf_{k \geq n}{f_k}})} \leq \liminf_{n \to \infty}{\int{f_n}}
+ 			\end{align}
+ 		\end{proof}
+ 	\end{thm}
+ 
+ \newpage
+ \subsection{$General \,\, case$}
+ \paragraph{可积函数}
+ 	跟Riemann 积分类似，对于Lebesgue 积分，我们也有\textbf{可积函数}的概念.
+ 	
+ 	\vspace{2em}
+ 	下面先让我们回到\textbf{非负可测}函数，定义非负可测函数中\textbf{可积}的概念.
+ 	\begin{defn}\label{def 3.1.5}
+ 		For $f \in \mathcal{M}^{+}$, if
+ 		\begin{align}
+ 			\int{f} < \infty
+ 		\end{align}
+ 		Then we say $f$ is \underline{\textcolor{blue}{\textbf{Lebesgue integrable}}} or simply \underline{\textcolor{blue}{\textbf{integrable}}}.
+ 	\end{defn}
+ 
+ 	\vspace{2em}
+ 	下面扩展到一般的可测函数，给出其\textbf{Lebesgue 积分}及\textbf{可积}的定义.
+ 	\begin{defn}\label{def 3.1.6}
+ 		For any $f$ measurable on $\R^d$
+ 		\begin{align}
+ 			f^{+}(x) \coloneqq \max{\{ f(x) , 0 \}} \,\, , \,\, f^{-}(x) \coloneqq \max{\{ -f(x) , 0 \}}
+ 		\end{align}
+ 		If at least one of $\int{f^{+}}$ and $\int{f^{-}}$ is finite, we define the \underline{\textcolor{blue}{\textbf{integral of $f$}}}
+ 		\begin{align}
+ 			\int{f} \coloneqq \int{f^{+}} - \int{f^{-}}
+ 		\end{align}
+ 		We say that $f$ is \underline{\textcolor{blue}{\textbf{(Lebesgue) integrable}}} if $\left| f \right|$ is integrable.
+ 		
+ 		\vspace{1em}
+ 		\begin{rmk}
+ 			\begin{itemize}
+ 				\item 注意到
+ 				\begin{align}
+ 					f &= f^{+} - f^{-} \\
+ 					\left| f \right| &= f^{+} + f^{-}
+ 				\end{align}
+ 			
+ 				\item 根据定义，对于任意可测函数$f$，
+ 				\begin{align}
+ 					f \,\, integrable \,\, \Leftrightarrow \,\, \left| f \right| integrable \,\, &\Leftrightarrow \,\, \int{\left| f \right|} = \int{f^{+}} + \int{f^{-}} < \infty \\
+ 					&\Leftrightarrow \,\, f^{+} \,\, and \,\, f^{-} \,\, integrable
+ 				\end{align}
+ 				\begin{center}
+ 					即$f$可积 $\Leftrightarrow$ $\int{f^{+}}$ 和$\int{f^{-}}$ 均有界.
+ 				\end{center}
+ 			\end{itemize}
+ 		\end{rmk}
+ 	\end{defn}
+ 	
+
+
+
+	%  ############################
+	\ifx\allfiles\undefined
+\end{document}
+\fi
