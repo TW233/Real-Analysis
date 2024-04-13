@@ -742,6 +742,87 @@
  			\end{itemize}
  		\end{rmk}
  	\end{defn}
+ 
+ \newpage
+ 
+ \paragraph{性质}
+ 	下面我们将说明，定义在任一集合$X$ 上的\textbf{实可积函数}构成的空间$\mathcal{L}^1$ 为\textbf{线性空间}.
+ 	
+ 	\vspace{2em}
+ 	在此之前，先给出上述定义的一般的可测函数的积分的\textbf{基本性质}.
+ 	\begin{proposition}\label{prop 3.1.4}
+ 		Suppose $f , g \in \mathcal{L}$, then
+ 		\begin{enumerate}
+ 			\item \textbf{Linearity}: $\int{(af + bg)} = a\int{f} + b\int{g}$.
+ 			
+ 			\vspace{1em}
+ 			
+ 			\item \textbf{Finite Additivity}: 
+ 			\begin{align}
+ 				\int_{\bigsqcup_{j = 1}^{n}{A_j}}{f} = \sum_{j = 1}^{n}{\int_{A_j}{f}}
+ 			\end{align}
+ 			where $\{ A_j \}_{j = 1}^{n}$ are disjoint.
+ 			
+ 			\vspace{1em}
+ 			
+ 			\item \textbf{Monotonicity}: If $f \leq g$, then $\int{f} \leq \int{g}$.
+ 			
+ 			\vspace{1em}
+ 			
+ 			\item \textbf{Triangle inequality}: $\left| \int{f} \right| \leq \int{\left| f \right|}$.
+ 		\end{enumerate}
+ 	
+ 		\vspace{2em}
+ 		\begin{proof}
+ 			\begin{enumerate}
+ 				\item[2.]: We shall show that $\int_{\bigsqcup_{j = 1}^{n}{A_j}}{f^{+}} = \sum_{j = 1}^{n}{\int_{A_j}{f^{+}}}$ and $\int_{\bigsqcup_{j = 1}^{n}{A_j}}{f^{-}} = \sum_{j = 1}^{n}{\int_{A_j}{f^{-}}}$.\\
+ 				By \textbf{Thm \ref{thm 2.2.1}}, there exists simple $\varphi_n \nearrow f^{+}$, then by \textbf{MCT (Thm \ref{thm 3.1.2}, 单调收敛定理)},
+ 				\begin{align}
+ 					\int_{\bigsqcup_{j = 1}^{n}{A_j}}{f^{+}} = \lim_{n \to \infty}{\int_{\bigsqcup_{j = 1}^{n}{A_j}}{\varphi_n}}
+ 				\end{align}
+ 				Since $\varphi_n$ are simple, by the \textbf{countable additivity (简单函数的可数可加性)}, we have
+ 				\begin{align}
+ 					\int_{\bigsqcup_{j = 1}^{n}{A_j}}{f^{+}} 
+ 					= \lim_{n \to \infty}{\int_{\bigsqcup_{j = 1}^{n}{A_j}}{\varphi_n}}
+ 					= \lim_{n \to \infty}{\sum_{j = 1}^{n}{\int_{A_j}{\varphi_n}}}
+ 					&= \sum_{j = 1}^{n}{\lim_{n \to \infty}{\int_{A_j}{\varphi_n}}} \\
+ 					&\overset{\textbf{MCT}}{=} \sum_{j = 1}^{n}{\int_{A_j}{f^{+}}}
+ 				\end{align}
+ 			
+ 				\vspace{2em}
+ 				
+ 				\item[4.] 根据实数域上的三角不等式，we have
+ 				\begin{align}
+ 					\left| \int{f} \right| 
+ 					= \left| \int{f^{+}} - \int{f^{-}} \right| 
+ 					\leq \left| \int{f^{+}} \right| + \left| \int{f^{-}} \right|
+ 					= \int{f^{+}} + \int{f^{-}}
+ 					= \int{\left| f \right|}
+ 				\end{align}
+ 			\end{enumerate}
+ 		\end{proof}
+ 	\end{proposition}
+ 
+ \newpage
+ 	现在我们便可以来说明，定义在任一集合$X$ 上的\textbf{实可积函数}构成的空间$\mathcal{L}^1$ 为\textbf{线性空间}. 
+ 	\begin{proposition}\label{prop 3.1.5}
+ 		The set of integrable real-valued functions on $X$ is a real vector space.
+ 		
+ 		\vspace{2em}
+ 		\begin{proof}
+ 			$\forall f , g \in \mathcal{L}^1$, if $a \in \R$,
+ 			\begin{align}
+ 				\int{\left| f + g \right|} 
+ 				&\leq \int{(\left| f \right| + \left| g \right|)}
+ 				= \int{\left| f \right|} + \int{\left| g \right|}
+ 				< \infty \\
+ 				\int{\left| af \right|} 
+ 				&= \left| a \right| \int{\left| f \right|} 
+ 				< \infty
+ 			\end{align}
+ 			Therefore, $f + g , af \in \mathcal{L}^1$. $\,\, \Rightarrow \,\,$ $\mathcal{L}^1$ is a real vector space.
+ 		\end{proof}
+ 	\end{proposition}
  	
 
 
