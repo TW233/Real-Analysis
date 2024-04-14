@@ -746,7 +746,7 @@
  \newpage
  
  \paragraph{性质}
- 	下面我们将说明，定义在任一集合$X$ 上的\textbf{实可积函数}构成的空间$\mathcal{L}^1$ 为\textbf{线性空间}.
+ 	下面我们将说明，定义在任一集合$X$ 上的\textbf{实可积函数}构成的空间$\mathcal{L}^1$ 为\textbf{线性空间}，以及$f \in \mathcal{L}^1$ 时的一些性质.
  	
  	\vspace{2em}
  	在此之前，先给出上述定义的一般的可测函数的积分的\textbf{基本性质}.
@@ -821,6 +821,193 @@
  				< \infty
  			\end{align}
  			Therefore, $f + g , af \in \mathcal{L}^1$. $\,\, \Rightarrow \,\,$ $\mathcal{L}^1$ is a real vector space.
+ 		\end{proof}
+ 	\end{proposition}
+ 
+ 	\vspace{2em}
+ 	对于可积函数，我们往往是在整个$\R^d$ 空间上讨论其可积性，类比\textbf{Riemann}可积函数，合理地猜测其在$\R^d$ 平面上\textbf{“较远”}的地方的积分值应当较小. 这就是下面我们要给出的$\mathcal{L}^1$ 可积函数的性质.
+ 	
+ 	\begin{proposition}\label{prop 3.1.6}
+ 		Suppose $f \in \mathcal{L}^{1}(\R^d)$. Then $\forall \epsilon > 0$
+ 		\begin{enumerate}
+ 			\item[(\rmnum{1})]$\exists$ a set of finite measure $B$ such that
+ 			\begin{center}
+ 				$\int_{B^c}{\left| f \right|} < \epsilon$
+ 			\end{center}
+ 			
+ 			\item[(\rmnum{2})][\textbf{Absolutely Continuity}].\\
+ 			$\exists \delta > 0$ such that
+ 			\begin{center}
+ 				$\int_{E}{\left| f \right|} < \epsilon , \,\, \forall m(E) < \delta$
+ 			\end{center}
+ 		\end{enumerate}
+ 		
+ 		\vspace{2em}
+ 		\begin{rmk}
+ 			\begin{itemize}
+ 				\item (\rmnum{1})和(\rmnum{2})共同说明了，若$f \in \mathcal{L}^{1}(\R^d)$，则$f$ 的积分主要集中在一个\textbf{有限测度}区域内，且在很小的区域内$f$ 的积分值趋于零.
+ 				
+ 				\vspace{2em}
+ 				
+ 				\item (\rmnum{2}) 本质为测度的\textbf{绝对连续性} (\textbf{正测度关于正测度的绝对连续性}). 此处令正测度
+ 				\begin{align}
+ 					\mu : \mathcal{L} &\longrightarrow [0 , \infty] \\
+ 					E &\longmapsto \mu(E) = \int_{E}{\left| f \right|}
+ 				\end{align}
+ 				则命题 (\rmnum{2})可表示为：$\forall \epsilon > 0$, $\exists \delta > 0$, $\st$
+ 				\begin{center}
+ 					$\mu(E) < \epsilon , \,\, \forall m(E) < \delta$
+ 				\end{center}
+ 			\end{itemize}
+ 		\end{rmk}
+ 	
+ 		\newpage
+ 		\begin{proof}
+ 			\begin{enumerate}
+ 				\item[(\rmnum{1})]: 对定义域做截断.\\
+ 				Suppose $f \geq 0$. Let $B_n = B(0 , n)$, $f_n = f \chi_{B_n}$, then $f_n \nearrow f$. \\
+ 				By \textbf{MCT (Thm \ref{thm 3.1.2}, 单调收敛定理)}, 
+ 				\begin{align}
+ 					\lim_{n \to \infty}{\int{f_n}} = \int{f}
+ 				\end{align}
+ 				Then $\forall \epsilon > 0$, $\exists N \in \N$, $\st$
+ 				\begin{align}
+ 					\left| \int{f} - \int{f_N} \right| 
+ 					= \int{f} - \int{f_N}
+ 					= \int{f(1 - \chi_{B_N})}
+ 					= \int{f \chi_{B_{N}^{c}}}
+ 					= \int_{B_{N}^c}{f}
+ 					< \epsilon
+ 				\end{align}
+ 				Therefore, let $B = B_N = B(0 , N)$, the desired result follows.
+ 				
+ 				\vspace{2em}
+ 				
+ 				\item[(\rmnum{2})]: 同样是做截断. 不过此处是对$f$ 的取值做截断. \\
+ 				Let $B_n = \{ x \in \R^d \mid f(x) \leq n \}$, $f_n = f \chi_{B_n}$. Then $f_n \nearrow f$, $f_n \leq n$.\\
+ 				同(\rmnum{1}), By \textbf{MCT (Thm \ref{thm 3.1.2}, 单调收敛定理)},
+ 				\begin{align}
+ 					\lim_{n \to \infty}{\int{f_n}} = \int{f}
+ 				\end{align}
+ 				$\forall \epsilon > 0$, $\exists N \in \N$, $\st$
+ 				\begin{align}
+ 					\left| \int{f} - \int{f_N} \right|
+ 					= \int{(f - f_N)}
+ 					< \frac{\epsilon}{2}
+ 				\end{align}
+ 				Pick $\delta > 0$, $\st \,\, N\delta < \frac{\epsilon}{2}$. Then for all $m(E) < \delta$,
+ 				\begin{align}
+ 					\int_{E}{f}
+ 					= \int_{E}{(f - f_N)} + \int_{E}{f_N}
+ 					&\leq \int{(f - f_N)} + N \cdot m(E) \\
+ 					&< \frac{\epsilon}{2} + N \delta \\
+ 					&< \epsilon
+ 				\end{align}
+ 			\end{enumerate}
+ 		\end{proof}
+ 	\end{proposition}
+ 
+ \newpage
+ 
+ \subsection{$The \,\, Dominated \,\, Convergence \,\, Theorem$}
+ 	下面我们来介绍实分析中最最有用的定理——
+ 	\begin{center}
+ 		\underline{\textbf{控制收敛定理 (The Dominated Convergence Theorem)}}.
+ 	\end{center}
+ 	
+ 	\vspace{2em}
+ 	在\textbf{Riemann 积分}中，对于函数列\textbf{交换极限与积分的次序}的条件太过于奇怪与繁琐，而在\textbf{Lebesgue 积分}中，\textbf{控制收敛定理}则很完美地解决了这一问题. 它对于\textbf{交换极限与积分的次序}的条件十分简洁.下面便来介绍这一定理.
+ 	\begin{thm}\label{thm 3.1.7}
+ 		\textbf{The Dominated Convergence Theorem (DCT)}. \\
+ 		Suppose $\{ f_n \}_{n = 1}^{\infty} \subset \mathcal{M}^{+}$, $f_n \rightarrow f$ a.e.. If $\left| f_n \right| \leq g$, where $g \in \mathcal{L}^{1}(\R^d)$, then
+ 		\begin{align}
+ 			\int{\left| f_n - f \right|} \to 0 , \,\, n \to \infty
+ 		\end{align}
+ 		and consequently
+ 		\begin{align}
+ 			\int{f_n} \to \int{f} , \,\, n \to \infty
+ 		\end{align}
+ 	
+ 		\vspace{3em}
+ 		\begin{proof}
+ 			分别对$g + f_n$ 和$g - f_n$ 利用\textbf{Fatou's Lemma (Thm \ref{thm 3.1.6})}即可得证.
+ 			\begin{itemize}
+ 				\item Since $g + f_n \geq 0$, then by \textbf{Fatou's Lemma (Thm \ref{thm 3.1.6})},
+ 				\begin{align}
+ 					\int{\liminf_{n \to \infty}{(g + f_n)}} \leq \liminf_{n \to \infty}{\int{(g + f_n)}} 
+ 				\end{align}
+ 				Since $f_n \to f$, we have
+ 				\begin{align}
+ 					\int{g} + \int{f} &\leq \int{g} + \liminf_{n \to \infty}{\int{f_n}} \\
+ 					\int{f} &\leq \liminf_{n \to \infty}{\int{f_n}}
+ 				\end{align}
+ 				
+ 				\vspace{1em}
+ 				
+ 				\item Since $g - f_n \geq 0$, then by \textbf{Fatou's Lemma (Thm \ref{thm 3.1.6})},
+ 				\begin{align}
+ 					\int{\liminf_{n \to \infty}{(g - f_n)}} &\leq \liminf_{n \to \infty}{\int{(g - f_n)}} \\
+ 					\int{g} - \int{f} &\leq \int{g} + \liminf_{n \to \infty}{(-\int{f_n})} \\
+ 					&= \int{g} - \limsup_{n \to \infty}{\int{f_n}}
+ 				\end{align}
+ 				Then
+ 				\begin{align}
+ 					\int{f} \geq \limsup_{n \to \infty}{\int{f_n}}
+ 				\end{align}
+ 			\end{itemize}
+ 			Therefore
+ 			\begin{align}
+ 				\limsup_{n \to \infty}{\int{f_n}} \leq \int{f} \leq \liminf_{n \to \infty}{\int{f_n}}
+ 			\end{align}
+ 			which means $\underset{n \to \infty}{\lim}{\int{f_n}}$ exists, and
+ 			\begin{align}
+ 				\lim_{n \to \infty}{\int{f_n}} = \int{f}
+ 			\end{align}
+ 		\end{proof}
+ 	\end{thm}
+ 
+ \newpage
+ \subsection{$Complex-Valued \,\, Functions$}
+ \begin{center}
+ 	下面我们将\textbf{实值函数}上的\textbf{Lebesgue 积分}推广至\textbf{复值函数}.
+ \end{center}
+ 	
+ 	先来规定一些记号：
+ 	\begin{itemize}
+ 		\item Let $f : \R^d \rightarrow \C$, write $f(x) = u(x) + i v(x)$.
+ 	\end{itemize}
+ 	
+ 	\vspace{2em}
+ 	下面给出复值函数\textbf{可测}以及\textbf{可积}的定义.
+ 	\begin{defn}\label{def 3.1.7}
+ 		Suppose $f : \R^d \rightarrow \C$, $f = u + iv$, then we say
+ 		\begin{itemize}
+ 			\item $f$ is \underline{\textcolor{blue}{\textbf{measurable}}} if $u$ and $v$ are both measurable.
+ 			
+ 			\item $f$ is \underline{\textcolor{blue}{\textbf{Lebesgue integrable}}} if $\left| f \right|$ is Lebesgue integrable.
+ 		\end{itemize}
+ 		
+ 		\vspace{2em}
+ 		\begin{rmk}
+ 			事实上，根据此处定义，$f$ 可积 $\,\, \Leftrightarrow \,\,$ $u$ and $v$ 都可积.
+ 			\begin{proof}
+ 				\begin{itemize}
+ 					\item $f$ is integrable $\,\, \Rightarrow \,\,$ $\int{\sqrt{u^2 + v^2}} < \infty$ $\,\, \Rightarrow \,\,$ $\int{\left| u \right|} , \int{\left| v \right|} \leq \int{\sqrt{u^2 + v^2}} < \infty$ $\,\, \Rightarrow \,\,$ $u$ and $v$ 可积.
+ 					
+ 					\item $u$ and $v$ 可积 $\,\, \Rightarrow \,\,$ $\int{\left| u \right|} , \int{\left| v \right|} < \infty$ $\,\, \Rightarrow \,\,$ $\int{\sqrt{u^2 + v^2}} \leq \int{\left| u \right|} + \int{\left| v \right|} < \infty$ $\,\, \Rightarrow \,\,$ $f$ 可积.
+ 				\end{itemize}
+ 			\end{proof}
+ 		\end{rmk}
+ 	\end{defn}
+ 	
+ 	\vspace{2em}
+ 	下面对\textbf{命题 \ref{prop 3.1.5}} 的结论进行推广，即由\textbf{复值可积函数}构成的空间为\textbf{线性空间}.
+ 	\begin{proposition}\label{prop 3.1.7}
+ 		$\mathcal{L}^{1}(\R^d , \C)$ is a vector space.
+ 		
+ 		\vspace{2em}
+ 		\begin{proof}
+ 			Trivial.
  		\end{proof}
  	\end{proposition}
  	
