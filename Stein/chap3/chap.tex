@@ -1026,8 +1026,277 @@
  			Trivial.
  		\end{proof}
  	\end{proposition}
- 	
+ 
+ 
+ \newpage
+ 
+\section{$\mathcal{L}^1$ 空间的完备性}
+\paragraph{引入}
+	在讲\textbf{Riemann积分}时，我们称\textbf{Riemann可积函数}构成的空间是\textbf{不完备的 (not complete)}. 在提及\textbf{完备}这个概念之前，我们需要先引入衡量“距离”的工具，即\textbf{范数}和\textbf{度量}.
+	
+	\vspace{2em}
+	\subsection{范数，度量}
+ 	下面给出\textbf{范数}和\textbf{度量}的严格定义.
+ 	\begin{defn}\label{def 3.2.1}
+ 		Let $X$ be a vector space over $\mathbb{F}$, a \underline{\textcolor{blue}{\textbf{norm}}} is a function:
+ 		\begin{align}
+ 			X &\longrightarrow \R_{\geq 0} \\
+ 			f &\longmapsto \Vert f \Vert
+ 		\end{align}
+ 		satisfying the following properties:
+ 		\begin{enumerate}
+ 			\item[(\rmnum{1})]$\Vert f \Vert \geq 0$, $\forall f \in X$. \hspace*{3em} ($\Vert f \Vert = 0 \,\, \Leftrightarrow \,\, f = 0 \,\, a.e.$)
+ 			
+ 			\item[(\rmnum{2})]$\Vert af \Vert = \left| a \right| \Vert f \Vert$, $\forall a \in \mathbb{F}, f \in X$.
+ 			
+ 			\item[(\rmnum{3})]$\Vert f + g \vert \leq \Vert f \Vert + \Vert g \Vert$, $\forall f , g \in X$.
+ 		\end{enumerate}
+ 		
+ 		\vspace{2em}
+ 		\begin{rmk}
+ 			\begin{itemize}
+ 				\item (\rmnum{1})中的“$\Vert f \Vert = 0 \,\, \Leftrightarrow \,\, f = 0 \,\, a.e.$”的\textbf{“a.e.”}是对于$X$ 取函数空间时的条件，在实分析的取等条件中基本为默认叙述，在后续定义中往往省略. 在对$\mathcal{L}^1$ 空间的定义 (\textbf{定义 \ref{def 3.2.4}})中可以看到其合理性.
+ 				
+ 				\vspace{1em}
+ 				
+ 				\item \textbf{范数}实际上是对$\R^n$ 空间中\textbf{“与原点之间的距离”}这一概念的推广. 将函数视作向量，则其范数即为到原点的距离，即\textbf{模长}.
+ 				
+ 				\vspace{1em}
+ 				
+ 				\item 若一个\textbf{线性空间}$X$ 上配备了一个\textbf{范数}，则称其为\textcolor{blue}{\textbf{赋范向量空间 (赋范线性空间)}}.
+ 			\end{itemize}
+ 		\end{rmk}
+ 	\end{defn}
+ 
+ 	\newpage
+ 	将函数视作向量，就有其\textbf{到原点的距离}为\textbf{范数}. 但若是想要衡量\textbf{任意两个函数之间的距离}，则需要引入下面\textbf{度量}的概念.
+ 	\begin{defn}\label{def 3.2.2}
+ 		A \underline{\textcolor{blue}{\textbf{metric}}} on $X$ is a map
+ 		\begin{align}
+ 			d : X \times X &\longrightarrow \R_{\geq 0} \\
+ 			(x , y) &\longmapsto d(x , y)
+ 		\end{align}
+ 		satisfying
+ 		\begin{enumerate}
+ 			\item[(\rmnum{1})]$d(x,  y) \geq 0$, $\forall x , y \in X$. \hspace*{3em} ($d(x , y) = 0 \,\, \Leftrightarrow \,\, x = y$)
+ 			
+ 			\item[(\rmnum{2})]$d(x , y) = d(y , x)$, $\forall x , y \in X$.
+ 			
+ 			\item[(\rmnum{3})]$d(x , y) + d(y , z) \geq d(x , z)$, $\forall x , y , z \in X$.
+ 		\end{enumerate}
+ 		
+ 		\vspace{2em}
+ 		\begin{rmk}
+ 			\begin{itemize}
+ 				\item 若$X$ 为函数空间，则 (\rmnum{1})中“$d(x , y) = 0$”等价条件默认为“$x = y \,\, a.e.$”.
+ 				
+ 				\vspace{1em}
+ 				
+ 				\item \textbf{度量}可看作将两个函数 (向量)的起点均平移至原点后，其两个终点之间的\textbf{距离}.
+ 			\end{itemize}
+ 		\end{rmk}
+ 	\end{defn}
+ 
+\vspace{2em}
+\subsection{$The \,\, Space \,\, \mathcal{L}^{1}(\R^d)$}
+\paragraph{范数}
+	下面先在所有\textbf{Lebesgue可积函数}构成的空间上定义\textbf{范数}.
+	\begin{defn}\label{def 3.2.3}
+		For any integrable function $f$ on $\R^d$, we define the \underline{\textcolor{blue}{\textbf{norm}}} of $f$,
+		\begin{align}
+			\Vert f \Vert = \int_{\R^d}{\left| f \right| dx}
+		\end{align}
+	
+		\vspace{1em}
+		\begin{rmk}
+			\begin{itemize}
+				\item 由\textbf{命题 \ref{prop 3.1.3}}可知，此处$\Vert f \Vert = 0 \,\, \Leftrightarrow \,\, f = 0 \,\, a.e.$
+				
+				\vspace{1em}
+				
+				\item 容易证明，如此定义的\textbf{范数}满足范数应当满足的三条公理. (\textbf{定义 \ref{def 3.2.1}})
+			\end{itemize}
+		\end{rmk}
+	\end{defn}
 
+\newpage
+\paragraph{\textbf{Space $\mathcal{L}^{1}(\R^d)$}}
+	由于\textbf{定义 \ref{def 3.2.3}}中“$\Vert f \Vert = 0 \,\, \Leftrightarrow \,\, f = 0 \,\, a.e.$”，而我们对零测集上的函数性质并不关心，因而引出了如下关于$\mathcal{L}^1$ 空间的定义.
+	\begin{defn}\label{def 3.2.4}
+		我们在所有\textbf{Lebesgue可积函数}构成的空间上定义一个等价关系“$\sim$”:
+		\begin{center}
+			$f \sim g \,\, \Leftrightarrow \,\, f = g \,\, a.e.$
+		\end{center}
+		\textcolor{blue}{$\mathcal{L}^{1}(\R^d)$} is \underline{\textcolor{blue}{\textbf{the space of equivalences classes}}} of integrable functions.
+		
+		\vspace{2em}
+		\begin{rmk}
+			由定义可知，$\mathcal{L}^{1}(\R^d)$ 空间中的元素实际上为\textbf{函数的等价类 (集合)}
+			\begin{center}
+				$[f] = \{ g \,\, integrable \mid g \sim f \}$
+			\end{center}
+			而在实际中，我们还是习惯性地当作单独的函数进行运算，这在\textbf{几乎处处}的意义下时等价的.
+		\end{rmk}
+	\end{defn}
+
+\vspace{2em}
+\paragraph{度量}
+	下面我们说明，根据\textbf{定义 \ref{def 3.2.3}} 中所定义的\textbf{范数}可诱导出$\mathcal{L}^{1}(\R^d)$ 上的一个\textbf{度量}.
+	
+	\begin{proposition}\label{prop 3.2.1}
+		\begin{align}
+			d : \mathcal{L}^{1}(\R^d) \times \mathcal{L}^{1}(\R^d) &\longrightarrow \R_{\geq 0} \\
+			(f , g) &\longmapsto d(f , g) \coloneqq \Vert f - g \Vert
+		\end{align}
+		defines a \underline{\textcolor{blue}{\textbf{metric}}} on $\mathcal{L}^{1}(\R^d)$.
+		
+		\vspace{2em}
+		\begin{proof}
+			下面即来逐一验证\textbf{定义 \ref{def 3.2.2}} 中的三条公理.
+			\begin{itemize}
+				\item 根据范数的非负性，$\forall f , g \in \mathcal{L}^{1}(\R^d)$，$d(f , g) = \Vert f - g \Vert \geq 0$.
+				\begin{center}
+					$d(f , g) = 0 \,\, \Leftrightarrow \,\, f - g = 0 \,\, a.e. \,\, \Leftrightarrow \,\, f = g \,\, in \,\, \mathcal{L}^{1}(\R^d)$
+				\end{center}
+			
+				\item 可交换性. $\forall f , g \in \mathcal{L}^{1}(\R^d)$,
+				\begin{align}
+					d(f , g) = \vert f - g \Vert = \int_{\R^d}{\left| f - g \right|} = \int_{\R^d}{\left| g - f \right|} = \Vert g - f \Vert = d(g , f)
+				\end{align}
+			
+				\item 根据范数的三角不等式，$\forall f, g , h \in \mathcal{L}^{1}(\R^d)$,
+				\begin{center}
+					$d(f , g) + d(g , h) = \Vert f - g \Vert + \Vert g - h \Vert \geq \Vert (f - g) + (g - h) \Vert = \Vert f - h \Vert = d(f , h)$
+				\end{center}
+			\end{itemize}
+		\end{proof}
+	\end{proposition}
+
+\newpage
+\subsection{$\mathcal{L}^1$ 空间的完备性}
+\paragraph{定义}
+	在得到了\textbf{范数}、\textbf{度量}的定义后，我们下面给出\textbf{完备空间}的定义.
+	\begin{defn}\label{def 3.2.5}
+		A \textbf{metric space} $X$ is \underline{\textcolor{blue}{\textbf{complete}}} if every Cauchy Sequence $\{ x_k \}_{k = 1}^{\infty}$ has a limit in $X$.
+		
+		\vspace{2em}
+		\begin{rmk}
+			\begin{itemize}
+				\item \textbf{完备空间}即指空间中的任一柯西列都有\textbf{收敛到自身}的极限.
+				
+				\vspace{1em}
+				
+				\item 下面给出一个\textbf{不完备的度量空间}的例子.
+				\begin{example}\label{ex 3.2.1}
+					取一维实数域$\R$ 的子空间$(0 , 1) \subset \R$，考虑其上的Cauchy Sequence $\{ \frac{1}{n} \}_{n = 2}^{\infty} \subset (0 , 1)$.\\
+					由于$\frac{1}{n} \to 0 \notin (0 , 1)$，因此度量空间$(0 , 1)$ 不完备.
+				\end{example}
+			\end{itemize}
+		\end{rmk}
+	\end{defn}
+
+\vspace{2em}
+\paragraph{\textbf{$\mathcal{L}^1$ 空间的完备性}}
+	下面我们将给出本小节最重要的结论，即$\mathcal{L}^1$ 空间的\textbf{完备性}，这也是其比\textbf{Riemann可积函数}所构成的空间的优越性之所在.
+	
+	\begin{thm}\label{thm 3.2.1}
+		\textbf{(Riesz - Fischer)}. 
+		\begin{center}
+			$\mathcal{L}^1$ is complete in its metric.
+		\end{center}
+	
+		\vspace{2em}
+		\begin{proof}
+			Let $\{ f_n \}_{n = 1}^{\infty} \subset \mathcal{L}^{1}(\R^d)$ be a Cauchy Sequence in $\mathcal{L}^1$, then
+			\begin{center}
+				$\forall \epsilon > 0$, $\exists N(\epsilon) \in \N$, $\forall n , m \geq N(\epsilon)$, $\st \Vert f_n - f_m \Vert \leq \epsilon$
+			\end{center}
+			Tacking $\epsilon = 2^{-k}$, then $\exists N(2^{-k}) \geq N^{2^{-(k - 1)}}$, $\st$ for $n_k = N(2^{-k}) , n_{k + 1} = N(2^{-(k + 1)})$,
+			\begin{center}
+				$\Vert f_{n_k} - f_{n_{k + 1}} \Vert \leq 2^{-k}$
+			\end{center}
+			下面分为三步进行证明.
+			\begin{itemize}
+				\item 构建$f(x)$ 并利用$g(x)$ 证明$f \in \mathcal{L}^1$，证明子列$\{ f_{n_j} \}_{j = 1}^{\infty}$ 收敛到$f$. \\
+				Let 
+				\begin{align}
+					f &= f_{n_1} + \sum_{j = 1}^{\infty}{(f_{n_{j + 1}} - f_{n_j})} \\
+					g &= \left| f_{n_1} \right| + \sum_{j = 1}^{\infty}{\left| f_{n_{j + 1}} - f_{n_j} \right|}
+				\end{align}
+				Then by \textbf{MCT (Thm \ref{thm 3.1.2}, 控制收敛定理)}
+				\begin{align}
+					\int{g}
+					= \int{\left| f_{n_1} \right|} + \int{\sum_{j = 1}^{\infty}{\left| f_{n_{j + 1}} - f_{n_j} \right|}}
+					&= \int{\left| f_{n_1} \right|} + \sum_{j = 1}^{\infty}{\int{\left| f_{n_{j + 1}} - f_{n_j} \right|}} \\
+					&= \int{\left| f_{n_1} \right|} + \sum_{j = 1}^{\infty}{\Vert f_{n_{j + 1}} - f_{n_j} \Vert} \\
+					&\leq \int{\left| f_{n_1} \right|} + \sum_{j = 1}^{\infty}{2^{-j}}
+					< \infty
+				\end{align}
+				Therefore $g$ is integrable, $g \in \mathcal{L}^1$. Since $\left| f \right| \leq g$, then $\int{\left| f \right|} < \infty$. $f$ is integrable. \\
+				Let
+				\begin{align}
+					S_{k} = f_{n_1} + \sum_{j = 1}^{k}{(f_{n_{j + 1}} - f_{n_j})} = f_{n_{k + 1}} , \,\, k = 1 , 2 , \cdots
+				\end{align}
+				\begin{center}
+					$f$ is integrable $\,\, \Rightarrow \,\,$ $f < \infty \,\, a.e.$ $\,\, \Rightarrow \,\,$ $S_k$ converges a.e. $\,\, \Rightarrow \,\,$ $S_k = f_{n_{k + 1}} \to f \,\, a.e.$
+				\end{center}
+				So we find
+				\begin{center}
+					$f_{n_k} \to f \,\, a.e.$
+				\end{center}
+				
+				\vspace{4em}
+				\item 将逐点收敛性转化为$\mathcal{L}^1$ 收敛性，即证$\Vert f - f_{n_k} \Vert \to 0$. \\
+				We note that
+				\begin{align}
+					\left| f - f_{n_k} \right|
+					&= \left| \left( f_{n_1} + \sum_{j = 1}^{\infty}{(f_{n_{j + 1}} - f_{n_j})} \right) - \left( f_{n_1} + \sum_{j = 1}^{k - 1}{(f_{n_{j + 1}} - f_{n_j})} \right) \right| \\
+					&=\left| \sum_{j = k}^{\infty}{(f_{n_{j + 1}} - f_{n_j})} \right| 
+					\leq g
+				\end{align}
+				By \textbf{DCT (Thm \ref{thm 3.1.7}, 控制收敛定理)}, since $\left| f - f_{n_k} \right| \to 0 \,\, a.e.$, $\left| f - f_{n_k} \right| \leq g$, $g$ integrable,
+				\begin{align}
+					\lim_{k \to \infty}{\Vert f - f_{n_k} \Vert}
+					= \lim_{k \to \infty}{\int{\left| f - f_{n_k} \right|}}
+					\overset{\textbf{DCT}}{=} \int{\lim_{k \to \infty}{\left| f - f_{n_k} \right|}}
+					= 0
+				\end{align}
+				Therefore, $\Vert f - f_{n_k} \Vert \to 0$. 即$f_{n_k}$ 依$\mathcal{L}^1$ 范数收敛到$f$.
+				
+				\newpage
+				\item 利用子列$\{ f_{n_k} \}_{k = 1}^{\infty}$ 作为“桥梁”，证明$f_n$ 依$\mathcal{L}^1$ 范数收敛到$f$，即$\Vert f_n - f \Vert \to 0$. \\
+				$\forall \epsilon > 0$，由于$\{ f_n \}_{n = 1}^{\infty}$ 为$\mathcal{L}^1$ 中Cauchy Sequence, 因此$\exists N \in \N$, $\st$
+				\begin{center}
+					$\Vert f_n - f_m \Vert < \frac{\epsilon}{2} , \,\, \forall n , m > N$
+				\end{center}
+				Since $\Vert f_{n_k} - f \Vert \to 0$, then for $\epsilon > 0$, pick $n_k > N$ which $\st$
+				\begin{center}
+					$\Vert f_{n_k} - f \Vert < \frac{\epsilon}{2}$
+				\end{center}
+				Then
+				\begin{align}
+					\Vert f_n - f \Vert 
+					\leq \Vert f_n - f_{n_k} \Vert + \Vert f_{n_k} - f \Vert
+					< \epsilon , \,\, \forall n > n_k > N
+				\end{align}
+				Therefore $\Vert f_n \to f \Vert \to 0$ with $f \in \mathcal{L}^1$. $\mathcal{L}^1$ is complete in its metric.
+			\end{itemize}
+		\end{proof}
+	\end{thm}
+
+	\vspace{2em}
+	根据上述定理的证明过程，可以得到下面的推论.
+	\begin{corollary}\label{cor 3.2.2}
+		If $\{ f_n \}_{n = 1}^{\infty}$ converges to $f$ in $\mathcal{L}^1$, then there exists a subsequence $\{ f_{n_k} \}_{k = 1}^{\infty}$ such that
+		\begin{center}
+			$f_{n_k}(x) \to f(x) \,\, a.e.$
+		\end{center}
+	
+		\vspace{1em}
+		\begin{rmk}
+			即在\textbf{依$\mathcal{L}^1$ 范数收敛}的函数序列中，总存在\textbf{“几乎处处收敛”}意义的子列.
+		\end{rmk}
+	\end{corollary}
 
 
 	%  ############################
