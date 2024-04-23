@@ -1298,6 +1298,138 @@
 		\end{rmk}
 	\end{corollary}
 
+\vspace{2em}
+\subsection{$\mathcal{L}^1$ 的稠密子空间}
+	下面说明$\mathcal{L}^1$ 空间中以下的函数集合是\textbf{稠密的}.
+	\begin{thm}\label{thm 3.2.3}
+		The following families of functions are dense in $\mathcal{L}^{1}(\R^d)$:
+		\begin{enumerate}
+			\item[(\rmnum{1})]The simple functions.
+			
+			\item[(\rmnum{2})]The step functions.
+			
+			\item[(\rmnum{3})]The continuous functions of compact support.
+		\end{enumerate}
+	
+		\vspace{2em}
+		\begin{proof}
+			详情可见视频\href{https://www.bilibili.com/video/BV1FT411C7wM?p=24}{Urysohn引理与$\mathcal{L}^1$ 的稠密子空间}.
+		\end{proof}
+	\end{thm}
+
+\newpage
+\section{$Lebesgue$ 积分的平移不变性}
+	首先给出\textbf{平移算符}及\textbf{函数平移}的符号表达.
+	\begin{defn}\label{def 3.3.1}
+		The \underline{\textcolor{blue}{\textbf{translation}}} by a vector $h$ on $\R^d$ is denoted by the map $\tau_h : x \mapsto x - h$. If $f$ is a function defined on $\R^d$, the \underline{\textcolor{blue}{\textbf{translation}}} of $f$ by $h \in \R^d$ is the function $f_h$, defined by
+		\begin{center}
+			$f_{h}(x) = (f \circ \tau_h)(x) = f(x - h)$
+		\end{center}
+	\end{defn}
+
+	\vspace{2em}
+	下面给出\textbf{Lebesgue 积分的平移不变性}.
+	\begin{thm}\label{thm 3.3.1}
+		If $f \in \mathcal{L}^{1}(\R^d)$, then $\forall h \in \R^d$, $f_h \in \mathcal{L}^{1}(\R^d)$ and
+		\begin{align}
+			\int_{\R^d}{f(x - h) dx} = \int_{\R^d}{f(x) dx}
+		\end{align}
+	
+		\vspace{2em}
+		\begin{proof}
+			下面按$Lebesgue$ 积分的构造过程来证明，即\textbf{特征函数}$\Rightarrow$ \textbf{简单函数}$\Rightarrow$ \textbf{非负可测}.
+			\begin{itemize}
+				\item \textbf{Characteristic Function}. \\
+				Suppose $f = \chi_E$, where $E \subset \R^d$ is measurable. Then
+				\begin{align}
+					f_{h}(x) = f(x - h) = \chi_{E}(x - h) = 
+					\begin{cases}
+						1 , if \,\, x - h \in E \\
+						0 , if \,\, x - h \notin E
+					\end{cases}
+				 	= 
+				 	\begin{cases}
+				 		1 , if \,\, x \in E + h = E_h \\
+				 		0 , if \,\, x \in (E + h)^c = E_{h}^c
+				 	\end{cases}
+				\end{align}
+				根据$Lebesgue$ 测度的\textbf{平移不变性}，
+				\begin{align}
+					\int_{\R^d}{f_h} = m(E_h) = m(E) = \int_{\R^d}{f}
+				\end{align}
+			
+				\vspace{2em}
+				\item \textbf{Simple Function}. \\
+				$\forall \varphi = \overset{n}{\underset{k = 1}{\sum}}{a_k \chi_{E_k}}$ simple, by the \textbf{linearity of integration},
+				\begin{align}
+					\int_{\R^d}{\varphi_h} = \sum_{k = 1}^{n}{\int_{\R^d}{\chi_{(E_k)_h}}} = \sum_{k = 1}^{n}{\int_{\R^d}{\chi_{E_k}}} = \int_{\R^d}{\varphi}
+				\end{align}
+			
+				\vspace{2em}
+				\item \textbf{Non-negative Function}. \\
+				$\forall f$ non-negative, $\exists \{ \varphi_n \}_{n = 1}^{\infty}$ simple, $\st \varphi \nearrow f$ and $\varphi \geq 0$. Then by \textbf{MCT (Thm \ref{thm 3.1.2})},
+				\begin{align}
+					\int_{\R^d}{\varphi_n} \to \int_{\R^d}{f} \,\, as \,\, n \to \infty
+				\end{align}
+				Since $(\varphi_n)_h \nearrow f_h$ and $\int{\varphi_n} = \int{(\varphi_n)_h}$, then by \textbf{MCT (Thm \ref{thm 3.1.2})},
+				\begin{align}
+					\int_{\R^d}{\varphi_n} = \int_{\R^d}{(\varphi_n)_h} \to \int_{\R^d}{f_h} \,\, as \,\, n \to \infty
+				\end{align}
+				Therefore
+				\begin{align}
+					\int_{\R^d}{f_h} = \int_{\R^d}{f}
+				\end{align}
+			
+				\vspace{2em}
+				\item \textbf{General Case}. \\
+				$\forall f \in \mathcal{L}^{1}(\R^d)$, $f = f^{+} - f^{-}$, where $f^{+}$ and $f^{-}$ are non-negative. \\
+				Then by the \textbf{linearity of integration},
+				\begin{align}
+					\int_{\R^d}{f_h} = \int_{\R^d}{f^{+}_h} - \int_{\R^d}{f^{-}_h} = \int_{\R^d}{f^{+}} - \int_{\R^d}{f^{-}} = \int_{\R_d}{f}
+				\end{align}
+			\end{itemize}
+		\end{proof}
+	\end{thm}
+
+\newpage
+\section{$Lebesgue$ 可积函数的$\mathcal{L}^1$ 连续性}
+\paragraph{引入}
+	Recall 数学分析中\textbf{连续}的\textbf{等价定义}:
+	\begin{align}
+		f \,\, is \,\, continous \,\, at \,\, x \,\, &\Leftrightarrow \,\, f(x) - f(x - h) \to 0 \,\, as \,\, h \to 0 \\
+		&\Leftrightarrow \left| f_{h}(x) - f(x) \right| \to 0 \,\, as \,\, h \to 0
+	\end{align}
+	即可大致视作\textbf{Riemann可积函数关于2-范数的连续性}.
+
+\vspace{2em}
+\paragraph{\textbf{Lebesgue可积函数的$\mathcal{L}^1$ 连续性}}
+	在$\mathcal{L}^1$ 空间中，\textbf{Lebesgue可积函数}也有类似的\textbf{关于$\mathcal{L}^1$ 范数的连续性}. 这就是下面的定理.
+	\begin{thm}\label{thm 3.4.1}
+		Suppose $f \in \mathcal{L}^{1}(\R^d)$, then
+		\begin{align}
+			\Vert f_h - f \Vert_{\mathcal{L}^1} \to 0 \,\, as \,\, h \to 0
+		\end{align}
+		
+		\vspace{2em}
+		\begin{proof}
+			详见视频\href{https://www.bilibili.com/video/BV1FT411C7wM?p=25}{积分的平移不变性与可积函数的$\mathcal{L}^1$ 连续性}. \\
+			其中需要用到如下的引理.
+			\begin{lemma}\label{lemma 3.4.2}\footnote{此为书：\textbf{《$Real \,\, Analysis -- Modern \,\, Techniques \,\, and \,\, Their \,\, Applications$》--- $Gerald \,\, B. \,\, Folland$} \\
+					\textbf{P238 Lemma 8.4}}
+				If $f \in C_{c}(\R^d)$, then $f$ is uniformly continuous.
+				
+				\vspace{1em}
+				\begin{rmk}
+					$f \in C_{c}(\R^d)$ 表示$f$ 为具有紧支集的连续函数.
+				\end{rmk}
+			\end{lemma}
+		\end{proof}
+	\end{thm}
+
+\newpage
+\section{$Fubini$ 定理}
+
+
 
 	%  ############################
 	\ifx\allfiles\undefined
