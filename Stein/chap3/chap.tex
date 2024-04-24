@@ -1428,7 +1428,269 @@
 
 \newpage
 \section{$Fubini$ 定理}
+	为了讨论的方便，下面先给出函数及集合的\textbf{切片}的定义.
+	\begin{defn}\label{def 3.5.1}
+		If $f$ is a function on $\R^{d_1} \times \R^{d_2}$, the \underline{\textcolor{blue}{\textbf{slice}}} of $f$ w.r.t. $y \in \R^{d_2}$ is the function
+		\begin{align}
+			f^y : \R^{d_1} &\longrightarrow \overline{\R} \\
+			x &\longmapsto f(x , y)
+		\end{align}
+		Similarly, the \underline{\textcolor{blue}{\textbf{slice}}} of $f$ for a fixed $x \in \R^{d_1}$ is
+		\begin{align}
+			f_x : \R^{d_2} &\longrightarrow \overline{\R} \\
+			y &\longmapsto f(x , y)
+		\end{align}
+		Let $E \subset \R^{d_1} \times \R^{d_2}$, we define its \underline{\textcolor{blue}{\textbf{slices}}} by
+		\begin{align}
+			E^y \coloneqq \{ x \in \R^{d_1} \mid (x , y) \in E \} , \,\, E_x \coloneqq \{ y \in \R^{d_2} \mid (x , y) \in E \}
+		\end{align}
+	\end{defn}
 
+	\vspace{4em}
+	下面给出\textbf{Fubini 定理}.
+	\begin{thm}\label{thm 3.5.1}
+		\textbf{Fubini}. \\
+		Suppose $f(x , y)$ is \textbf{integrable} on $\R^{d_1} \times \R^{d_2}$. Then for a.e. $y \in \R^{d_2}$:
+		\begin{enumerate}
+			\item[(\rmnum{1})]The slice $f^y$ is integrable on $\R^{d_1}$.
+			
+			\item[(\rmnum{2})]The function $y \mapsto \int_{\R^{d_1}}{f^{y}(x) dx}$ is integrable on $\R^{d_2}$.
+			
+			\item[(\rmnum{3})]Moreover,
+			\begin{align}
+				\int_{\R^{d_2}}{\left( \int_{\R^{d_1}}{f^{y}(x) dx} \right) dy} = \int_{\R^d}{f}
+			\end{align}
+		\end{enumerate}
+	\end{thm}
+
+\newpage
+\subsection{$Fubini$ 定理的证明}
+	\begin{proof}
+		Let $\mathcal{F} = \{ f \in \mathcal{L}^{1}(\R^d) \mid f \,\, satisfies \,\, (\rmnum{1}) \sim (\rmnum{3}) \}$. It suffices to show that $\mathcal{L}^{1}(\R^d) \subset \mathcal{F}$. \\
+		下面仍按照构造$Lebesgue$ 积分的顺序思路进行证明，即\textbf{特征函数}$\Rightarrow$ \textbf{简单函数}$\Rightarrow$ \textbf{非负可测}.
+		\begin{center}
+			(其中\textbf{特征函数}部分 (\textbf{Step 3 $\sim$ 5})最为复杂繁琐，后续的证明则是水到渠成)
+		\end{center}
+		在此之前，还要先证明$\mathcal{F}$ 对\textbf{函数的线性组合}及\textbf{单调函数列的极限}封闭.
+		
+		\vspace{2em}
+		
+		\begin{itemize}
+			\item \textbf{Step 1: Any finite linear combination of functions in $\mathcal{F}$ also belongs to $\mathcal{F}$.} \\
+			Suppose $\{ f_k \}_{k = 1}^N \subset \mathcal{F}$. By the condition, $\forall k$, $\exists A_k \subset \R^{d_2}$, $m(A_k) = 0$, $\st$
+			\begin{center}
+				$f_{k}^{y}(x)$ is integrable on $\R^{d_1}$, $\forall y \in A_{k}^c$.
+			\end{center}
+			Let $A = \overset{N}{\underset{k = 1}{\bigcup}}{A_k}$, then $m(A) = 0$ and
+			\begin{center}
+				$f_{k}^{y}(x)$ is integrable on $\R^{d_1}$, $\forall y \in A^c$, $\forall k$.
+			\end{center}
+			下面对定理结论逐条验证. By the linearity of integration, $\forall a_k \in \R$,
+			\begin{align}
+				(\sum_{k = 1}^{N}{a_k f_k})^{y} 
+				&= \sum_{k = 1}^{N}{a_k f_{k}^{y}} \,\, is \,\, integrable \,\, on \,\, \R^{d_1} \\
+				\int_{\R^{d_1}}{\sum_{k = 1}^{N}{(a_k f_k)^{y}}(x) dx} 
+				&= \sum_{k = 1}^{N}{a_k \int_{\R^{d_1}}{f_{k}^{y}(x) dx}} \,\, is \,\, integrable \,\, on \,\, \R^{d_2}
+			\end{align}
+			\begin{align}
+				\int_{\R^{d_2}}{\left( \int_{\R^{d_1}}{\sum_{k = 1}^{N}{(a_k f_k)^{y}}(x) dx} \right) dy}
+				&= \sum_{k = 1}^{N} a_k \int_{\R^{d_2}}{\left( \int_{\R^{d_1}}{f_{k}^{y}(x) dx} \right) dy} \\
+				&= \sum_{k = 1}^{N} a_k \int_{\R^d}{f_k} \\
+				&= \int_{\R^d}{\sum_{k = 1}^{N}{a_k f_k}} \\
+			\end{align}
+			Therefore, $\overset{N}{\underset{k = 1}{\sum}}{a_k f_k} \in \mathcal{F}$, $\forall a_k \in \R$.
+			
+			\newpage
+			
+			\item \textbf{Step 2: $\mathcal{F}$ 对单调函数列的极限封闭，即$\forall \{ f_k \}_{k = 1}^{\infty} , \,\, f_k \nearrow f , \,\, f$ integrable $ \,\, \Rightarrow \,\, f \in \mathcal{F}$}. \\
+			Suppose $f_k \geq 0$. By the condition, $\forall k$, $\exists A_k \subset \R^d$, $m(A_k) = 0$, $\st$
+			\begin{center}
+				$f_{k}^{y}(x)$ is integrable on $\R^{d_1}$, $\forall y \in A_{k}^c$.
+			\end{center}
+			Let $A = \overset{\infty}{\underset{k = 1}{\bigcup}}{A_k}$, then $m(A) = 0$ and
+			\begin{center}
+				$f_{k}^{y}(x)$ is integrable on $\R^{d_1}$, $\forall y \in A^c$, $\forall k$.
+			\end{center}
+			Since $f_{k}^{y}(x) \nearrow f^{y}(x)$, by \textbf{MCT (Thm \ref{thm 3.1.2})}
+			\begin{align}
+				\int_{\R^{d_1}}{f_{k}^{y}(x) dx} \to \int_{\R^{d_1}}{f^{y}(x) dx} \,\, as \,\, k \to \infty
+			\end{align}
+			Let 
+			\begin{align}
+				g_{k}(y) = \int_{\R^{d_1}}{f_{k}^{y}(x) dx} , \,\, g(y) = \int_{\R^{d_1}}{f^{y}(x) dx}
+			\end{align}
+			Then we have $g_{k}(y) \nearrow g(y)$ and $g_k \geq 0$. By \textbf{MCT (Thm \ref{thm 3.1.2})}
+			\begin{align}
+				\int_{\R^{d_2}}{g_{k}(y) dy} \to \int_{\R^{d_2}}{g(y) dy} \,\, as \,\, k \to \infty
+			\end{align}
+			i.e.
+			\begin{align}
+				\int_{\R^{d_2}}{\left( \int_{\R^{d_1}}{f_{k}^{y}(x) dx} \right) dy} \to \int_{\R^{d_2}}{\left( \int_{\R^{d_1}}{f^{y}(x) dx} \right) dy}
+			\end{align}
+			By the condition (\rmnum{3}), we have
+			\begin{align}
+				\int_{\R^d}{f_k} \to \int_{\R^{d_2}}{\left( \int_{\R^{d_1}}{f^{y}(x) dx} \right) dy}
+			\end{align}
+			Since $f_k \nearrow f$, $f_k \geq 0$, by \textbf{MCT (Thm \ref{thm 3.1.2})}
+			\begin{align}
+				\int_{\R^d}{f_k} \to \int_{\R^d}{f}
+			\end{align}
+			Therefore
+			\begin{align}
+				\int_{\R^d}{f} = \int_{\R^{d_2}}{\left( \int_{\R^{d_1}}{f^{y}(x) dx} \right) dy} = \int_{\R^{d_2}}{g(y) dy}
+			\end{align}
+			Since $f$ is integrable, $g(y) = \int{f^{y}(x) dx}$ is integrable on $\R^{d_2}$ $\,\, \Rightarrow \,\,$ $\int{g} < \infty$.\\
+			Then we have
+			\begin{align}
+				g(y) = \int_{\R^{d_1}}{f^{y}(x) dx} < \infty \,\, for \,\, a.e. \,\, y \in \R^{d_2}
+			\end{align}
+			Therefore $f^{y}(x)$ is integrable for a.e. $y \in \R^{d_2}$. \\
+			Then $f \in \mathcal{F}$.
+			
+			\newpage
+			
+			\item \textbf{Step 3: Any characteristic function of a set $E$ of type $G_{\delta}$ with finite measure belongs to $\mathcal{F}$}. \\
+			下面对$E$ 进行讨论，分$a \sim e$ 五种情况来证明：
+			\vspace{2em}
+			\begin{enumerate}
+				\item[\textbf{(a)}]\textbf{$E \subset \R^d$ is a bounded open cube}. \\
+				Suppose $E = Q_1 \times Q_2$, where $Q_1 \subset \R^{d_1}$ and $Q_2 \subset \R^{d_2}$ are open cubes. \\
+				$\forall y \in \R^{d_2}$, $\chi_{E}(x , y)$ is measurable in $x$, and integrable with
+				\begin{align}
+					g(y) = \int_{\R^{d_1}}{\chi_{E}(x , y) dx} = 
+					\begin{cases}
+						\left|	Q_1 \right| , \,\, if \,\, y \in Q_2 \\
+						0 , \,\, if \,\, y \not\in Q_2
+					\end{cases}
+					 = \left| Q_1 \right| \chi_{Q_2}(y)
+				\end{align}
+				Since $g(y) = \left| Q_1 \right| \chi_{Q_2}(y)$ is measurable and integrable with
+				\begin{align}
+					\int_{\R^{d_2}}{g(y) dy} = \left| Q_1 \right| \left| Q_2 \right| = \left| E \right| = \int_{\R^d}{\chi_E}
+				\end{align}
+				i.e.
+				\begin{align}
+					\int_{\R^{d_2}}{\left( \int_{\R^{d_1}}{\chi_{E}(x , y) dx} \right) dy} = \int_{\R^d}{\chi_E}
+				\end{align}
+				Therefore, $\chi_E \in \mathcal{F}$.
+				
+				\vspace{3em}
+				
+				\item[\textbf{(b)}]\textbf{$E \subset \R^d$ is a subset of the boundary of some closed cube}. \\
+				Since $m(E) = 0$, we have
+				\begin{align}
+					\int_{\R^d}{\chi_E} = m(E) = 0
+				\end{align}
+				\uwave{After an investigation of various possibilities}, we note that (此处细节证明暂且留疑)
+				\begin{center}
+					$\forall$ a.e. $y \in \R^{d_2}$, $E^y = \{ x \in \R^{d_1} \mid (x , y) \in E \}$ has measure 0 in $\R^{d_1}$.
+				\end{center}
+				Then $\forall$ a.e. $y \in \R^{d_2}$, $\chi_{E}^{y}(x)$ is integrable on $\R^{d_1}$ with
+				\begin{align}
+					g(y) = \int_{\R^{d_1}}{\chi_{E}^{y}(x) dx} = \int_{\R^{d_1}}{\chi_{E}(x , y) dx} = 0 , \,\, \forall \,\, a.e. \,\, y \in \R^{d_2}
+				\end{align}
+				So $g(y)$ is integrable on $\R^{d_2}$ with
+				\begin{align}
+					\int_{\R^{d_2}}{g(y) dy} = 0 = \int_{\R^d}{\chi_E}
+				\end{align}
+				i.e.
+				\begin{align}
+					\int_{\R^{d_2}}{\left( \int_{\R^{d_1}}{\chi_{E}(x , y) dx} \right) dy} = \int_{\R^d}{\chi_E}
+				\end{align}
+				Therefore, $\chi_E \in \mathcal{F}$.
+				
+				\newpage
+				
+				\item[\textbf{(c)}]\textbf{$E \subset \R^d$ is a finite union of almost disjoint closed cubes}. \\
+				Suppose $E = \overset{N}{\underset{k = 1}{\bigcup}}{Q_k}$, where $\{ Q_{k}^{\circ} \}_{k = 1}^{N}$ are disjoint. \\
+				Let $A_k = Q_k - Q_{k}^{\circ}$ be the boundary of closed cube $Q_k$. Then $\chi_{A_k} \in \mathcal{F}$. (by \textbf{Step 3 (b)})\\
+				$\chi_E$ is a linear combination of $\chi_{Q_k}$ and $\chi_{A_k}$, $k = 1 \sim N$. \\
+				Since $\chi_{Q_k}$, $\chi_{A_k} \in \mathcal{F}$, $k = 1 \sim N$, then by \textbf{Step 1}, $\chi_E \in \mathcal{F}$.
+				
+				\vspace{6em}
+				
+				\item[\textbf{(d)}]\textbf{$E \subset \R^d$ is open and of finite measure}. \\
+				Since $E \subset \R^d$ is open, by \textbf{Thm \ref{thm 1.1.4}}, $\exists$ alomst disjoint closed cubes $\{ Q_k \}_{k = 1}^{\infty}$, $\st$
+				\begin{align}
+					E = \bigcup_{k = 1}^{\infty}{Q_k} , \,\, where \,\, \{ Q_{k}^{\circ} \}_{k = 1}^{\infty} \,\, are \,\, disjoint
+				\end{align}
+				Let
+				\begin{align}
+					f_k = \chi_{\bigcup_{j = 1}^{k}{Q_j}}
+				\end{align}
+				Then by \textbf{Step 3 (c)}, $f_k \in \mathcal{F}$, and $f_k \nearrow f = \chi_E$, $f_k \geq 0$. By \textbf{Step 2}, we have $f = \chi_E \in \mathcal{F}$.
+				
+				\vspace{6em}
+				
+				\item[\textbf{(e)}]\textbf{$E \subset \R^d$ is a $G_{\delta}$ of finite measure}. \\
+				By the \textbf{definition of $G_{\delta}$ (Def \ref{def 1.4.5})}, 
+				\begin{align}
+					E = \bigcap_{k = 1}^{\infty}{\widetilde{Q_k}} , \,\, where \,\, \widetilde{Q_k} \underset{open}{\subset} \R^d
+				\end{align}
+				Since $E$ has finite measure, $\exists \widetilde{O_0} \subset \R^d$ open, $\st$ $E \subset \widetilde{O_0}$. \\
+				Let
+				\begin{align}
+					O_k = O_0 \cap \bigcap_{j = 1}^{k}{\widetilde{O_j}}
+				\end{align}
+				Then $O_1 \supset O_2 \supset \cdots$ and $E = \overset{\infty}{\underset{k = 1}{\bigcap}}{O_k}$. Let $f_k = \chi_{O_k}$, then $f_k \in \mathcal{F}$. (By \textbf{Step 3 (d)}) \\
+				Since $f_k \searrow f = \chi_E$, $f_k \in \mathcal{F}$, then by \textbf{Step 2}, $f = \chi_E \in \mathcal{F}$.
+ 			\end{enumerate}
+ 		
+ 			\newpage
+ 			
+ 			\item \textbf{Step 4: If $E \subset \R^d$ has measure 0, then $\chi_E \in \mathcal{F}$}. \\
+ 			By \textbf{Thm \ref{thm 1.4.1}}, $\exists$ a set $G \subset \R^d$ of type $G_{\delta}$ with $E = G \backslash N$, where $m(N) = 0$. Then
+ 			\begin{center}
+ 				$E \subset G$, $m(G) = m(E) + m(G \backslash E) = 0$.
+ 			\end{center}
+ 			By \textbf{Step 3}, $\chi_G \in \mathcal{F}$, then
+ 			\begin{align}
+ 				\int_{\R^{d_2}}{\left( \int_{\R^{d_1}}{\chi_{G}(x , y) dx} \right) dy}
+ 				= \int_{\R^d}{\chi_G} = 0
+ 			\end{align}
+ 			Then
+ 			\begin{align}
+ 				\int_{\R^{d_1}}{\chi_{G}(x , y) dx} = 0 \,\, for \,\, a.e. \,\, y \in \R^{d_2}
+ 			\end{align}
+ 			Since
+ 			\begin{align}
+ 				\int_{\R^{d_1}}{\chi_{G}(x , y) dx} = \int_{\R^{d_1}}{\chi_{G}^{y}(x) dx} = \int_{\R^{d_1}}{\chi_{G^y}(x) dx} = m(G^y)
+ 			\end{align}
+ 			Therefore
+ 			\begin{align}
+ 				G^y = \{ x \in \R^{d_1} \mid (x , y) \in G \} \,\, has \,\, measure \,\, 0 \,\, for \,\, a.e. \,\, y \in \R^{d_2}
+ 			\end{align}
+ 			Since $E^y \subset G^y$, then $E^y$ has measure 0 for a.e. $y \in \R^{d_2}$.
+ 			\begin{align}
+ 				&\Rightarrow \int_{\R^{d_1}}{\chi_{E}(x , y) dx} = m(E^y) = 0 \,\, for \,\, a.e. \,\, y \in \R^{d_2} \\
+ 				&\Rightarrow \int_{\R^{d_2}}{\left( \int_{\R^{d_1}}{\chi_{E}(x , y) dx} \right) dy} = 0 = \int_{\R^d}{\chi_E} \\
+ 				&\Rightarrow \chi_E \in \mathcal{F}
+ 			\end{align}
+ 		
+ 			\vspace{6em}
+ 			
+ 			\item \textbf{Step 5: If $E$ is any measurable subset of $\R^d$ with finite measure, then $\chi_E$ belongs to $\mathcal{F}$}. \\
+ 			By \textbf{Thm \ref{thm 1.4.1}}, $\exists$ a finite measure $G$ of type $G_{\delta}$ with $E \subset G$ and $m(G - E) = 0$.\\
+ 			Since $\chi_E = \chi_{G} - \chi_{G - E}$, by \textbf{Step 4}, $\chi_G , \chi_{G - E} \in \mathcal{F}$, then by \textbf{Step 1}, $\chi_E \in \mathcal{F}$.
+ 			
+ 			\newpage
+ 			
+ 			\item \textbf{Step 6: If $f$ is integrable, then $f \in \mathcal{F}$}. \\
+ 			不妨Suppose $f$ non-negative. By \textbf{Step 1 and Step 5}, $\forall \varphi = \overset{N}{\underset{k = 1}{\sum}}{a_k \chi_{E_k}}$ simple, $\varphi \in \mathcal{F}$. \\
+ 			By \textbf{Thm \ref{thm 2.2.1}}, $\exists \{ \varphi_{k} \}_{k = 1}^{\infty}$ simple, $\varphi_k \nearrow f$, $\varphi_k \geq 0$. Then by \textbf{Step 2}, $f \in \mathcal{F}$.
+		\end{itemize}
+	
+		\vspace{2em}
+		
+		Therefore, 
+		\begin{center}
+			$\mathcal{L}^{1}(\R^d) \subset \mathcal{F}$
+		\end{center}
+	\end{proof}
+
+\newpage
+\subsection{$Fubini$ 定理的应用}
+	
 
 
 	%  ############################
