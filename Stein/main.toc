@@ -75,3 +75,8 @@
 \contentsline {chapter}{\numberline {第四章\hspace {.3em}}$Differentiation \,\, and \,\, Integration$}{83}{chapter.4}%
 \contentsline {paragraph}{\textbf {Motivation}}{83}{paragraph*.41}%
 \contentsline {section}{\numberline {4.1}$Hardy-Littlewood$ 极大函数}{84}{section.4.1}%
+\contentsline {paragraph}{定义}{84}{paragraph*.42}%
+\contentsline {paragraph}{性质}{84}{paragraph*.43}%
+\contentsline {section}{\numberline {4.2}$Lebesgue$ 微分定理}{87}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}$Chebyshev's \,\, Inequality$}{87}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}$The \,\, Lebesgue \,\, Differentiation \,\, Theorem$}{88}{subsection.4.2.2}%
