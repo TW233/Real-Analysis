@@ -74,9 +74,24 @@
 \contentsline {subsection}{\numberline {3.8.2}$Lusin$ 定理}{82}{subsection.3.8.2}%
 \contentsline {chapter}{\numberline {第四章\hspace {.3em}}$Differentiation \,\, and \,\, Integration$}{83}{chapter.4}%
 \contentsline {paragraph}{\textbf {Motivation}}{83}{paragraph*.41}%
-\contentsline {section}{\numberline {4.1}$Hardy-Littlewood$ 极大函数}{84}{section.4.1}%
+\contentsline {section}{\numberline {4.1}$Hardy-Littlewood$ 极大函数 (非球心)}{84}{section.4.1}%
 \contentsline {paragraph}{定义}{84}{paragraph*.42}%
 \contentsline {paragraph}{性质}{84}{paragraph*.43}%
-\contentsline {section}{\numberline {4.2}$Lebesgue$ 微分定理}{87}{section.4.2}%
+\contentsline {section}{\numberline {4.2}$Lebesgue$ 微分定理 (非球心)}{87}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}$Chebyshev's \,\, Inequality$}{87}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}$The \,\, Lebesgue \,\, Differentiation \,\, Theorem$}{88}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}$Hardy-Littlewood$ 极大函数$\&$ $Lebesgue$ 微分定理 (球心)}{91}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}$Hardy-Littlewood$ 极大函数}{91}{subsection.4.3.1}%
+\contentsline {paragraph}{\textbf {Premilinaries}}{91}{paragraph*.44}%
+\contentsline {paragraph}{\textbf {Average Value of f on B(x , r)}}{93}{paragraph*.45}%
+\contentsline {paragraph}{\textbf {Hardy-Littlewood}极大函数}{95}{paragraph*.46}%
+\contentsline {subsection}{\numberline {4.3.2}$Lebesgue$ 微分定理}{96}{subsection.4.3.2}%
+\contentsline {paragraph}{函数的上极限}{96}{paragraph*.47}%
+\contentsline {paragraph}{\textbf {Lebesgue}微分定理}{97}{paragraph*.48}%
+\contentsline {section}{\numberline {4.4}有界变差函数}{99}{section.4.4}%
+\contentsline {paragraph}{引入}{99}{paragraph*.49}%
+\contentsline {subsection}{\numberline {4.4.1}有界变差函数的概念}{100}{subsection.4.4.1}%
+\contentsline {paragraph}{引入}{100}{paragraph*.50}%
+\contentsline {paragraph}{定义}{101}{paragraph*.51}%
+\contentsline {paragraph}{例子}{102}{paragraph*.52}%
+\contentsline {subsection}{\numberline {4.4.2}有界变差函数的刻画}{105}{subsection.4.4.2}%

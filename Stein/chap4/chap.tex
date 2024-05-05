@@ -64,7 +64,7 @@
 	\end{itemize}
 	
 \newpage
-\section{$Hardy-Littlewood$ 极大函数}
+\section{$Hardy-Littlewood$ 极大函数 (非球心)}
 \paragraph{定义}
 	下面我们给出\textbf{Hardy-Littlewood 极大函数}的定义.
 	\begin{defn}\label{def 4.1.1}
@@ -208,7 +208,7 @@
 	\end{proposition}
 
 \newpage
-\section{$Lebesgue$ 微分定理}
+\section{$Lebesgue$ 微分定理 (非球心)}
 	\begin{center}
 		在这一节我们将利用\textbf{Hardy-Littlewood极大函数}来证明\textbf{Lebesgue微分定理}.
 	\end{center}
@@ -388,6 +388,580 @@
 		\end{proof}
 	\end{thm}
 
+\newpage
+\section{$Hardy-Littlewood$ 极大函数$\&$ $Lebesgue$ 微分定理 (球心)}
+\subsection{$Hardy-Littlewood$ 极大函数}
+	\begin{center}
+		本节的重点是给出\textbf{Hardy-Littlewood极大函数 (centered)}的定义并证明其\textbf{连续性}.		
+	\end{center}
+
+\vspace{2em}
+\paragraph{\textbf{Premilinaries}}
+	在此之前，先来给出一些\textbf{记号}与\textbf{命题}. \\
+	We define 开球 $\&$ 球面
+	\begin{center}
+		$B(x , r) \coloneqq \{ y \in \R^d \mid \left| y - x \right| < r \}$ \\
+		$S(x , r) \coloneqq \{ y \in \R^d \mid \left| y - x \right| = r \}$
+	\end{center}
+	
+	\vspace{2em}
+	下面说明球面为零测集.
+	\begin{proposition}\label{prop 4.3.1}
+		$m(S(x , r)) = 0$, $\forall x \in \R^d , r \geq 0$.
+		
+		\vspace{4em}
+		\begin{proof}
+			根据\textbf{Lebesgue测度的平移不变性和伸缩变换公式 (Prop \ref{prop 3.7.1})}, it suffices to show
+			\begin{center}
+				$m(S(0 , 1)) = 0$
+			\end{center}
+			反证法. Suppose $m(S(0 , 1)) > 0$. By \textbf{Prop \ref{prop 3.7.1}},
+			\begin{center}
+				$m(rS(0 , 1)) = r^d m(S(0 , 1)) \geq m(S(0 , 1))$, $\forall r \geq 1$.
+			\end{center}
+			Consider the compact set $\{ x \in \R^d \mid 1 \leq \left| x \right| \leq 2 \}$. We have
+			\begin{align}
+				\bigcup_{k = 1}^{\infty}{S(0 , 1 + \frac{1}{k})} = \bigcup_{k = 1}^{\infty}{(1 + \frac{1}{k}) S(0 , 1)} \subset \{ x \in \R^d \mid 1 \leq \left| x \right| \leq 2 \}
+			\end{align}
+			However
+			\begin{align}
+				m\left( \bigcup_{k = 1}^{\infty}{S(0 , 1 + \frac{1}{k})} \right)
+				= \sum_{k = 1}^{\infty}{m\left( S(0 , 1 + \frac{1}{k}) \right)}
+				\geq \sum_{k = 1}^{\infty}{m\left( S(0 , 1) \right)} 
+				= \infty
+			\end{align}
+			which is a contradiction for $\{ 1 \leq \left| x \right| \leq 2 \}$ is compact.
+		\end{proof}
+	\end{proposition}
+
+	\newpage
+	下面我们给出当\textbf{球心收敛}时，\textbf{开球的特征函数的收敛性}.
+	\begin{proposition}\label{prop 4.3.2}
+		$\forall (x_j , r_j) \to (x , r)$ on $\R^d \times \R$,
+		\begin{center}
+			$\chi_{B(x_j , r_j)}(y) \to \chi_{B(x , r)}(y)$ on $\R^d \backslash S(x , r)$
+		\end{center}
+	
+		\vspace{1em}
+		\begin{rmk}
+			该命题在开球$B(x_j , r_j)$ 的边界，即$S(x , r)$ 上\textbf{不一定成立}. 下面给出一个反例.
+			\begin{example}\label{ex 4.3.1}
+				In $\R$, take $x_j = 0$, $r_j = 1 + \frac{1}{j + 1}$. Then $(x_j , r_j) \to (0 , 1)$.
+				\begin{center}
+					$\chi_{B(x_j , r_j)} 
+					= \chi_{(-1 - \frac{1}{j + 1} , 1 + \frac{1}{j + 1})} 
+					\to \chi_{[-1 , 1]}$
+				\end{center}
+				and $\chi_{[-1 , 1]}(x) \neq \chi_{(-1 , 1)}(x)$, for $x = -1$ or $1$.
+			\end{example}
+		\end{rmk}
+	
+		\vspace{2em}
+		\begin{proof}
+			下面分别对$\left| y \right| < r$ 与$\left| y - x \right| > r$两种情况进行讨论.
+			\begin{enumerate}
+				\item[(\rmnum{1})]$\left| y - x \right| < r$. WTS
+				\begin{center}
+					$\left| x_j - y \right| < r_j$, $\forall j > N$ for some $N$
+				\end{center}
+				Since $\left| x_j - y \right| < \left| x_j - x \right| + \left| x - y \right|$, it suffices to show
+				\begin{center}
+					$\left| x_j - x \right| + \left| x - y \right| < r_j$
+				\end{center}
+				Suppose $\left| x - y \right| = r - \epsilon$, $\epsilon > 0$. Then 
+				\begin{center}
+					$\Leftrightarrow \left| x_j - x \right| + r - \epsilon < r_j$ \\
+					$\Leftrightarrow \left| x_j - x \right| + r - r_j < \epsilon$
+				\end{center}
+				It suffices to show
+				\begin{center}
+					$\left| x_j - x \right| + \left| r_j - r \right| < \epsilon$
+				\end{center}
+				Since $(x_j , r_j) \to (x , r)$, then $\exists N \in \N$, $\st$
+				\begin{center}
+					$\left| x_j - x \right| < \frac{\epsilon}{3}$, $\left| r_j - r \right| < \frac{\epsilon}{3}$, $\forall j > N$
+				\end{center}
+				Then $\left| x_j - y \right| < r_j$, $\forall j > N$.
+				
+				\vspace{2em}
+				
+				\item[(\rmnum{2})]$\left| y - x \right| > r$. 同理Suppose $\left| x - y \right| = r + \epsilon$, $\epsilon > 0$. WTS $\left| x_j - y \right| > r_j$, $\forall j > N$ for some $N$. \\
+				It suffices to show
+				\begin{center}
+					$\left| x_j - y \right| > \left| x - y \right| - \left| x_j - x \right| = r + \epsilon - \left| x_j - x \right| > r_j$ \\
+					$\Leftrightarrow \left| x_j - x \right| + r_j - r < \epsilon$
+				\end{center}
+			\end{enumerate}
+		\end{proof}
+	\end{proposition}
+
+\newpage
+\paragraph{\textbf{Average Value of f on B(x , r)}}
+	在说明$f$ 的\textbf{连续性}之前，先来说明去掉$\sup$ 的函数的\textbf{连续性}.
+	\begin{defn}\label{def 4.3.1}
+		We define the \underline{\textcolor{blue}{\textbf{average value of f on B(x , r)}}}
+		\begin{align}
+			A_{\textcolor{purple}{r}} f(\textcolor{purple}{x}) = \frac{1}{m(B(\textcolor{purple}{x} , \textcolor{purple}{r}))} \int_{B(\textcolor{purple}{x} , \textcolor{purple}{r})}{f(y) dy}
+		\end{align}
+	\end{defn}
+	
+	\vspace{2em}
+	下面给出\textbf{局部可积}的概念.
+	\begin{defn}\label{def 4.3.2}
+		A measurable function $f : \R^d \to \C$ is called \underline{\textcolor{blue}{\textbf{locally integrable}}} if
+		\begin{align}
+			\int_{K}{\left| f \right|} < \infty \,\, \text{for every bounded measurable set $K \subset \R^d$}
+		\end{align}
+		We write $f \in \mathcal{L}_{loc}^{1}(\R^d)$.
+		
+		\vspace{1em}
+		\begin{example}\label{ex 4.3.2}
+			$f(x) = e^x$ is locally integrable but not integrable on $\R$.
+		\end{example}
+	\end{defn}
+
+	\vspace{2em}
+	下面给出$A_{r}f(x)$ 的\textbf{连续性}.
+	\begin{lemma}\label{lemma 4.3.1}
+		If $f \in \mathcal{L}_{loc}^{1}(\R^d)$, then
+		\begin{center}
+			$A_{r}f(x)$ is jointly continuous in $r$ and $x$ ($r > 0$, $x \in \R^d$).
+		\end{center}
+	
+		\vspace{4em}
+		\begin{proof}
+			下面分为两步进行证明.
+			\begin{itemize}
+				\item $\int_{B(x , r)}{f(y) dy}$ is continuous. 
+				\begin{align}
+					\int_{B(0 , r)}{f(y) dy}
+					= \int_{\R^d}{f(y) \chi_{B(x , r)}(y) dy}
+				\end{align}
+				Fix $(x , r) \in \R^d \times \R$, $\forall (x_j , r_j) \to (x , r)$, by \textbf{Prop \ref{prop 4.3.2}},
+				\begin{center}
+					$\chi_{B(x_j , r_j)}(y) \to \chi_{B(x , r)}(y)$ on $\R^d \backslash S(x , r)$
+				\end{center}
+				Since by \textbf{Prop \ref{prop 4.3.1}}, $m(S(x , r)) = 0$, we have
+				\begin{center}
+					$\chi_{B(x_j , r_j)}(y) \to \chi_{B(x , r)}(y)$ for a.e. $y$ \\
+					$\Rightarrow f(y) \chi_{B(x_j , r_j)}(y) \to f(y) \chi_{B(x , r)}(y)$ for a.e. $y$
+				\end{center}
+				Since $(x_j , r_j) \to (x , r)$, $\exists N$, $\st$ $B(x_j , r_j) \subset B(x , 100r)$, $\forall j > N$. Then
+				\begin{center}
+					$\left| f(y) \chi_{B(x_j , r_j)}(y) \right| \leq \left| f(y) \chi_{B(x , 100r)}(y) \right| \in \mathcal{L}^{1}$ for a.e. $y$
+				\end{center}
+				Therefore, by \textbf{DCT (Thm \ref{thm 3.1.7}, 控制收敛定理)}
+				\begin{align}
+					\int_{\R^d}{f(y) \chi_{B(x_j , r_j)}(y) dy} \to \int_{\R^d}{f(y) \chi_{B(x , r)}(y) dy}
+				\end{align}
+				i.e.
+				\begin{align}
+					\int_{B(x_j , r_j)}{f(y) dy} \to \int_{B(x , r)}{f(y) dy} , \,\, \forall (x_j , r_j) \to (x , r)
+				\end{align}
+				Then by \textbf{Heine归结原理}, $\int_{B(x , r)}{f(y) dy}$ is continuous.
+				
+				\vspace{2em}
+				
+				\item $A_{r}f(x)$ is continuous. Since $m(B(x , r)) = r^d m(B(0 , 1)) = r^d v_d$, then
+				\begin{align}
+					A_{r}f(x) = v_{d}^{-1} r^{-d} \int_{B(x , r)}{f(y) dy} \,\, \text{is continuous}
+				\end{align}
+			\end{itemize}
+		\end{proof}
+	\end{lemma}
+
+\newpage
+\paragraph{\textbf{Hardy-Littlewood}极大函数}
+	下面先给出\textbf{Hardy-Littlewood极大函数 (球心)}的定义.
+	\begin{defn}\label{def 4.3.3}
+		If $f \in \mathcal{L}_{loc}^{1}$, we define its \underline{\textcolor{blue}{\textbf{Hardy-Littlewood maximal function $Hf$}}} by
+		\begin{align}
+			Hf(x) = \sup_{r > 0}{A_{r} \left| f \right| (x)} = \sup_{r > 0}{\frac{1}{m(B(x , r))} \int_{B(x , r)}{\left| f(y) \right| dy}}
+		\end{align}
+	\end{defn}
+
+	\vspace{4em}
+	下面说明\textbf{Hardy-Littlewood极大函数}的\textbf{连续性}.
+	\begin{corollary}\label{cor 4.3.2}
+		$Hf$ is continuous.
+		
+		\vspace{2em}
+		\begin{proof}
+			$\forall (a , \infty) \subset \R$, by \textbf{Lemma \ref{lemma 4.3.1}}, $A_{r} \left| f \right|$ is continuous, then
+			\begin{align}
+				(Hf)^{-1}((a , \infty)) = \bigcup_{r > 0}{(A_{r} \left| f \right|)^{-1} ((a , \infty))} \,\, \text{is open}, \,\, \forall a \in \R
+			\end{align}
+			Therefore $Hf$ is continuous.
+		\end{proof}
+	\end{corollary}
+
+	\vspace{4em}
+	此版本的\textbf{Hardy-Littlewood极大函数}同样有\textbf{weak-type inequality}.
+	\begin{proposition}\label{prop 4.3.3}
+		\textbf{weak-type inequality}. \\
+		If $f \in \mathcal{L}^{1}$, then
+		\begin{align}
+			m\left( \left\{ x \in \R^d \mid Hf(x) > \alpha \right\} \right) 
+			\leq \frac{A}{\alpha} \,\, \Vert f \Vert_{\mathcal{L}^1}, \,\, \forall \alpha > 0
+		\end{align}
+		where $A = 3^d$.
+		
+		\vspace{2em}
+		\begin{proof}
+			与\textbf{命题 \ref{prop 4.1.1} (\rmnum{3})} 证明类似.
+		\end{proof}
+	\end{proposition}
+
+\newpage
+\subsection{$Lebesgue$ 微分定理}
+\paragraph{函数的上极限}
+	首先来回顾一下\textbf{函数的上极限}的定义.
+	\begin{defn}\label{def 4.3.4}
+		$\forall$ 函数$f : E \subset \R^d \rightarrow \R$，$x_0$ 为$E$ 的聚点，定义$f$ 在$x_0$ 的\underline{\textcolor{blue}{\textbf{上极限}}}为
+		\begin{align}
+			\limsup_{x \to x_0}{f(x)} = \lim_{\delta \to 0^{+}}{\sup_{0 < \left| x - x_0 \right| < \delta}{f(x)}}
+		\end{align}
+		同理可定义函数$f$ 在$x_0$ 点的\underline{\textcolor{blue}{\textbf{下极限}}}.
+		\vspace{1em}
+		\begin{rmk}
+			不难证明，该定义与通常数学分析书\footnote{此处参考书籍：\textbf{《数学分析教程 (上册) (第一版)》—— 常庚哲、史济怀 编} $\S$ 2.11 定义 2.22}上的定义等价，即
+			\begin{align}
+				\limsup_{x \to x_0}{f(x)} 
+				= \sup{\left\{ l \in \R \mid \exists \{ x_n \}_{n = 1}^{\infty} \subset E , \,\, x_n \to x_0 , \,\, \st f(x_n) \to l \right\}}
+			\end{align}
+		\end{rmk}
+	\end{defn}
+
+	\vspace{6em}
+	下面利用\textbf{函数的上极限}给出\textbf{函数极限}的\textbf{等价定义}.
+	\begin{proposition}\label{prop 4.3.4}
+		$\forall$ 函数$f : E \subset \R^d \rightarrow \R$，$x_0$ 为$E$ 的聚点，则
+		\begin{center}
+			$\underset{x \to x_0}{\lim}{f(x)} = c \,\, \Leftrightarrow \,\, \underset{x \to x_0}{\limsup}{\left| f(x) - c \right|} = 0$
+		\end{center}
+	
+		\vspace{4em}
+		\begin{proof}
+			此处证明采用数学分析中的定义更方便. 根据\textbf{Heine归结原理},
+			\begin{align}
+				\underset{x \to x_0}{\lim}{f(x)} = c \,\, 
+				&\Leftrightarrow \,\, \forall \{ x_j \}_{j = 1}^{\infty}, \,\, x_j \to x_0, \,\, \st f(x_j) \to c \\
+				&\Leftrightarrow \,\, E = \left\{ l \in \R \mid \exists \{ x_n \}_{n = 1}^{\infty} \subset E , \,\, x_n \to x_0 , \,\, \st \left| f(x_n) - c \right| \to l \right\} = \{ 0 \} \\
+				&\Leftrightarrow \,\, \limsup_{x \to x_0}{\left| f(x) - c \right|} = \sup{E} = 0
+			\end{align}
+		\end{proof}
+	\end{proposition}
+
+\newpage
+\paragraph{\textbf{Lebesgue}微分定理}
+	下面给出\textbf{Lebesgue微分定理 (球心)}.
+	\begin{thm}\label{thm 4.3.3}
+		\textbf{Lebesgue Differentiation Theorem}. \\
+		If $f \in \mathcal{L}_{loc}^{1}$, then
+		\begin{align}
+			\lim_{r \to 0}{\frac{1}{m(B(x , r))} \int_{B(x , r)}{f(y) dy}} = f(x) \,\, for \,\, a.e. \,\, x \in \R^d
+		\end{align}
+	
+		\vspace{4em}
+		\begin{proof}
+			Since $f \in \mathcal{L}_{loc}^1$, then for all $x \in \R^d$, $\exists N$, $\st$ $\left| x \right| < N$ and
+			\begin{align}
+				A_{r}f(x) = \frac{1}{m( B(x , r) )} \int_{B(x , r)}{f(y) dy} \,\,\,\, \text{depends only on $f(y)$ for $\left| y \right| \leq N + 1$.}
+			\end{align}
+			\begin{center}
+				(with $r \leq 1$ and $\left| x \right| < N$)
+			\end{center}
+			Then we can replace $f$ with $f \chi_{B(0 , N + 1)} \in \mathcal{L}^1$. 于是我们不妨设$f \in \mathcal{L}^1$. 根据\textbf{Prop \ref{prop 4.3.4}}, 要证
+			\begin{align}
+				\lim_{r \to 0}{\frac{1}{m(B(x , r))} \int_{B(x , r)}{f(y) dy}} 
+				= \lim_{r \to 0}{A_{r}f(x)}
+				= f(x) \,\, for \,\, a.e. \,\, x \in \R^d
+			\end{align}
+			即证
+			\begin{align}
+				\limsup_{r \to 0}{\left| A_{r}f(x) - f(x) \right|} = 0 \,\, for \,\, a.e. \,\, x \in \R^d
+			\end{align}
+			
+			\vspace{2em}
+			
+			下面来估计$\underset{r \to 0}{\limsup}{\left| A_{r}f(x) - f(x) \right|}$. \\
+			Fix $\epsilon > 0$, 根据\textbf{Thm \ref{thm 3.2.3}}, $\exists g \in C_{c}(\R^d)$, $\st$
+			\begin{center}
+				$\Vert f - g \Vert_{\mathcal{L}^1} < \epsilon$
+			\end{center}
+			Since $A_{r}g(x)$ is continuous (by \textbf{Lemma \ref{lemma 4.3.1}}),  we have
+			\begin{center}
+				$\left| A_{r}g(x) - g(x) \right| = \left| A_{r}g(x) - A_{0}g(x) \right| < \epsilon$ for all small $r$.
+			\end{center}
+			Then
+			\begin{align}
+				\limsup_{r \to 0}{\left| A_{r}f(x) - f(x) \right|}
+				&= \limsup_{r \to 0}{\left| A_{r}(f - g)(x) + (A_{r}g - g)(x) + (g - f)(x) \right|} \\
+				&\leq \lim_{\delta \to 0^{+}}{\sup_{0 < r < \delta}{\left| A_{r}(f - g)(x) \right|}} + 0 + \left| g(x) - f(x) \right|
+			\end{align}
+			Since 
+			\begin{align}
+				\sup_{0 < r < \delta}{\left| A_{r}(f - g)(x) \right|} 
+				\leq \sup_{r > 0}{\left| A_{r}(f - g)(x) \right|}
+				&= \sup_{r > 0}{\left| \frac{1}{m(B(x , r))} \int_{B(x , r)}{f(y) - g(y) dy} \right|} \\
+				&\leq \sup_{r > 0}{\frac{1}{m(B(x , r))} \int_{B(x , r)}{\left| f(y) - g(y) \right| dy}} \\
+				&= H(f - g)(x) , \,\, \forall \delta > 0
+			\end{align}
+			Let $\delta \to 0^{+}$, we have
+			\begin{align}
+				\limsup_{r \to 0}{\left| A_{r}f(x) - f(x) \right|}
+				&\leq \lim_{\delta \to 0^{+}}{\sup_{0 < r < \delta}{\left| A_{r}(f - g)(x) \right|}} + \left| g(x) - f(x) \right| \\
+				&\leq H(f - g)(x) + \left| g(x) - f(x) \right|
+			\end{align}
+			后续证明与\textbf{Thm \ref{thm 4.2.2}}一致，即定义$E_\alpha$, 并分别对$H(f - g)(x)$ 与$\left| g - f \right|$ 运用\textbf{weak-type inequality (Prop \ref{prop 4.3.3})} 与\textbf{Chebyshev's Inequality (Thm \ref{thm 4.2.1})}, 即可证明$m(E_\alpha) = 0 , \forall \alpha \geq 0$. 从而得证.
+		\end{proof}
+	\end{thm}
+
+\newpage
+\section{有界变差函数}
+\paragraph{引入}
+	在\textbf{Riemann积分}中，我们知道对于一阶连续可微函数，我们有\textbf{微积分基本定理}
+	\begin{align}
+		F(b) - F(a) = \int_{a}^{b}{F^{'}(x) dx}
+	\end{align}
+	而对于\textbf{Lebesgue积分}，我们也想要得到该命题成立的条件，且最好为\textbf{充要条件}. 可以举例证明，仅仅$F$ 连续并不能保证$F$ 可导 (可见视频 \href{https://www.bilibili.com/video/BV1GV411e7dP?p=31}{a continuous but nowhere differentiable function}). 同时仅仅要求$F$ 导数存在也可能出现$F^{'}$ 不可积的情况，如下反例.
+	\begin{example}\label{ex 4.4.1}
+		\textbf{(书\footnote{\textbf{《$Real \,\, Analysis -- Measure \,\, Theroy, \,\, Integration, \,\, \& \,\, Hilbert \,\, Spaces$》--- $Elias \,\, M. \,\, Stein$}} P147 Ex 12)}. \\
+		Consider the function $F(x) = x^{2} \sin{\frac{1}{x^2}}$, $x \neq 0$, with $F(0) = 0$. Show that $F^{'}(x)$ exists for every $x$, but $F^{'}$ is not integrable on $[-1 , 1]$.
+		
+		\vspace{2em}
+		\begin{proof}
+			详细证明可见视频 \href{https://www.bilibili.com/video/BV1FT411C7wM?p=34}{微积分基本定理: 问题引入}.
+		\end{proof}
+	\end{example}
+
+	\vspace{2em}
+	\begin{center}
+		为了解决上述问题，我们在这一节将引入一种新类型的函数，叫做\textbf{有界变差函数}.
+	\end{center}
+
+\newpage
+\subsection{有界变差函数的概念}
+\paragraph{引入}
+	为了便于理解，我们将\textbf{有界变差函数}与\textbf{平面上的曲线}相联系. 首先来回顾数学分析中有关\textbf{平面上的曲线}的相关概念.
+	
+	\begin{defn}\label{def 4.4.1}
+		Let $\gamma$ be a \underline{\textcolor{blue}{\textbf{parametrized curve}}} in the plane given by $z(t) = (x(t) , y(t))$, where $a \leq t \leq b$. Here $x(t)$ and $y(t)$ are continuous real-valued functions on $[a , b]$. 
+		
+		\vspace{1em}
+		
+		The curve is \underline{\textcolor{blue}{\textbf{rectifiable}}} if $\exists M < \infty$, $\st$ for any partition $a = t_0 < t_1 < \cdots < t_N = b$ of $[a , b]$,
+		\begin{align}
+			\sum_{j = 1}^{N}{\left| z(t_j) - z(t_{j - 1}) \right|} \leq M
+		\end{align}
+	
+		\vspace{1em}
+		
+		The \underline{\textcolor{blue}{\textbf{Length}}} $L(\gamma)$ of the curve is defined as
+		\begin{align}
+			L(\gamma) = \sup_{all \,\, partitions}{\sum_{j = 1}^{N}{\left| z(t_j) - z(t_{j - 1}) \right|}}
+		\end{align}
+	
+		\begin{figure}[thbp!]
+			\centering
+			\includegraphics[width=0.4\linewidth]{figure/4.4.1-1}
+			\caption{rectifiable curve}
+			\label{pic : 4.4.1-1} % 添加图像引用标签
+		\end{figure}
+		
+		\begin{rmk}
+			为了表述的方便，后续我们常将$z$ 的值域视作复平面，即$z(t) = x(t) + iy(t)$.
+		\end{rmk}
+	\end{defn}
+
+	\vspace{2em}
+	在定义了曲线\textbf{可求长}的概念后，我们自然要问，在什么情况下\textbf{曲线可求长}？ 即
+	\begin{center}
+		What condition on $x(t)$ and $y(t)$ guarantees rectifiability of $\gamma$?
+	\end{center}
+	为了解决这个问题，下面我们给出\textbf{有界变差函数}的定义，并会在后续给出这个问题的\textbf{充要条件}，即
+	\begin{center}
+		$\gamma$ rectifiable $\,\, \Leftrightarrow \,\, x(t), y(t)$ 均为\textbf{有界变差函数}.
+	\end{center}
+
+\newpage
+\paragraph{定义}
+	下面给出\textbf{有界变差函数}的定义.
+	\begin{defn}\label{def 4.4.2}
+		Suppose $F : [a , b] \rightarrow \C$, and $\mathcal{P}$ is a partition $a = t_0 < t_1 < \cdots < t_N = b$. The \underline{\textcolor{blue}{\textbf{variation}}} of $F$ on this partition $\mathcal{P}$ is defined by
+		\begin{align}
+			V_{\mathcal{P}}(F) = \sum_{j = 1}^{N}{\left| F(t_j) - F(t_{j - 1}) \right|}
+		\end{align}
+		$F$ is said to be of \underline{\textcolor{blue}{\textbf{bounded variation (BV)}}} if $V_{\mathcal{P}}(F)$ is bounded over all partitions.
+	\end{defn}
+
+	\vspace{2em}
+	下面就能够来回答\textbf{``引入"}中提到的问题，即\textbf{平面曲线可求长}的\textbf{充要条件}.
+	\begin{thm}\label{thm 4.4.1}
+		A curve parametrized by $F(t) = x(t) + iy(t)$, $a \leq t \leq b$, is rectifiable $\,\, \Leftrightarrow \,\,$ both $x(t)$ and $y(t)$ are of BV.
+		
+		\vspace{2em}
+		\begin{proof}
+			$\forall$ partition $\mathcal{P}$: $a = t_0 < t_1 < \cdots < t_N = b$, we have
+			\begin{align}
+				V_{\mathcal{P}}(F) = \sum_{j = 1}^{N}{\left| F(t_j) - F(t_{j - 1}) \right|}
+			\end{align}
+			Since $\left| a + bi \right| \leq \left| a \right| + \left| b \right| \leq 2 \left| a + bi \right|$,
+			\begin{align}
+				\left| F(t_j) - F(t_{j - 1}) \right| = \left| x(t_j) - x(t_{j - 1}) + i \left( y(t_j) - y(t_{j - 1}) \right) \right|
+			\end{align}
+			Then
+			\begin{itemize}
+				\item $\Leftarrow$: $\left| F(t_j) - F(t_{j - 1}) \right| \leq \left| x(t_j) - x(t_{j - 1}) \right| + \left| y(t_j) - y(t_{j - 1}) \right|$, then $\exists M < \infty$, $\st$
+				\begin{align}
+					V_{\mathcal{P}}(F) 
+					&= \sum_{j = 1}^{N}{\left| F(t_j) - F(t_{j - 1}) \right|} \\
+					&= \sum_{j = 1}^{N}{\left| x(t_j) - x(t_{j - 1}) \right|} + \sum_{j = 1}^{N}{\left| y(t_j) - y(t_{j - 1}) \right|} \\
+					&\leq 2M , \,\, \forall partition \,\, \mathcal{P}
+				\end{align}
+				Therefore, the curve $F(t) = x(t) + iy(t)$ is rectifiable.
+				
+				\vspace{2em}
+				
+				\item $\Rightarrow$: $\left| x(t_j) - x(t_{j - 1}) \right| + \left| y(t_j) - y(t_{j - 1}) \right| \leq 2 \left| F(t_j) - F(t_{j - 1}) \right|$, then $\exists M < \infty$, $\st$
+				\begin{align}
+					\sum_{j = 1}^{N}{\left| x(t_j) - x(t_{j - 1}) \right|} + \sum_{j = 1}^{N}{\left| y(t_j) - y(t_{j - 1}) \right|} 
+					\leq 2 \sum_{j = 1}^{N}{\left| F(t_j) - F(t_{j - 1}) \right|} 
+					= 2 V_{\mathcal{P}}(F) 
+					\leq 2M
+				\end{align}
+				Therefore, both $x(t)$ and $y(t)$ are of BV.
+			\end{itemize}
+		\end{proof}
+	\end{thm}
+
+\newpage
+\paragraph{例子}
+	下面来给出一些\textbf{有界变差函数}的例子.
+	\begin{example}\label{ex 4.4.2}
+		\begin{itemize}
+			\item $x , x^2$ is of BV on $[a , b]$, $\forall [a , b] \subset \R$.
+			
+			\vspace{4em}
+			\begin{proof}
+				$\forall$ partition $\mathcal{P}$: $a = x_0 < x_1 < \cdots < x_N = b$, since $x$ is strictly increasing, then
+				\begin{align}
+					V_{\mathcal{P}}(x) 
+					= \sum_{j = 1}^{N}{\left| x_j - x_{j - 1} \right|}
+					= \sum_{j = 1}^{N}{x_j - x_{j - 1}} 
+					= b - a < \infty
+				\end{align}
+				Also for $x^2$, 
+				\begin{align}
+					V_{\mathcal{P}}(x^2) 
+					= \sum_{j = 1}^{N}{\left| x_{j}^2 - x_{j - 1}^2 \right|}
+					= \sum_{j = 1}^{N}{\left| x_j + x_{j - 1} \right| \left| x_j - x_{j - 1} \right|}
+					\leq 2b \sum_{j = 1}^{N}{\left| x_j - x_{j - 1} \right|}
+					= 2b(b - a) < \infty
+				\end{align}
+				Therefore, both $x$ and $x^2$ are of BV on $[a , b]$, $\forall [a , b] \subset \R$.
+			\end{proof}
+		
+			\vspace{10em}
+			
+			\item If $F$ is real-valued, monotonic, and bounded, then $F$ is of BV.
+			
+			\vspace{4em}
+			\begin{proof}
+				$\forall$ partition $\mathcal{P}$: $a = t_0 < t_1 < \cdots < t_N = b$. \\
+				Since $F$ is bounded, $\exists M < \infty$, $\st \left| F \right| \leq M$. 不妨设$F$ 单调递增,
+				\begin{align}
+					V_{\mathcal{P}}(F) 
+					= \sum_{j = 1}^{N}{\left| F(t_j) - F(t_{j - 1}) \right|}
+					= F(b) -F(a)
+					\leq 2M , \,\, \forall partition \,\, \mathcal{P}
+				\end{align}
+				So $F$ is of BV.
+			\end{proof}
+		
+			\newpage
+			
+			\item \textbf{(书\footnote{\textbf{《$Real \,\, Analysis -- Measure \,\, Theroy, \,\, Integration, \,\, \& \,\, Hilbert \,\, Spaces$》--- $Elias \,\, M. \,\, Stein$}} P147 Ex 11)}. \\
+			If $a , b > 0$, let
+			\begin{align}
+				f(x) = 
+				\begin{cases}
+					x^{a} \sin{(x^{-b})} , \,\, 0 \leq x \leq 1 \\
+					0 , \,\, x = 0
+				\end{cases}
+			\end{align}
+			Then 
+			\begin{center}
+				$f$ is of BV in $[0 , 1]$ $\,\, \Leftrightarrow \,\, $ $a > b$
+			\end{center}
+		
+			\vspace{2em}
+			\begin{proof}
+				\begin{itemize}
+					\item 先来考虑简单情形，即$f(x) = \sin{\frac{1}{x}}$. \\
+					根据直觉，随着$x \to 0^{+}$，$\sin{\frac{1}{x}}$ 的震荡越剧烈，当分划足够密时，其变差中应当会出现各项为1的无穷级数，从而发散. 下面取一个特殊分划进行证明. \\
+					对于$\forall$ 奇数$k \in \N$, 取
+					\begin{center}
+						$\frac{1}{x_k} = 2k \pi + \frac{\pi}{2}$, $\frac{1}{x_{k + 1}} = 2k \pi + \pi$
+					\end{center}
+					于是
+					\begin{align}
+						V_{\mathcal{P}}(f) 
+						= \sum_{j = 1}^{N}{\left| \sin{\frac{1}{x_j}} - \sin{\frac{1}{x_{j - 1}}} \right|}
+						= \sum_{j = 1}^{N}{1}
+						= N , \,\, which \,\ is \,\, related \,\, to \,\, \mathcal{P}
+					\end{align}
+					故$\forall M < \infty$，当分划$\mathcal{P}$ 足够密时，$V_{\mathcal{P}}(f) > M$. 故$f$ 非BV.
+						
+				\vspace{2em}
+				
+				\item 对于一般情况，下面先讨论一种特殊分划$\mathcal{P}$. 即 \textbf{(Monotonic Partition, 单调划分)}
+				\begin{align}
+					[\frac{1}{x_{4k + 1}^b} , \frac{1}{x_{4k + 2}^b}] = [2k\pi + \frac{\pi}{2}, 2k\pi + \pi] , \,\,
+					[\frac{1}{x_{4k + 3}^b} , \frac{1}{x_{4k + 4}^b}] = [2k\pi + \frac{3\pi}{2} , 2k\pi + 2\pi]
+				\end{align}
+				则以上述第一种的$[x_{4k + 1} , x_{4k + 2}]$ 举例，
+				\begin{align}
+					\left| x_{k + 1}^{a} \sin{\frac{1}{x_{k + 1}^{b}}} - x_{k}^{a} \sin{\frac{1}{x_{k}^{b}}} \right|
+					= \left| x_{k + 1}^{a} \sin{\frac{1}{x_{k + 1}^{b}}} \right|
+					= \frac{1}{(2k\pi + \frac{\pi}{2})^{\frac{a}{b}}}
+					= O(\frac{1}{k^{\frac{a}{b}}})
+				\end{align}
+				同理对于$[x_{4k + 2} , x_{4k + 3}] , [x_{4k + 3} , x_{4k + 4}]  ,[x_{4k + 4} , x_{4k + 5}]$，均可得到
+				\begin{align}
+					\left| x_{k + 1}^{a} \sin{\frac{1}{x_{k + 1}^{b}}} - x_{k}^{a} \sin{\frac{1}{x_{k}^{b}}} \right|
+					= O(\frac{1}{k^{\frac{a}{b}}})
+				\end{align}
+				于是
+				\begin{align}
+					\sum_{k = 0}^{N}{\left| x_{k + 1}^{a} \sin{\frac{1}{x_{k + 1}^{b}}} - x_{k}^{a} \sin{\frac{1}{x_{k}^{b}}} \right|}
+					= O\left( \sum_{k = 1}^{N}{\frac{1}{k^{\frac{a}{b}}}} \right)
+				\end{align}
+				根据\textbf{p-级数}$\overset{\infty}{\underset{n}{\sum}}{\frac{1}{n^p}}$ 的收敛性 (收敛 $\Leftrightarrow$ $p > 1$)可得，
+				\begin{align}
+					&\sum_{k = 0}^{N}{\left| x_{k + 1}^{a} \sin{\frac{1}{x_{k + 1}^{b}}} - x_{k}^{a} \sin{\frac{1}{x_{k}^{b}}} \right|} < \infty \\
+					&\Leftrightarrow \,\, \frac{a}{b} > 1 \,\, \Leftrightarrow \,\, a > b
+				\end{align}
+				由于对于任一分划$\mathcal{P}$，有：
+				\begin{center}
+					\textbf{``加密分割，变差不减"}
+				\end{center}
+				因此对于$\forall$ 分割，我们可以在其中加入如上节点，其变差不减，但因为上述节点中，$\sin{\frac{1}{x^b}}$ 在每个区间$[x_k , x_{k + 1}]$均单调，所以在各区间$[x_k , x_{k + 1}]$ 中的变差可放缩后去除绝对值，并得到
+				\begin{align}
+					V_{\mathcal{P}}(f) = O\left( \sum_{k = 1}^{N}{\frac{1}{k^{\frac{a}{b}}}} \right)
+				\end{align}
+				于是
+				\begin{center}
+					$f$ is of BV $\,\, \Leftrightarrow \,\, \frac{a}{b} > 1 \,\, \Leftrightarrow \,\, a > b$
+				\end{center}
+				\end{itemize}
+			\end{proof}
+		\end{itemize}
+	\end{example}
+
+\newpage
+\subsection{有界变差函数的刻画}
+	
 
 	%  ############################
 	\ifx\allfiles\undefined
