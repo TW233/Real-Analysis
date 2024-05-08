@@ -95,3 +95,7 @@
 \contentsline {paragraph}{定义}{101}{paragraph*.51}%
 \contentsline {paragraph}{例子}{102}{paragraph*.52}%
 \contentsline {subsection}{\numberline {4.4.2}有界变差函数的刻画}{105}{subsection.4.4.2}%
+\contentsline {paragraph}{介绍}{105}{paragraph*.53}%
+\contentsline {paragraph}{定义}{105}{paragraph*.54}%
+\contentsline {paragraph}{有界变差函数的刻画}{106}{paragraph*.55}%
+\contentsline {subsection}{\numberline {4.4.3}有界变差函数的全变差的性质}{109}{subsection.4.4.3}%

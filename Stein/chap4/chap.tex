@@ -793,9 +793,15 @@
 			V_{\mathcal{P}}(F) = \sum_{j = 1}^{N}{\left| F(t_j) - F(t_{j - 1}) \right|}
 		\end{align}
 		$F$ is said to be of \underline{\textcolor{blue}{\textbf{bounded variation (BV)}}} if $V_{\mathcal{P}}(F)$ is bounded over all partitions.
+		
+		\vspace{1em}
+		
+		\begin{rmk}
+			\textbf{有界变差函数}不要求函数\textbf{连续}，而在考虑\textbf{平面曲线}时默认函数\textbf{连续}.
+		\end{rmk}
 	\end{defn}
 
-	\vspace{2em}
+	\vspace{1em}
 	下面就能够来回答\textbf{``引入"}中提到的问题，即\textbf{平面曲线可求长}的\textbf{充要条件}.
 	\begin{thm}\label{thm 4.4.1}
 		A curve parametrized by $F(t) = x(t) + iy(t)$, $a \leq t \leq b$, is rectifiable $\,\, \Leftrightarrow \,\,$ both $x(t)$ and $y(t)$ are of BV.
@@ -821,7 +827,7 @@
 				\end{align}
 				Therefore, the curve $F(t) = x(t) + iy(t)$ is rectifiable.
 				
-				\vspace{2em}
+				\vspace{1em}
 				
 				\item $\Rightarrow$: $\left| x(t_j) - x(t_{j - 1}) \right| + \left| y(t_j) - y(t_{j - 1}) \right| \leq 2 \left| F(t_j) - F(t_{j - 1}) \right|$, then $\exists M < \infty$, $\st$
 				\begin{align}
@@ -946,7 +952,7 @@
 				\begin{center}
 					\textbf{``加密分割，变差不减"}
 				\end{center}
-				因此对于$\forall$ 分割，我们可以在其中加入如上节点，其变差不减，但因为上述节点中，$\sin{\frac{1}{x^b}}$ 在每个区间$[x_k , x_{k + 1}]$均单调，所以在各区间$[x_k , x_{k + 1}]$ 中的变差可放缩后去除绝对值，并得到
+				因此对于$\forall$ 分割，我们可以在其中加入如上节点，其变差不减，但因为上述节点中，$\sin{\frac{1}{x^b}}$ 在每个区间$[x_k , x_{k + 1}]$均单调，所以在各区间$[x_k , x_{k + 1}]$ 中的变差可直接去除绝对值，并得到
 				\begin{align}
 					V_{\mathcal{P}}(f) = O\left( \sum_{k = 1}^{N}{\frac{1}{k^{\frac{a}{b}}}} \right)
 				\end{align}
@@ -961,7 +967,305 @@
 
 \newpage
 \subsection{有界变差函数的刻画}
+\paragraph{介绍}
+	本小节将给出\textbf{有界变差函数}的一个刻画，即
+	\begin{center}
+		\textbf{任一有界变差函数可差分为两个有界递增函数之差}.
+	\end{center}
+	同时还将研究函数的\textbf{全变差}的\textbf{性质}. 而这一切都是为了后续研究\textbf{微积分基本定理}做准备.
 	
+\vspace{2em}
+\paragraph{定义}
+	回顾函数的\textbf{变差}的概念\textbf{(Def \ref{def 4.4.2})}. 在此基础上，我们下面给出\textbf{全变差}的定义.
+	\begin{defn}\label{def 4.4.3}
+		Suppose $f : [a , b] \rightarrow \C$. The \underline{\textcolor{blue}{\textbf{total variation}}} of $f$ on $[a , x]$ ($a \leq x \leq b$) is defined by
+		\begin{align}
+			V_{f}([a , x]) = \sup_{all \,\, partitions}{\sum_{j = 1}^{n}{\left| f(t_j) - f(t_{j - 1}) \right|}}
+		\end{align}
+		In particular, if $f$ is real-valued, i.e. $f : [a , b] \rightarrow \R$. Then the \underline{\textcolor{blue}{\textbf{positive variation}}} of $f$ on $[a , x]$ is
+		\begin{align}
+			P_{f}([a , x]) = \sup_{all \,\, partitions}{\sum_{(+)}{f(t_j) - f(t_{j - 1})}}
+		\end{align}
+		Also the \underline{\textcolor{blue}{\textbf{negative variation}}} of $f$ on $[a , x]$ is
+		\begin{align}
+			N_{f}([a , x]) = \sup_{all \,\, partitions}{\sum_{(-)}{- \left[ f(t_j) - f(t_{j - 1}) \right]}}
+		\end{align}
+	
+		\vspace{1em}
+		\begin{rmk}
+			\begin{itemize}
+				\item \textbf{全变差}对\textbf{任一复值函数}均可定义，而\textbf{正变差}和\textbf{负变差}则只对\textbf{实值函数}有定义. 在后续的讨论中基本默认$f$ 为\textbf{实值函数}.
+				
+				\vspace{1em}
+				
+				\item 下面对定义中的符号$(+)$ 和$(-)$ 进行说明，即
+				\begin{align}
+					(+) &\coloneqq \{ j \mid f(t_j) \geq f(t_{j - 1}) \} \\
+					(-) &\coloneqq \{ j \mid f(t_j) \leq f(t_{j - 1}) \}
+				\end{align}
+			
+				\vspace{1em}
+				
+				\item 常常将\textbf{全变差}$V_{f}([a , b])$ 简记为$V_{a}^{b}(f)$.
+			\end{itemize}
+		\end{rmk}
+	\end{defn}
+
+\newpage
+\paragraph{有界变差函数的刻画}
+	在刻画有界变差函数之前，先来给出一个引理. 它说明了对于\textbf{实值有界变差函数}$f$，其\textbf{全变差与正、负变差之间的关系}，以及\textbf{$f$ 与正、负变差的关系}.
+	\begin{lemma}\label{lemma 4.4.2}
+		Suppose $f$ is real-valued and of BV on $[a , b]$. Then for all $x \in [a , b]$, we have
+		\begin{center}
+			$f(x) - f(a) = P_{f}([a , x]) - N_{f}([a , x])$
+		\end{center}
+		and
+		\begin{center}
+			$V_{f}([a , x]) = P_{f}([a , x]) + N_{f}([a , x])$
+		\end{center}
+	
+		\vspace{4em}
+		\begin{proof}
+			\begin{itemize}
+				\item $f(x) - f(a) = P_{f}([a , x]) - N_{f}([a , x])$: \\
+				$\forall \epsilon > 0$, $\exists$ a partition $\mathcal{P}$: $a = t_0 < t_1 < \cdots < t_N = b$, $\st$
+				\begin{align}
+					\left| P_{f} - \sum_{(+)}{f(t_j) - f(t_{j - 1})} \right| \leq \epsilon \,\, and \,\, 
+					\left| N_{f} - \sum_{(-)}{- \left[ f(t_j) - f(t_{j - 1}) \right]} \right| \leq \epsilon
+				\end{align}
+				Then
+				\begin{align}
+					-\epsilon + \sum_{(+)}{f(t_j) - f(t_{j - 1})}
+					&\leq P_{f} 
+					\leq \sum_{(+)}{f(t_j) - f(t_{j - 1})} + \epsilon \\
+					-\epsilon + \sum_{(-)}{- \left[ f(t_j) - f(t_{j - 1}) \right]}
+					&\leq N_{f} 
+					\leq \sum_{(-)}{- \left[ f(t_j) - f(t_{j - 1}) \right]} + \epsilon
+				\end{align}
+				Since 
+				\begin{align}
+					f(x) - f(a) 
+					= \left( \sum_{(+)}{f(t_j) - f(t_{j - 1})} \right) - \left( \sum_{(-)}{- \left[ f(t_j) - f(t_{j - 1}) \right]} \right)
+				\end{align}
+				Then
+				\begin{align}
+					&P_{f} - N_{f} \in \left[ f(x) - f(a) - 2\epsilon , f(x) - f(a) + 2\epsilon \right] \\
+					&\Rightarrow \,\, \left| \left( P_{f} - N_{f} \right) - \left( f(x) - f(a) \right) \right| \leq 2\epsilon , \,\, \forall \epsilon > 0
+				\end{align}
+				Since $\epsilon$ is arbitrary, letting $\epsilon \to 0$, we get $f(x) - f(a) = P_{f} - N_{f}$.
+				
+				\newpage
+				
+				\item $V_{f}([a , x]) = P_{f}([a , x]) + N_{f}([a , x])$: \\
+				$\forall$ partition $\mathcal{P}$: $a = t_0 < t_1 < \cdots < t_N = b$, $\st$
+				\begin{align}
+					V_{\mathcal{P}}(f) 
+					= \sum_{j = 1}^{N}{\left| f(t_j) - f(t_{j - 1}) \right|}
+					= \left( \sum_{(+)}{f(t_j) - f(t_{j - 1})} \right) + \left( \sum_{(-)}{-\left[ f(t_j) - f(t_{j - 1}) \right]} \right)
+				\end{align}
+			
+				\vspace{1em}
+				
+				\begin{itemize}
+					\item $V_{f}([a , x]) \leq P_{f}([a , x]) + N_{f}([a , x])$: \\
+					分别对右侧两项取上确界 through all partitions, we have
+					\begin{align}
+						\sum_{j = 1}^{N}{\left| f(t_j) - f(t_{j - 1}) \right|}
+						\leq P_{f}([a  ,x]) + N_{f}([a , x])
+					\end{align}
+					再对左侧取上确界 through all partitions, then
+					\begin{align}
+						V_{f}([a , x]) \leq P_{f}([a , x]) + N_{f}([a , x])
+					\end{align}
+				
+					\vspace{1em}
+				
+					\item $P_{f}([a , x]) + N_{f}([a , x]) \leq V_{f}([a , x])$: \\
+					Similarly, 先对左侧取上确界，再对右侧分别取上确界，得到
+					\begin{align}
+						P_{f}([a , x]) + N_{f}([a , x]) \leq V_{f}([a , x])
+					\end{align}
+				\end{itemize}
+			
+				\vspace{1em}
+			
+				综上，$V_{f}([a , x]) = P_{f}([a , x]) + N_{f}([a , x])$.
+			\end{itemize}
+		\end{proof}
+	\end{lemma}
+
+	\newpage
+	下面我们说明，\textbf{任一有界变差函数可差分为两个有界递增函数之差}.
+	\begin{thm}\label{thm 4.4.3}
+		A real-valued function $f : [a , b] \rightarrow \R$ on $[a , b]$ is of BV
+		\begin{center}
+			$\Leftrightarrow \,\,$ $f$ is the difference of two increasing bounded functions.
+		\end{center}
+	
+		\vspace{4em}
+		\begin{proof}
+			\begin{itemize}
+				\item $\Leftarrow$: Suppose $f = f_1 - f_2$, where $f_j$ is increasing and bounded on $[a , b]$, $j = 1 , 2$. \\
+				Then by \textbf{Example \ref{ex 4.4.2}}, $f_j$ is of BV on $[a , b]$, $j = 1 , 2$. \\
+				$\forall$ partition $\mathcal{P}$: $a=  t_0 < t_1 < \cdots < t_N = b$, since
+				\begin{align}
+					\left| f(t_j) - f(t_{j - 1}) \right| 
+					\leq \left| f_{1}(t_j) - f_{1}(t_{j - 1}) \right| + \left| f_{2}(t_j) - f_{2}(t_{j - 1}) \right| , \,\, \forall j - 1 \sim N
+				\end{align}
+				Then since both $f_1$ and $f_2$ are of BV, $\exists M < \infty$, $\st$
+				\begin{align}
+					\sum_{j = 1}^{N}{\left| f(t_j) - f(t_{j - 1}) \right|}
+					\leq \sum_{j = 1}^{N}{\left| f_{1}(t_j) - f_{1}(t_{j - 1}) \right|} + \sum_{j = 1}^{N}{\left| f_{2}(t_j) - f_{2}(t_{j - 1}) \right|}
+					\leq 2M
+				\end{align}
+				Therefore, $f$ is of BV on $[a , b]$.
+				
+				\vspace{2em}
+				
+				\item $\Rightarrow$: By \textbf{Lemma \ref{lemma 4.4.2}}, $f(x) - f(a) = P_{f}([a , x]) - N_{f}([a , x])$, $\forall x \in [a , b]$. \\
+				It's trivial to show that $P_{f}([a , x])$ is increasing in $x$. \\
+				Similarly, we get $N_{f}([a , x])$ is increasing in $x$. Therefore
+				\begin{center}
+					$f(x) = \left( P_{f}([a , x]) + f(a) \right) - N_{f}([a , x])$
+				\end{center}
+				where $P_{f}([a , x]) + f(a)$ and $N_{f}([a , x])$ are increasing and bounded.
+			\end{itemize}
+		\end{proof}
+	\end{thm}
+
+\newpage
+\subsection{有界变差函数的全变差的性质}
+	在本小节的最后，我们来讨论一下\textbf{实值有界变差函数的全变差的性质}.
+	\begin{proposition}\label{prop 4.4.1}
+		Let $f \in BV([a , b])$ and be real-valued. Then
+		\begin{enumerate}
+			\item [(\rmnum{1})] $\forall c \in (a , b)$, $V_{f}([a , b]) = V_{f}([a , c]) + V_{f}([c , b])$.
+			
+			\vspace{1em}
+			
+			\item[(\rmnum{2})] $V_{f}([a , x])$ and $U(x) = V_{f}([a , x]) - f(x)$ are both increasing in $x$ on $[a , b]$.
+			
+			\vspace{1em}
+			
+			\item[(\rmnum{3})] $V_{f}([a , x])$ is continuous at $x_0$ $\,\, \Leftrightarrow \,\,$ $f$ is continuous at $x_0$.
+		\end{enumerate}
+	
+		\vspace{4em}
+		\begin{proof}
+			\begin{enumerate}
+				\item[(\rmnum{1})] 不难证明, $\forall c \in (a,  b)$,
+				\begin{align}
+					V_{f}([a , b]) = \sup{\left[ \sum_{j = 1}^{k}{\left| f(t_j) - f(t_{j - 1}) \right|} + \sum_{j = k + 1}^{N}{\left| f(t_j) - f(t_{j - 1}) \right|} \right]}
+				\end{align}
+				The sup is taken over all partitions with $a = t_0 < t_1 < \cdots < t_k = c < \cdots < t_N = b$. \\
+				Since
+				\begin{align}
+					\sum_{j = 0}^{N}{\left| f(t_j) - f(t_{j - 1}) \right|}
+					= \sum_{j = 1}^{k}{\left| f(t_j) - f(t_{j - 1}) \right|} + \sum_{j = k + 1}^{N}{\left| f(t_j) - f(t_{j - 1}) \right|}
+				\end{align}
+				Then 先对左侧取上确界 over all partitions on $[a , b]$, we have
+				\begin{align}
+					V_{f}([a , b]) 
+					\geq \sum_{j = 1}^{k}{\left| f(t_j) - f(t_{j - 1}) \right|} + \sum_{j = k + 1}^{N}{\left| f(t_j) - f(t_{j - 1}) \right|}
+				\end{align}
+				再对左侧两项分别取上确界 over all partitions on $[a , c]$ and $[c , b]$, we have
+				\begin{align}
+					V_{f}([a , b]) \geq V_{f}([a , c]) + V_{f}([c , b])
+				\end{align}
+				Similarly, 改变两侧取上确界次序，可得
+				\begin{align}
+					V_{f}([a , b]) \leq V_{f}([a , c]) + V_{f}([c , b])
+				\end{align}
+				Therefore, $V_{f}([a , b]) = V_{f}([a , c]) + V_{f}([c , b])$, $\forall c \in (a , b)$.
+				
+				\newpage
+				
+				\item[(\rmnum{2})] Since $P_{f}([a , x])$ and $N_{f}([a , x])$ are both increasing, then by \textbf{Lemma \ref{lemma 4.4.2}},
+				\begin{center}
+					$V_{f}([a , x]) = P_{f}([a , x]) + N_{f}([a , x])$ is increasing in $x$ on $[a , b]$.
+				\end{center}
+				$\forall x \geq y$, we have
+				\begin{align}
+					V(x) - V(y) 
+					&= V_{f}([a , x]) - V_{f}([a , y]) \\
+					&= V_{y}^{x}(f) 
+					\geq \left| f(x) - f(y) \right| 
+					\geq f(x) - f(y)
+				\end{align}
+				Therefore $V(x) - f(x) \geq V(y) - f(y)$, $\forall x \geq y$. i.e.
+				\begin{center}
+					$U(x) \geq U(y)$, $\forall x \geq y$
+				\end{center}
+			
+				\vspace{4em}
+				
+				\item[(\rmnum{3})] 
+				\begin{itemize}
+					\item $\Rightarrow$: 根据\textbf{(\rmnum{2})}的证明过程 (式(4.111)), we get
+					\begin{center}
+						$\left| V(x) - V(y) \right| \geq V(x) - V(y) \geq \left| f(x) - f(y) \right|$, $\forall x , y \in [a , b]$
+					\end{center}
+					Suppose $V(x)$ is continuous at $x_0$, then $\forall \epsilon > 0$, $\exists \delta > 0$, $\st$
+					\begin{center}
+						$\left| f(x) - f(x_0) \right| \leq \left| V(x) - V(x_0) \right| \leq \epsilon$, $\forall \left| x - x_0 \right| < \delta$
+					\end{center}
+					Then $f(x)$ is continuous at $x_0$.
+					
+					\vspace{2em}
+					
+					\item $\Leftarrow$: Suppose $f(x)$ is continuous at $x_0$. Fix $\epsilon > 0$, then $\exists \delta_0 > 0$, $\st$
+					\begin{center}
+						$\left| f(x_0 + h) - f(x) \right| < \frac{\epsilon}{2}$, $\forall \left| h \right| < \delta_0$
+					\end{center}
+					It suffices to show
+					\begin{center}
+						$\left| V(x_0 + h) - V(x) \right| < \epsilon$, $\forall$ small $h$
+					\end{center}
+					
+					\vspace{1em}
+					
+					考虑\textbf{全变差}$V_{a}^{x_0}(f)$ and $V_{x_0}^{b}(f)$, for fixed $\epsilon > 0$, $\exists$ partitions
+					\begin{align}
+						a &= t_0 < t_1 < \cdots < t_n = x_0 \\
+						x_0 &= s_0 < s_1 < \cdots < s_m = b
+					\end{align}
+					$\st$
+					\begin{align}
+						\left| V_{f}([a , x_0]) - \sum_{j = 1}^{n}{\left| f(t_j) - f(t_{j - 1}) \right|} \right| 
+						&< \frac{\epsilon}{2} \\
+						\left| V_{f}([x_0 , b]) - \sum_{j = 1}^{m}{\left| f(s_j) - f(s_{j - 1}) \right|} \right| 
+						&< \frac{\epsilon}{2}
+					\end{align}
+					Now update $h$ with $\left| h \right| < h_0 = \min{\left\{ \delta_0 , x_0 - t_{n - 1} , s_1 - x_0 \right\}}$. \\
+					下面先对$h > 0$ 的情况讨论.
+					\begin{align}
+						V(x_0 + h) - V(x_0)
+						&= V_{x_0}^{b}(f) - V_{x_0 + h}^{b}(f) \\
+						&\leq \sum_{j = 1}^{m}{\left| f(t_j) - f(t_{j - 1}) \right|} + \frac{\epsilon}{2} - V_{x_0 + h}^{b}(f) \\
+						&= \left| f(s_0) - f(s_1) \right| + \sum_{j = 2}^{m}{\left| f(t_j) - f(t_{j - 1}) \right|} + \frac{\epsilon}{2} - V_{x_0 + h}^{b}(f) \\
+						&\leq \left| f(x_0 + h) - f(x_0) \right| + \left| f(s_1) - f(x_0 + h) \right| + \sum_{j = 2}^{m}{\left| f(t_j) - f(t_{j - 1}) \right|} + \frac{\epsilon}{2} - V_{x_0 + h}^{b}(f)
+					\end{align}
+					Since $x_0 + h < s_1 < \cdots < s_m = b$ is a partition of $[x_0 + h , b]$, then
+					\begin{align}
+						\left| f(s_1) - f(x_0 + h) \right| + \sum_{j = 2}^{m}{\left| f(t_j) - f(t_{j - 1}) \right|}
+						\leq V_{x_0 + h}^{b}(f)
+					\end{align}
+					Therefore
+					\begin{align}
+						V(x_0 + h) - V(x_0)
+						&\leq \left| f(x_0 + h) - f(x_0) \right| + \frac{\epsilon}{2} \\
+						&< \frac{\epsilon}{2} + \frac{\epsilon}{2}
+						= \epsilon , \,\, \forall \left| h \right| < h_0
+					\end{align}
+					Similarly, 对于$h < 0$ 的情况，我们可同样估计$V(x_0) - V(x_0 + h) = V_{a}^{x_0}(f) - V_{a}^{x_0 + h}(f)$, 从而得出结论. \\
+					综上, $V(x)$ is continuous at $x_0$.
+				\end{itemize}
+			\end{enumerate}
+		\end{proof}
+	\end{proposition}
+
+
+
 
 	%  ############################
 	\ifx\allfiles\undefined
