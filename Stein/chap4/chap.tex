@@ -1271,7 +1271,269 @@
 		\end{proof}
 	\end{proposition}
 
+\newpage
+\section{升阳引理$\&$ $Dini$ 导数}
+	\begin{center}
+		在后面一节我们会证明\textbf{有界变差函数几乎处处可微}. 但在此之前，需要给出本节的\textbf{Rising Sun Lemma}和\textbf{Dini导数}的相关内容作为铺垫.
+	\end{center}
 
+\vspace{2em}
+\subsection{$Rising \,\, Sun \,\, Lemma$}
+	这里直接给出\textbf{升阳引理}的内容.
+	\begin{lemma}\label{lemma 4.5.1}
+		\textbf{Rising Sun Lemma}. \\
+		Suppose $G$ is real-valued and continuous on $\R$. Let
+		\begin{center}
+			$E = \left\{ x \in \R \mid G(x + h) > G(x) \,\, for \,\, some \,\, h = h_x > 0 \right\}$
+		\end{center}
+		If $E$ is nonempty, then it must be open, and hence can be written as
+		\begin{align}
+			E = \bigcup_{k = 1}^{\infty}{(a_k , b_k)}
+		\end{align}
+		If $(a_k , b_k)$ is finite, then
+		\begin{center}
+			$G(a_k) = G(b_k)$
+		\end{center}
+		
+		\begin{figure}[thbp!]
+			\centering
+			\includegraphics[width=0.7\linewidth]{figure/4.5.1-1}
+			\caption{Rising Sun Lemma}
+			\label{pic : 4.5.1-1} % 添加图像引用标签
+		\end{figure}
+	
+		\newpage
+		\begin{proof}
+			Suppose $E$ is nonempty. 下面分三个部分证明.
+			\begin{itemize}
+				\item $E$ is open. \\
+				From the definition of $E$, we get
+				\begin{align}
+					E &= \left\{ x \in \R \mid G(x + h) > G(x) \,\, for \,\, some \,\, h > 0 \right\} \\
+					&= \bigcup_{h > 0}{\left\{ x \in \R \mid G(x + h) - G(x) > 0 \right\}}
+				\end{align}
+				Let $\widetilde{G}_{h}(x) = G(x + h) - G(x)$, then $G_h$ is continuous. 根据\textbf{连续函数开集的原象为开集},
+				\begin{center}
+					$\left\{ x \in \R \mid \widetilde{G}_{h}(x) > 0 \right\}$ is open, $\forall h > 0$
+				\end{center}
+				Then
+				\begin{align}
+					E = \bigcup_{h > 0}{\left\{ x \in \R \mid \widetilde{G}_{h}(x) > 0 \right\}} \,\, is \,\, open
+				\end{align}
+			
+				\vspace{2em}
+				
+				\item $E = \overset{\infty}{\underset{k = 1}{\bigcup}}{(a_k , b_k)}$. \\
+				By \textbf{Thm \ref{thm 1.1.3} (开集构成定理)}, it's trivial.
+				
+				\vspace{2em}
+				
+				\item If $(a_k , b_k)$ is finite, then $G(a_k) = G(b_k)$. 
+				\begin{itemize}
+					\item $G(b_k) \leq G(a_k)$: \\
+					Since $a_k \notin E$, then
+					\begin{center}
+						$G(a_k + h) \leq G(a_k)$, $\forall h > 0$
+					\end{center}
+					Since $b_k > a_k$, then $G(b_k) \leq G(a_k)$.
+					
+					\vspace{1em}
+					
+					\item $G(b_k) = G(a_k)$: (排除$G(b_k)$ 严格小于$G(a_k)$ 的情况)\\
+					反证法. Suppose $G(b_k) < G(a_k)$. \\
+					Since $G$ is continuous, $[a_k , b_k] \subset \R$ is connected, \\
+					then by \textbf{Intermediate Value Thm (介值定理)},
+					\begin{align}
+						A = \left\{ x \in [a_k , b_k] \mid G(x) = \frac{G(a_k) + G(b_k)}{2} \right\} \neq \varnothing
+					\end{align}
+					Since $b_k$ 为$A$ 的上界, then by \textbf{确界原理}, $\exists c = \sup{A}$. \\
+					下面证明$c \in A$, 即$c = \sup{A} = \max{A}$. 
+					
+					\vspace{1em}
+					
+					\begin{itemize}
+						\item 反证法. Suppose $c \notin A$, i.e.
+						\begin{center}
+							$G(c) \neq \frac{G(a_k) + G(b_k)}{2}$
+						\end{center}
+						Since $c = \sup{A}$, then $\exists \{ x_j \}_{j = 1}^{\infty} \subset A$, $\st$
+						\begin{center}
+							$x_j \to c$ and $G(x_j) = \frac{G(a_k) + G(b_k)}{2}$, $\forall j$
+						\end{center}
+						Since $G$ is continuous, then for $\epsilon = \left| G(c) - \left( \frac{G(a_k) + G(b_k)}{2} \right) \right| / 2 > 0$, $\exists \delta > 0$, $\st$
+						\begin{center}
+							$G(x) \neq \frac{G(a_k) + G(b_k)}{2}$, $\forall x \in (c - \delta , c + \delta) \cap [a_k , b_k]$
+						\end{center}
+						which is a contradiction for $x_j \to c$ and $G(x_j) = \frac{G(a_k) + G(b_k)}{2}$.
+					\end{itemize}
+					
+					\vspace{4em}
+					
+					综上, $c = \max{A}$. 下面根据$E$ 的性质给出矛盾. \\
+					Since $c \in E$, $\exists h_c > 0$, $\st$
+					\begin{center}
+						$G(c + h_c) > G(c) = \frac{G(a_k) + G(b_k)}{2}$
+					\end{center}
+					Then $c + h_c < b_k$ (otherwise $b_k \in E$ for $G(c + h_c) > G(b_k)$ with $c + h_c > b_k$). \\
+					Then by \textbf{Intermediate Value Thm (介值定理)}, $\exists c + h_c < d < b_k$, $\st$
+					\begin{center}
+						$G(d) = \frac{G(a_k) + G(b_k)}{2}$ with $d > c + h_c > c$
+					\end{center}
+					which is a contradiction with $c = \max{A}$. \\
+					Therefore, $G(a_k) = G(b_k)$.
+				\end{itemize}
+				
+				\begin{figure}[thbp!]
+					\centering
+					\includegraphics[width=0.5\linewidth]{figure/4.5.1-2}
+					\caption{Case $G(a_k) > G(b_k)$}
+					\label{pic : 4.5.1-2} % 添加图像引用标签
+				\end{figure}
+			\end{itemize}
+		\end{proof}
+	\end{lemma}
+
+	\newpage
+	下面给出\textbf{升阳引理}定义在\textbf{闭区间}上的推论.
+	\begin{corollary}\label{cor 4.5.2}
+		Suppose $G : [a , b] \rightarrow \R$ is continuous and let
+		\begin{center}
+			$E = \left\{ x \in (a , b) \mid G(x + h) > G(x) \,\, for \,\, some \,\, h = h_x > 0 \right\}$
+		\end{center}
+		then $E$ is either empty or open. In the letter case, 
+		\begin{align}
+			E = \bigcup_{k = 1}^{\infty}{(a_k , b_k)} \,\, and \,\, G(b_k) = G(a_k)
+		\end{align}
+		except possibly when $a_k = a$, in which case we only have
+		\begin{center}
+			$G(a_k) \leq G(b_k)$
+		\end{center}
+	
+		\vspace{8em}
+		\begin{proof}
+			与\textbf{Rising Sun Lemma (Lemma \ref{lemma 4.5.1})} 证明过程一致. \\
+			Suppose $a_k = a$. 下用反证法. Suppose $G(a_k) = G(a) > G(b_k)$. 同理, $\exists$ biggest $c \in (a , b_k)$, $\st$
+			\begin{center}
+				$G(c) = \frac{G(a) + G(b_k)}{2}$
+			\end{center}
+			But $c \in E$ $\,\, \Rightarrow \,\,$ $\exists d \in (c , b_k)$, $\st$ $G(d) = G(c)$, a contradiction for $c$ is the biggest.
+		\end{proof}
+	\end{corollary}
+
+\newpage
+\subsection{$Dini$ 导数}
+\paragraph{引入}
+	探讨函数的\textbf{可微性}，即探讨如下\textbf{极限的存在性}:
+	\begin{align}
+		\lim_{h \to 0}{\triangle_{h}(f)(x)} = \lim_{h \to 0}{\frac{f(x + h) - f(x)}{h}}
+	\end{align}
+	而我们又知道，上述\textbf{极限存在} $\,\, \Leftrightarrow \,\,$ 下述极限\textbf{存在}，i.e.
+	\begin{align}
+		&\Leftrightarrow \lim_{h \to 0^{+}}{\frac{f(x + h) - f(x)}{h}} = \lim_{h \to 0^{-}}{\frac{f(x + h) - f(x)}{h}} \\
+		&\Leftrightarrow \limsup_{h \to 0^{+}}{\frac{f(x + h) - f(x)}{h}} = \liminf_{h \to 0^{+}}{\frac{f(x + h) - f(x)}{h}} \\
+		&= \limsup_{h \to 0^{-}}{\frac{f(x + h) - f(x)}{h}} = \liminf_{h \to 0^{-}}{\frac{f(x + h) - f(x)}{h}}
+	\end{align}
+	i.e.
+	\begin{align}
+		\limsup_{h \to 0^{+}}{\triangle_{h}(f)(x)}
+		&= \liminf_{h \to 0^{+}}{\triangle_{h}(f)(x)} \\
+		= \limsup_{h \to 0^{-}}{\triangle_{h}(f)(x)}
+		&= \liminf_{h \to 0^{-}}{\triangle_{h}(f)(x)}
+	\end{align}
+	而上述四个极限即为下面要定义的\textbf{Dini导数}.
+
+\vspace{4em}
+\paragraph{定义}
+	下面给出\textbf{Dini导数}的定义 / 记号.
+	\begin{defn}\label{def 4.5.1}
+		Suppose $F$ is real-valued. The four \underline{\textcolor{blue}{\textbf{Dini numbers}}} at $x$ is defined by
+		\begin{align}
+			D^{+}(F)(x) &= \limsup_{h \to 0^{+}}{\triangle_{h}(F)(x)} \\
+			D_{+}(F)(x) &= \liminf_{h \to 0^{+}}{\triangle_{h}(F)(x)} \\
+			D^{-}(F)(x) &= \limsup_{h \to 0^{-}}{\triangle_{h}(F)(x)} \\
+			D_{-}(F)(x) &= \liminf_{h \to 0^{-}}{\triangle_{h}(F)(x)} 
+		\end{align}
+	\end{defn}
+
+\newpage
+\paragraph{性质}
+	下面说明，\textbf{连续函数的Dini导数可测}.
+	\begin{lemma}\label{lemma 4.5.3}\footnote{\textbf{《$Real \,\, Analysis -- Measure \,\, Theroy, \,\, Integration, \,\, \& \,\, Hilbert \,\, Spaces$》--- $Elias \,\, M. \,\, Stein$} P147 Ex 14.}
+		Suppose $F$ is continuous on $[a , b]$, then
+		\begin{align}
+			D^{+}(F)(x) = \limsup_{h \to 0^{+}}{\triangle_{h}(F)(x)}
+		\end{align}
+		is measurable.
+		
+		\vspace{4em}
+		\begin{proof}
+			\textbf{(证明的重点是将各种连续型的极限转化为离散型，再利用可测函数列对极限的封闭性得证)} \\
+			根据\textbf{函数上极限的定义 (Def \ref{def 4.3.4})},
+			\begin{align}
+				D^{+}(F)(x) = \limsup_{h \to 0^{+}}{\triangle_{h}(F)(x)}
+				= \lim_{\delta \to 0^{+}}{\sup_{0 < h < \delta}{\frac{F(x + h) - F(x)}{h}}}
+			\end{align}
+			下面先将最外层的$\delta \to 0^{+}$ 过程\textbf{离散化}. Let
+			\begin{align}
+				G(\delta) = \sup_{0 < h < \delta}{\frac{F(x + h) - F(x)}{h}}
+			\end{align}
+			Then $G \nearrow$ as $\delta \nearrow$. 由于单调函数必存在极限 (包含$\pm \infty$), 因此根据\textbf{Heine归结原理},
+			\begin{align}
+				\limsup_{h \to 0^{+}}{\triangle_{h}(F)(x)}
+				= \lim_{n \to \infty}{\sup_{0 < h < \frac{1}{n}}{\frac{F(x + h) - F(x)}{h}}}
+			\end{align}
+			Since \textbf{可测函数列对极限封闭}, it suffices to show for each $n \in \N$,
+			\begin{align}
+				\sup_{0 < h < \frac{1}{n}}{\triangle_{h}(F)(x)} \,\, is \,\, measurable
+			\end{align}
+		
+			\vspace{1em}
+			
+			为了证明上述函数可测，我们的思路还是一样，即用\textbf{可测函数列逼近}. 但上述$\sup$ 过程$0 < h < \frac{1}{n}$ 仍为\textbf{连续型}过程，下面通过说明该过程与$h \in (0 , \frac{1}{n}) \cap \Q$ 的等价性，来将$\sup$ 过程\textbf{离散化}，从而方便利用\textbf{可测函数列来逼近}.
+			
+			\vspace{1em}
+			
+			\textbf{Claim:} Fix $x \in [a , b)$. Let $f(h) = \triangle_{h}(F)(x)$, then
+			\begin{align}
+				\sup_{0 < h < \frac{1}{n}}{f(h)} = \sup_{h \in (0 , \frac{1}{n}) \cap \Q}{f(h)}
+			\end{align}
+			
+			\vspace{1em}
+			\begin{itemize}
+				\item 
+				\begin{proof}
+					Let $A = \sup_{0 < h < \frac{1}{n}}{f(h)}$, $B = \sup_{h \in (0 , \frac{1}{n}) \cap \Q}{f(h)}$. \\
+					显然$A \geq B$. 下证$A \leq B$. \\
+					Since $A = \sup_{0 < h < \frac{1}{n}}{f(h)}$, $\exists \{ x_j \}_{j = 1}^{\infty} \subset (0 , \frac{1}{n})$ $\st$
+					\begin{center}
+						$f(x_j) \to A$
+					\end{center}
+					由于对于$\forall j \in \N$, $x_j$ 可由有理数列$\{ y_{kj} \}_{k = 1}^{\infty} \subset (0 , \frac{1}{n}) \cap \Q$ 逼近, i.e.
+					\begin{center}
+						$y_{kj} \to x_j$ as $k \to \infty$
+					\end{center}
+					Since $f(h) = \triangle_{h}(F)(x)$ is continuous in $h$, then
+					\begin{center}
+						$f(y_{kj}) \to f(x_j)$, $\forall j \in \N$ as $k \to \infty$ 
+					\end{center}
+					Now take $\{ y_{kk} \}_{k = 1}^{\infty} \subset (0 , \frac{1}{n}) \cap \Q$, we have
+					\begin{center}
+						$f(y_{kk}) \to \underset{k \to \infty}{\lim}{f(x_k)} = A$ as $k \to \infty$
+					\end{center}
+					Therefore, $A \leq B$. 综上$A = B$.
+				\end{proof}
+				
+				\vspace{1em}
+				因为$\underset{h \in (0 , \frac{1}{n}) \cap \Q}{\sup}{\triangle_{h}(F)(x)}$ 为一列\textbf{可测函数}$\triangle_{h}(F)(x)$, $h \in (0 , \frac{1}{n}) \cap \Q$ 的上确界，而\textbf{可测函数列对上确界封闭}，所以$\underset{h \in (0 , \frac{1}{n}) \cap \Q}{\sup}{\triangle_{h}(F)(x)}$ measurable. \\
+				Therefore, 
+				\begin{center}
+					$\underset{0 < h < \frac{1}{n}}{\sup}{\triangle_{h}(F)(x)} = \underset{h \in (0 , \frac{1}{n}) \cap \Q}{\sup}{\triangle_{h}(F)(x)}$ measurable, $\forall n \in \N$
+				\end{center}
+				从而得证.
+			\end{itemize}
+			
+		\end{proof}
+	\end{lemma}
 
 
 	%  ############################

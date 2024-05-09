@@ -99,3 +99,9 @@
 \contentsline {paragraph}{定义}{105}{paragraph*.54}%
 \contentsline {paragraph}{有界变差函数的刻画}{106}{paragraph*.55}%
 \contentsline {subsection}{\numberline {4.4.3}有界变差函数的全变差的性质}{109}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}升阳引理$\&$ $Dini$ 导数}{112}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}$Rising \,\, Sun \,\, Lemma$}{112}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}$Dini$ 导数}{116}{subsection.4.5.2}%
+\contentsline {paragraph}{引入}{116}{paragraph*.56}%
+\contentsline {paragraph}{定义}{116}{paragraph*.57}%
+\contentsline {paragraph}{性质}{117}{paragraph*.58}%
