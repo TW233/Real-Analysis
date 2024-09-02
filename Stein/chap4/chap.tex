@@ -1400,7 +1400,7 @@
 		\begin{center}
 			$E = \left\{ x \in (a , b) \mid G(x + h) > G(x) \,\, for \,\, some \,\, h = h_x > 0 \right\}$
 		\end{center}
-		then $E$ is either empty or open. In the letter case, 
+		then $E$ is either empty or open. In the latter case, 
 		\begin{align}
 			E = \bigcup_{k = 1}^{\infty}{(a_k , b_k)} \,\, and \,\, G(b_k) = G(a_k)
 		\end{align}
@@ -1531,9 +1531,675 @@
 				\end{center}
 				从而得证.
 			\end{itemize}
-			
 		\end{proof}
 	\end{lemma}
+
+\newpage
+\section{连续有界变差函数的可微性}
+\paragraph{引入}
+	本节我们来研究一类特殊的\textbf{有界变差函数}的\textbf{可微性}，即\textbf{连续有界变差函数}.
+
+\subsection{连续有界变差函数的可微性}
+	下面我们给出\textbf{连续有界变差函数几乎处处可微}的结论.
+	\begin{thm}\label{thm 4.6.1}
+		If $F$ is continuous and of BV on $[a , b]$, then
+		\begin{center}
+			$F$ is differentiable a.e.
+		\end{center}
+	
+		\vspace{2em}
+		\begin{rmk}
+			这里给出该定理的\textbf{等价描述}，并作为证明的结论：
+			\begin{itemize}
+				\item It suffices to show
+				\begin{enumerate}
+					\item[(\rmnum{1})]$D^{+}(F)(x) < \infty$ for a.e. x.
+					
+					\item[(\rmnum{2})]$D^{+}(F)(x) \leq D_{-}(F)(x)$ for a.e. x.
+				\end{enumerate}
+				
+				\vspace{2em}
+				\begin{proof}
+					下面说明其与原定理的\textbf{等价性}. 只需证(\rmnum{1}) + (\rmnum{2}) $\Rightarrow$ \textbf{Thm \ref{thm 4.6.1}} (另一侧显然). \\
+					If (\rmnum{2}) holds, then since $-F$ is also continuous and of BV on $[a , b]$, we have
+					\begin{center}
+						$D^{+}(-F)(x) \leq D_{-}(-F)(x)$ for a.e. x.
+					\end{center}
+					Since
+					\begin{align}
+						D^{+}(-F)(x)
+						= \limsup_{h \to 0^{+}}{\frac{(-F)(x + h) - (-F)(x)}{h}}
+						&= \limsup_{h \to 0^{+}}{-\frac{F(x + h) - F(x)}{h}} \\
+						&= -\liminf_{h \to h^{+}}{\frac{F(x + h) - F(x)}{h}} \\
+						&= -D_{+}(F)(x)
+					\end{align}
+					\begin{align}
+						D_{-}(-F)(x) 
+						= \liminf_{h \to 0^{-}}{\frac{(-F)(x + h) - (-F)(x)}{h}}
+						&= \liminf_{h \to 0^{-}}{-\frac{F(x + h) - F(x)}{h}} \\
+						&= -\limsup_{h \to 0^{-}}{\frac{F(x + h) - F(x)}{h}} \\
+						&= -D^{-}(F)(x)
+					\end{align}
+					Then we have $D_{+}(F)(x) \geq D^{-}(F)(x)$ for a.e. x. 结合(\rmnum{2})及上下极限大小关系，得
+					\begin{center}
+						$D_{-} \leq D^{-} \leq D_{+} \leq D^{+} \leq D_{-} \,\, \Rightarrow \,\, D_{-} = D^{-} = D_{+} = D^{+}$
+					\end{center}
+					故a.e.导数存在. 又因为(\rmnum{1})，$F$ 各点导数有限，从而\textbf{几乎处处可微}.
+				\end{proof}
+			\end{itemize}
+		\end{rmk}
+		
+		\newpage
+		\begin{proof}
+			\begin{enumerate}
+				\item[(\rmnum{1})]$D^{+}(F)(x) < \infty$ for a.e. x. \\
+				Let 
+				\begin{center}
+					$E_\gamma = \left\{ x  \in (a , b) \mid D^{+}(F)(x) > \gamma \right\}$, $\forall \gamma > 0$
+				\end{center}
+				Then by \textbf{Lemma \ref{lemma 4.5.3}}, $D^{+}(F)$ is measurable $\Rightarrow$ $E_\gamma$ is measurable. It suffices to show
+				\begin{center}
+					$m\left( \left\{ x \in [a , b] \mid D^{+}(F)(x) = \infty \right\} \right) = 0$
+				\end{center}
+				Since
+				\begin{align}
+					E_\gamma 
+					&= \left\{ x  \in (a , b) \mid D^{+}(F)(x) > \gamma \right\} \\
+					&= \left\{ x \in (a , b) \mid \limsup_{h \to 0^{+}}{\frac{F(x + h) - F(x)}{h}} > \gamma \right\} \\
+					&\subset \left\{ x \in (a , b) \mid F(x + h) - F(x) > \gamma h \,\, for \,\, some \,\, h > 0 \right\} \\
+					&= \left\{ x \in (a , b) \mid F(x + h) - \gamma(x + h) > F(x) - \gamma x \,\, for \,\, some \,\, h > 0 \right\}
+				\end{align}
+				Let $G(x) = F(x) - \gamma x$, then $G$ is continuous. \\
+				By \textbf{Rising Sun Lemma (Cor \ref{cor 4.5.2})},
+				\begin{align}
+					E_\gamma \subset E &= \left\{ x \in (a , b) \mid G(x + h) > G(x) \,\, for \,\, some \,\, h > 0 \right\} \\
+					&= \bigcup_{k = 1}^{\infty}{(a_k , b_k)}
+				\end{align}
+				and $G(b_k) \geq G(a_k)$. i.e.
+				\begin{center}
+					$F(b_k) - F(a_k) \geq \gamma(b_k - a_k)$
+				\end{center}
+				Since $F$ is of BV on $[a , b]$, then by \textbf{Thm \ref{thm 4.4.3}}, $F$ is the difference of 2 increasing bounded functions. i.e.
+				\begin{center}
+					$F = F_1 - F_2$, where both $F_1$ and $F_2$ are increasing and bounded.
+				\end{center}
+				Then it suffices to show that $D^{+}(F_1)(x) < \infty$ and $D^{+}(F_2)(x) < \infty$ for a.e. x. \\
+				因此不妨设$F$ increasing $\&$ bounded. Then by $F(b_k) - F(a_k) \geq \gamma(b_k - a_k)$, we have
+				\begin{align}
+					m(E_\gamma) 
+					\leq m(E)
+					= \sum_{k = 1}^{\infty}{m\left( (a_k , b_k) \right)}
+					\leq \frac{1}{\gamma} \sum_{k = 1}^{\infty}{F(b_k) - F(a_k)}
+					\leq \frac{1}{\gamma} \left( F(b) - F(a) \right)
+				\end{align}
+				Thus $m(E_\gamma) \to 0$ as $\gamma \to \infty$. Therefore
+				\begin{align}
+					m\left( x \in [a , b] \mid D^{+}(F)(x) = \infty \right)
+					= m\left( \bigcap_{N = 1}^{\infty}{E_N} \right)
+					= \lim_{N \to \infty}{m(E_N)}
+					= 0
+				\end{align}
+				这就证明了$D^{+}(F)(x) < \infty$ for a.e. x.
+				
+				\newpage
+				
+				\item[(\rmnum{2})]$D^{+}(F)(x) \leq D_{-}(F)(x)$ for a.e. x. \\
+				与上一问同样的思路，即证明$D^{+} > D_{-}$ 的$x$ 为零测集. 但还需要进行一些形式的转化. \\
+				$\forall R , r \in \Q$, $R > r$, let
+				\begin{align}
+					E_{R , r} 
+					&= \left\{ x \in [a , b] \mid D^{+}(F)(x) > R > r > D_{-}(F)(x) \right\} \\
+					&= [a , b] \cap \left\{ x \in \R \mid D^{+}(F)(x) > R \right\} \cap \left\{ x \in \R \mid D_{-}(F)(x) < r \right\}
+				\end{align}
+				Since both $D^{+}(F)$ and $D_{-}(F)$ are measurable, then $E_{R , r}$ is measurable. \\
+				Since
+				\begin{align}
+					m\left( \bigcup_{\substack{R > r \\ R , r \in \Q}}{E} \right)
+					= m\left( \left\{ x \in [a , b] \mid D^{+}(F)(x) > D_{-}(F)(x) \right\} \right)
+				\end{align}
+				Then it suffices to show 
+				\begin{center}
+					$m(E_{R , r}) = 0$ for all $R , r \in \Q , R > r$.
+				\end{center}
+				
+				\vspace{1em}
+				Fix $R , r \in \Q , R > r$. 记$E = E_{R , r} \backslash \{ a , b \}$. 不妨设$F$ increasing $\&$ bounded. 下面证明$m(E) = 0$. \\
+				反证法. Suppose $m(E) > 0$. Then by \textbf{Thm \ref{thm 1.3.4} (Lebesgue测度的(外)正则性)}, \\
+				$\exists O \subset (a , b)$ open, $\st$
+				\begin{center}
+					$E \subset O \subset (a , b)$, $m(O) < \frac{R}{r}m(E)$
+				\end{center}
+				根据\textbf{Thm \ref{thm 1.1.3} (开集构造定理)}, we have
+				\begin{align}
+					O = \bigcup_{n = 1}^{\infty}{I_n} , \,\, I_n = (\alpha_n , \beta_n) \,\, disjoint
+				\end{align}
+				Fix $n \in \N$. Let $G(x) = F(-x) + rx$. Then
+				\begin{center}
+					$-x \in I_n \,\, \Leftrightarrow \,\, x \in -I_n = (-\beta_n , -\alpha_n)$
+				\end{center}
+				Thus by \textbf{Rising Sun Lemma (Cor \ref{cor 4.5.2})}, we have $E_G$ open, where
+				\begin{align}
+					E_G
+					&= \left\{ x \in (-\beta_n , -\alpha_n) \mid G(x + h) > G(x) \,\, for \,\, some \,\, h > 0 \right\} \\
+					&= \bigcup_{k = 1}^{\infty}{(-b_k , -a_k)}
+				\end{align}
+				and 
+				\begin{align}
+					G(-b_k) \leq G(-a_k) \,\, &\Rightarrow \,\, F(b_k) - rb_k \leq F(a_k) - ra_k \\
+					&\Rightarrow \,\, F(b_k) - F(a_k) \leq r(b_k - a_k)
+				\end{align}
+				上述估计式将会用于后面对于测度的估计.
+				
+				\newpage
+				Let $\widetilde{G}(x) = F(x) - Rx$. Apply \textbf{Rising Sun Lemma (Cor \ref{cor 4.5.2})} on $(a_k , b_k)$, $\forall k \in \N$
+				\begin{align}
+					E_{\widetilde{G}} 
+					&= \left\{ x \in (a_k , b_k) \mid \widetilde{G}(x + h) > \widetilde{G}(x) \,\, for \,\, some \,\, h > 0 \right\} \\
+					&= O_{n , k}
+					= \bigcup_{j = 1}^{\infty}{(a_{k , j} , b_{k , j})}
+					\subset (a_k , b_k)
+				\end{align}
+				
+				\begin{figure}[thbp!]
+					\centering
+					\includegraphics[width=0.35\linewidth]{figure/4.6.1-1}
+					\caption{$E_{\widetilde{G}} = O_{n , k}$ on $(a_k , b_k)$}
+					\label{pic : 4.6.1-1} % 添加图像引用标签
+				\end{figure}
+				
+				and $\widetilde{G}(b_{k , j}) \geq \widetilde{G}(a_{k , j})$. i.e.
+				\begin{center}
+					$F(b_{k , j}) - F(a_{k , j}) \geq R(b_{k , j} - a_{k , j})$
+				\end{center}
+				此时将视线缩放回整个$I_n$ 区间上. Let
+				\begin{align}
+					O_n 
+					\coloneqq \bigcup_{k = 1}^{\infty}{O_{n , k}} 
+					= \bigcup_{k = 1}^{\infty} \bigcup_{j = 1}^{\infty}{(a_{k , j} , b_{k , j})}
+				\end{align}
+				
+				\begin{figure}[thbp!]
+					\centering
+					\includegraphics[width=0.7\linewidth]{figure/4.6.1-2}
+					\caption{$O_{n}$ on $I_n$}
+					\label{pic : 4.6.1-2} % 添加图像引用标签
+				\end{figure}
+				
+				\vspace{2em}
+				下面估计$O_n$ 的测度. \\
+				By $F(b_k) - F(a_k) \leq r(b_k - a_k)$ and $F(b_{k , j}) - F(a_{k , j}) \geq R(b_{k , j} - a_{k , j})$, we have
+				\begin{align}
+					m(O_n) 
+					= \sum_{k = 1}^{\infty} \sum_{j = 1}^{\infty}{(b_{k , j} - a_{k , j})}
+					\leq \frac{1}{R} \sum_{k = 1}^{\infty} \sum_{j = 1}^{\infty}{F(b_{k , j}) - F(a_{k , j})}
+				\end{align}
+				Since $F$ is increasing, then
+				\begin{align}
+					m(O_n)
+					\leq \frac{1}{R} \sum_{k = 1}^{\infty}{\left( F(b_k) - F(a_k) \right)}
+					\leq \frac{r}{R} \sum_{k = 1}^{\infty}{(b_k - a_k)}
+					\leq \frac{r}{R} m(I_n)
+				\end{align}
+				
+				\newpage
+				下面先给出一个\textbf{断言}. 
+				
+				\vspace{2em}
+				
+				\begin{itemize}
+					\item \textbf{Claim :} $E \cap I_n \subset O_n$.
+					\begin{proof}
+						Since
+						\begin{align}
+							E 
+							&= (a , b) \cap \left\{ x \in \R \mid D^{+}(F)(x) > R \right\} \cap \left\{ x \in \R \mid D_{-}(F)(x) < r \right\} \\
+							&\subset \left\{ x \in (a , b) \mid \limsup_{h \to 0^{+}}{\frac{F(x + h) - F(x)}{h}} > R \right\} \\
+							&= \left\{ x \in (a , b) \mid F(x + h) - F(x) > Rh \,\, for \,\, some \,\, h > 0 \right\} \\
+							&= \left\{ x \in (a , b) \mid \widetilde{G}(x + h) > \widetilde{G}(x) \,\, for \,\, some \,\, h > 0 \right\}
+						\end{align}
+						Therefore
+						\begin{align}
+							E \cap I_n
+							&\subset \left\{ x \in I_n \mid \widetilde{G}(x + h) > \widetilde{G}(x) \,\, for \,\, some \,\, h > 0 \right\} \\
+							&= \bigcup_{k = 1}^{\infty}{\left\{ x \in (a_k , b_k) \mid \widetilde{G}(x + h) > \widetilde{G}(x) \,\, for \,\, some \,\, h > 0 \right\}} \\
+							&= \bigcup_{k = 1}^{\infty} \bigcup_{j = 1}^{\infty}{(a_{k , j} , b_{k , j})} \\
+							&= O_n
+						\end{align}
+					\end{proof}
+				\end{itemize}
+				
+				\vspace{1em}
+				
+				Since $E \subset O = \overset{\infty}{\underset{n = 1}{\bigcup}}{I_n}$, then
+				\begin{align}
+					E = \bigsqcup_{n = 1}^{\infty}{(E \cap I_n)}
+				\end{align}
+				Therefore, by \textbf{Claim}
+				\begin{align}
+					m(E) 
+					= \sum_{n = 1}^{\infty}{m(E \cap I_n)}
+					\leq \sum_{n = 1}^{\infty}{m(O_n)}
+					\leq \frac{r}{R} \sum_{n = 1}^{\infty}{m(I_n)}
+					= \frac{r}{R} m(O)
+					< m(E)
+				\end{align}
+				which is a contradiction that $m(E) < m(E)$. Thus $m(E) = 0$.
+			\end{enumerate}
+		\end{proof}
+	\end{thm}
+
+\newpage
+\subsection{$Weak \,\, Newton-Leibniz \,\, Formula$}
+	作为\textbf{Thm \ref{thm 4.6.1}}的推论，下面我们来给出\textbf{弱Newton-Leibniz公式}.
+	\begin{corollary}\label{cor 4.6.2}
+		\textbf{Weak Newton-Leibniz Formula}. \\
+		If $F : [a , b] \rightarrow \R$ is increasing, continuous and bounded on $[a , b]$, then $F^{'}$ exists a.e. on $[a , b]$. Moreover, $F^{'}$ is measurable, nonnegative and
+		\begin{align}
+			\int_{a}^{b}{F^{'}(x) dx} \leq F(b) - F(a)
+		\end{align}
+		In particular, if $F$ is bounded on $\R$, then $F^{'}$ is integrable on $\R$.
+		
+		\vspace{4em}
+		\begin{rmk}
+			至于结论中的$``\leq"$ 为何不能取$``="$，下面给出了经典反例，即\textbf{严格小于}的例子.
+			\begin{example}\label{ex 4.6.1}
+				\textbf{Cantor-Lebesgue Function}. 
+				\begin{align}
+					F\left( \sum_{k = 1}^{\infty}{\frac{a_k}{3^k}} \right) 
+					= \sum_{k = 1}^{\infty}{\frac{b_k}{2^k}} , \,\, b_k = \frac{a_k}{2} , \,\, a_k \in \{ 0 , 2 \}
+				\end{align}
+				可以证明$F^{'}(x) = 0$ for a.e. $x \in [0 , 1]$. Then
+				\begin{align}
+					\int_{0}^{1}{F^{'}(x) dx} = 0 < 1 = F(1) - F(0)
+				\end{align}
+				\begin{center}
+					具体证明可见书\footnote{\textbf{《$Real \,\, Analysis -- Measure \,\, Theroy, \,\, Integration, \,\, \& \,\, Hilbert \,\, Spaces$》--- $Elias \,\, M. \,\, Stein$}} P 125-127 或视频 \href{https://www.bilibili.com/video/BV1FT411C7wM/?p=38}{连续有界变差函数的可微性}.
+				\end{center}
+			\end{example}
+		\end{rmk}	
+		
+		\newpage
+		\begin{proof}
+			Since $F$ is increasing and bounded on $[a , b]$, then by \textbf{Example \ref{ex 4.4.2}}, $F$ is of BV. \\
+			Thus $F$ is continous and of BV on $[a , b]$, by \textbf{Thm \ref{thm 4.6.1}}, $F^{'}$ exists a.e. on $[a , b]$. \\
+			Let 
+			\begin{align}
+				G_{n}(x) = \frac{F(x + \frac{1}{n}) - F(x)}{\frac{1}{n}}
+			\end{align}
+			Then $G_n \to F^{'}$ for a.e. $x \in [a , b]$. \\
+			Since $G_n$ is continuous, especially measurable, and $G_n \to F^{'}$ for a.e. x, \\
+			then $F^{'}$ is measurable (\textbf{可测函数列对极限封闭}). We also have $G_n \geq 0$, $F^{'} \geq 0$. \\
+			Apply \textbf{Fatou's Lemma (Thm \ref{thm 3.1.6})},
+			\begin{align}
+				\int_{a}^{b}{\liminf_{n \to \infty}{G_{n}(x)} dx} \leq \liminf_{n \to \infty}{\int_{a}^{b}{G_{n}(x) dx}}
+			\end{align}
+			i.e.
+			\begin{align}
+				\int_{a}^{b}{F^{'}(x) dx} \leq \liminf_{n \to \infty}{\int_{a}^{b}{G_{n}(x) dx}}
+			\end{align}
+			Since
+			\begin{align}
+				\int_{a}^{b}{G_{n}(x) dx}
+				= n\int_{a}^{b}{F(x + \frac{1}{n}) dx} - n\int_{a}^{b}{F(x) dx}
+			\end{align}
+			根据\textbf{Thm \ref{thm 3.6.2}}，闭区间上\textbf{Lebesgue积分}可转化为\textbf{Riemann积分}，因此
+			\begin{align}
+				\int_{a}^{b}{G_{n}(x)}
+				= n\int_{a + \frac{1}{n}}^{b + \frac{1}{n}}{F(y) dy} - n\int_{a}^{b}{F(x) dx} \\
+				&= n\int_{b}^{b + \frac{1}{n}}{F(x) dx} - n\int_{a}^{a + \frac{1}{n}}{F(x) dx}
+			\end{align}
+			根据\textbf{积分中值定理}，
+			\begin{align}
+				\int_{a}^{b}{G_{n}(x) dx}
+				&= n\int_{b}^{b + \frac{1}{n}}{F(x) dx} - n\int_{a}^{a + \frac{1}{n}}{F(x) dx} \\
+				&= F(\xi_n) - F(\eta_n) \to F(b) - F(a) \\
+				&where \,\, \xi_n \in [b , b + \frac{1}{n}] , \,\, \eta_n \in [a , a + \frac{1}{n}]
+			\end{align}
+			Therefore
+			\begin{align}
+				\int_{a}^{b}{F^{'}(x) dx} 
+				\leq \liminf_{n \to \infty}{\int_{a}^{b}{G_{n}(x) dx}}
+				= F(b) - F(a)
+			\end{align}
+		\end{proof}
+	\end{corollary}
+
+\newpage
+\section{绝对连续函数与微积分基本定理}
+\subsection{绝对连续函数}
+	下面我们给出\textbf{绝对连续}的概念，它和\textbf{连续}的概念不太一样，甚至比\textbf{一致连续}还要强.
+	\begin{defn}\label{def 4.7.1}
+		A function $F$ on $[a , b]$ is \underline{\textcolor{blue}{\textbf{absolutely continuous}}} if $\forall \epsilon > 0$, $\exists \delta > 0$, $\st$
+		\begin{align}
+			\forall \sum_{k = 1}^{N}{(b_k - a_k)} < \delta , \,\, (a_k , b_k) \,\, disjoint \,\, 
+			\Rightarrow \,\, \sum_{k = 1}^{N}{\left| F(b_k) - F(a_k) \right|} < \epsilon
+		\end{align}
+		
+		\vspace{2em}
+		\begin{rmk}
+			下面给出几条\textbf{绝对连续函数}的\textbf{性质}.
+			\begin{enumerate}
+				\item \textbf{Absolutely Continuous $\Rightarrow$ Uniformly Continuous} (\textbf{绝对连续 $\Rightarrow$ 一致连续}).
+				
+				\vspace{1em}
+				\begin{proof}
+					取$N = 1$，则$\left| F(x) - F(y) \right| < \epsilon , \,\, \forall \left| x - y \right| < \delta$.
+				\end{proof}
+				
+				\vspace{8em}
+				
+				\item $f \in AC([a , b]) \,\, \Rightarrow \,\, f \in BV([a , b])$ ($\Rightarrow$ $f$ 几乎处处可微).
+				
+				\vspace{1em}
+				\begin{proof}
+					For $\epsilon = 1$, $\exists \delta > 0$, $\st$
+					\begin{align}
+						\sum_{i = 1}^{n}{\left| f(\widetilde{b_i}) - f(\widetilde{a_i}) \right|} < 1 \,\,
+						whenever \,\, if \,\, \sum_{i = 1}^{n}{(\widetilde{b_i} - \widetilde{a_i})} < \delta
+					\end{align}
+					Let $P^{*} : a = a_0 < a_1 < \cdots < a_n = b$ be a partition with 
+					\begin{center}
+						$a_i - a_{i - 1} = \frac{\delta}{2}$ for $i = 1 \sim n - 1$ and $a_{n} - a_{n - 1} \leq \frac{\delta}{2}$
+					\end{center}
+					Then $n = \left[ \frac{2(b - a)}{n} \right] + 1$. \\
+					Let $P$ be any partition of $[a , b]$, and let
+					\begin{align}
+						P^{'} &= P \cup P^{*} \\
+						P^{'} &: a = x_0 < x_1 < \cdots < x_m = a_n = b \\
+						P_{i}^{'} &= \left\{ x_{i_k} \in P^{'} \mid x_{i_k} \in [a_{i - 1} , a_{i}] \right\} , \,\, i = 1 \sim n
+					\end{align}
+					Suppose $\left| P_{i}^{'} \right| = n_i$. Since 
+					\begin{align}
+						\sum_{k = 1}^{n_i}{(x_{i_k} - x_{i_{k - 1}})} = a_{i} - a_{i - 1} \leq \frac{\delta}{2}
+					\end{align}
+					Then
+					\begin{align}
+						\sum_{k = 1}^{n_i}{\left| f(x_{i_k}) - f(x_{k - 1}) \right|} < 1
+					\end{align}
+					Thus for any partition $P$,
+					\begin{align}
+						V_{f}(P) 
+						\leq V_{f}(P^{'}) 
+						= \sum_{i = 1}^{n} \sum_{k = 1}^{n_i}{\left| f(x_{i_k}) - f(x_{i_{k - 1}}) \right|}
+						\leq n 
+						= \left[ \frac{2(b - a)}{\delta} \right] + 1
+					\end{align}
+					Therefore, $f \in BV([a , b])$.
+				\end{proof}
+				
+				\vspace{10em}
+				
+				\item If $f$ is integrable and $F(x) = \int_{a}^{x}{f(y) dy}$, then $F \in AC([a , b])$.
+				
+				\vspace{1em}
+				\begin{proof}
+					Since $f$ is integrable, 根据\textbf{Prop \ref{prop 3.1.6} (\rmnum{2}) (Lebesgue积分的绝对连续性)}, \\
+					$\forall \epsilon > 0$, $\exists \delta > 0$, $\st$
+					\begin{align}
+						\forall m(E) < \delta \,\, 
+						\Rightarrow \,\, \int_{E}{\left| f \right|} < \epsilon
+					\end{align}
+					Then
+					\begin{align}
+						\forall \sum_{k = 1}^{N}{(b_k - a_k)} = m\left( \bigcup_{k = 1}^{N}{(a_k , b_k)} \right) < \delta , \,\, (a_k , b_k) \,\, disjoint
+					\end{align}
+					We have
+					\begin{align}
+						\sum_{k = 1}^{N}{\left| F(b_k) - F(a_k) \right|}
+						= \sum_{k = 1}^{N}{\left| \int_{a}^{b_k}{f} - \int_{a}^{a_k}{f} \right|}
+						\leq \sum_{k = 1}^{N}{\int_{[a_k , b_k]}{\left| f \right|}}
+						= \int_{\bigcup_{k = 1}^{N}{[a_k , b_k]}}{\left| f \right|}
+						< \epsilon
+					\end{align}
+					Therefore, $F \in AC([a , b])$.
+				\end{proof}
+			\end{enumerate}
+		\end{rmk}
+	\end{defn}
+
+\newpage
+\subsection{$Vitali \,\, Covering \,\, Lemma$}
+	在\textbf{引理 \ref{lemma 4.1.1}} 中，我们已经给出过\textbf{Vitali覆盖引理}的\textbf{初等版本}. 而在这一小节，我们将给出\textbf{更一般}的\textbf{Vitali覆盖引理}. 
+	
+	\vspace{1em}
+	
+	首先先来给出\textbf{Vitali覆盖}的定义.
+	\begin{defn}\label{def 4.7.2}
+		A collection $\mathcal{B}$ of balls $\{ B \}$ is said to be a \underline{\textcolor{blue}{\textbf{Vitali Covering}}} of a set $E$ if \\
+		$\forall x \in E$, $\forall \eta > 0$, $\exists B \in \mathcal{B}$, $\st$ 
+		\begin{center}
+			$x \in B$ and $m(B) < \eta$
+		\end{center}
+	\end{defn}
+	
+	\vspace{2em}
+	
+	下面给出\textbf{一般形式}的\textbf{Vitali覆盖引理}.
+	\begin{lemma}\label{lemma 4.7.1}
+		\textbf{Vitali Covering Lemma}. \\
+		Suppose $E$ is a set of finite measure and $\mathcal{B}$ is a Vitali Covering of $E$. Then $\forall \delta > 0$, we can find finitely many balls $B_1 , \cdots , B_N \in \mathcal{B}$, $\st$
+		\begin{enumerate}
+			\item[(1)] $B_1 , \cdots , B_N$ are disjoint.
+			
+			\item[(2)] $\overset{N}{\underset{i = 1}{\sum}}{m(B_i)} \geq m(E) - \delta$
+		\end{enumerate}
+		
+		\vspace{4em}
+		\begin{proof}
+			详细证明可见视频 \href{https://www.bilibili.com/video/BV1FT411C7wM/?p=39}{绝对连续函数与微积分基本定理}.
+			
+			\vspace{2em}
+			
+			\begin{figure}[thbp!]
+				\centering
+				\includegraphics[width=0.4\linewidth]{figure/4.7.2-1}
+				\caption{$Vitali \,\, Covering \,\, Lemma$}
+				\label{pic : 4.7.2-1} % 添加图像引用标签
+			\end{figure}
+		\end{proof}
+	\end{lemma}
+
+	\newpage
+	根据\textbf{Vitali覆盖引理 (Lemma \ref{lemma 4.7.1})}，我们可马上得到推论.
+	\begin{corollary}\label{cor 4.7.2}
+		Suppose $E$ is a set of finite measure and $\mathcal{B}$ is a Vitali Covering of $E$. Then $\forall \delta > 0$, we can find finitely many balls $B_1 , \cdots , B_N \in \mathcal{B}$, $\st$
+		\begin{align}
+			m\left( E \backslash \bigcup_{i = 1}^{N}{B_i} \right) < 2\delta
+		\end{align}
+		
+		\vspace{4em}
+		\begin{proof}
+			根据\textbf{Thm \ref{thm 1.3.4} (Lebesgue测度的(外)正规性)}，$\exists E \subset O$ open, $\st$
+			\begin{center}
+				$m\left( O \backslash E \right) < \delta$
+			\end{center}
+			By \textbf{Vitali Covering Lemma (Lemma \ref{lemma 4.7.1})}, $\exists B_1 , \cdots , B_N \in \mathcal{B}$ disjoint, $\st$
+			\begin{align}
+				\sum_{i = 1}^{N}{m(B_i)} \geq m(E) - \delta
+			\end{align}
+			Then since
+			\begin{align}
+				\left( E \backslash \bigcup_{i = 1}^{N}{B_i} \right) \sqcup \bigcup_{i = 1}^{N}{B_i} = E \subset O
+			\end{align}
+			We have
+			\begin{align}
+				m\left( E \backslash \bigcup_{i = 1}^{N}{B_i} \right)
+				&\leq m(O) - m\left( \bigcup_{i = 1}^{N}{B_i} \right) \\
+				&\leq m(O) + \delta - m(E) \\
+				&= m(O \backslash E) + \delta \\
+				&< 2\delta
+			\end{align}
+		\end{proof}
+	\end{corollary}
+
+\newpage
+\subsection{微积分基本定理}
+	在介绍\textbf{微积分基本定理}之前，先来给出一个结论.
+	\begin{thm}\label{thm 4.7.3}
+		If $F$ is absolutely continuous on $[a , b]$, then $F^{'}(x)$ exists for a.e. $x \in [a , b]$. In particular, if $F^{'}(x) = 0$ for a.e. $x \in [a , b]$, then
+		\begin{center}
+			$F$ is constant.
+		\end{center}
+		
+		\vspace{2em}
+		\begin{rmk}
+			事实上，利用该定理即可说明，\textbf{Cantor-Lebesgue Function (Example \ref{ex 4.6.1})}不是\textbf{绝对连续函数}.
+		\end{rmk}
+		
+		\vspace{2em}
+		\begin{proof}
+			根据\textbf{绝对连续函数}的\textbf{性质2}，$F \in AC([a , b]) \,\, \Rightarrow \,\, F \in BV([a , b])$ and continuous. \\
+			Then by \textbf{Thm \ref{thm 4.6.1} (连续有界变差函数几乎处处可微)},
+			\begin{center}
+				$F^{'}(x)$ exists for a.e. $x \in [a , b]$.
+			\end{center}
+			
+			\vspace{1em}
+			If $F^{'}(x) = 0$ for a.e. $x \in [a , b]$, then it suffices to show 
+			\begin{center}
+				$F(a) = F(b)$ \\
+				(因为如果这条结论成立，则对于$\forall x \in [a , b]$, 都有$F \in AC([a , x])$, 从而$F(a) = F(x)$)
+			\end{center}
+			
+			\vspace{1em}
+			Let $E = \left\{ x \in (a , b) \mid F^{'}(x) = 0 \right\}$, then $m(E) = m([a , b]) = b - a$. \\
+			$\forall x \in E$, we have
+			\begin{align}
+				\lim_{h \to 0}{\left| \frac{F(x + h) - F(x)}{h} \right|} = 0
+			\end{align}
+			$\Leftrightarrow \,\, \forall \epsilon > 0 , \exists \widetilde{\delta} > 0 , \st$
+			\begin{align}
+				\left| F(x + h) - F(x) \right| < \epsilon \left| h \right|  , \,\, \left| h \right| < \widetilde{\delta} 
+			\end{align}
+			Then for all $0 < \eta < \widetilde{\delta}$, $\exists 0 < h_1 , h_2 < \widetilde{\delta}$, $\st$ 
+			\begin{center}
+				$h_1 + h_2 < \eta$
+			\end{center}
+			Let $a_x = x - h_1 \in (x - \widetilde{\delta} , x)$ and $b_x = x + h_2 \in (x , x + \widetilde{\delta})$. Then $b_x - a_x = h_1 + h_2 < \eta$ and
+			\begin{align}
+				\left| F(x + h_2) - F(x) \right| &< \epsilon \cdot h_2 \\
+				\left| F(x) - F(x - h_1) \right| &< \epsilon \cdot h_1
+			\end{align}
+			Thus
+			\begin{align}
+				\left| F(b_x) - F(a_x) \right| 
+				&\leq \left| F(x + h_2) - F(x) \right| + \left| F(x) - F(x - h_1) \right| \\
+				&< \epsilon(h_1 + h_2) \\
+				&= \epsilon(b_x - a_x)
+			\end{align}
+			Therefore, for all $x \in E$, $\forall 0 < \eta < \widetilde{\delta}$, $\exists I_x = (a_x , b_x) \subset (a , b)$ containing $x$, $\st$
+			\begin{align}
+				\left| F(b_x) - F(a_x) \right| < \epsilon(b_x - a_x) \,\, and \,\, b_k - a_k < \eta
+			\end{align}
+			Then the collection of open intervals
+			\begin{align}
+				\mathcal{B} = \left\{ (a_x , b_x) \mid x \in (a , b) \right\}
+			\end{align}
+			is a vitali covering of $E$. \\
+			Since $F \in AC([a , b])$, then for $\epsilon > 0$, $\exists \delta > 0$, $\st$
+			\begin{align}
+				\forall \sum_{k = 1}^{N}{(b_k - a_k)} < \delta , \,\, (a_k , b_k) \,\, disjoint \,\, 
+				\Rightarrow \,\, \sum_{k = 1}^{N}{\left| F(b_k) - F(a_k) \right|} < \epsilon
+			\end{align}
+			By \textbf{Vitali Covering Lemma (Lemma \ref{lemma 4.7.1})}, for $\delta > 0$, $\exists$ disjoint $\left\{ (a_i , b_i) \mid 1 \leq i \leq N \right\} \subset \mathcal{B}$, $\st$
+			\begin{align}
+				\sum_{i = 1}^{N}{m\left( (a_i , b_i) \right)} \geq m(E) - \delta = (b - a) - \delta
+			\end{align}
+			根据式(4.221)可知，
+			\begin{align}
+				&\left| F(b_i) - F(a_i) \right| \leq \epsilon (b_i - a_i) \\
+				&\Rightarrow \sum_{i = 1}^{N}{\left| F(b_i) - F(a_i) \right|} 
+				\leq \epsilon \cdot \sum_{i = 1}^{N}{(b_i - a_i)} 
+				\leq \epsilon (b - a)
+			\end{align}
+			
+			\begin{figure}[thbp!]
+				\centering
+				\includegraphics[width=0.4\linewidth]{figure/4.7.3-1}
+				\caption{$Collection \left\{ (a_i , b_i) \right\}_{i = 1}^{N}$ on $[a , b]$}
+				\label{pic : 4.7.3-1} % 添加图像引用标签
+			\end{figure}
+			
+			显然，$[a , b]$ 去除这有限个开区间$\left\{ (a_i , b_i) \right\}_{i = 1}^{N}$ 后，剩下有限个闭区间，即
+			\begin{align}
+				[a , b] \backslash \bigcup_{i = 1}^{N}{(a_i , b_i)} = \bigcup_{k = 1}^{M}{(\alpha_k , \beta_k)}
+			\end{align}
+			并且根据$\sum_{i = 1}^{N}{m\left( (a_i , b_i) \right)} \geq m(E) - \delta = (b - a) - \delta$ 可知
+			\begin{align}
+				\sum_{k = 1}^{M}{(\beta_k - \alpha_k)} \leq \delta
+			\end{align}
+			而这再结合$F \in AC([a , b])$, 根据\textbf{绝对连续函数}的定义, 可以得到
+			\begin{align}
+				\sum_{k = 1}^{M}{\left| F(\beta_k) - F(\alpha_k) \right|} \leq \epsilon
+			\end{align}
+			综上所述, $\left\{ (a_i , b_i) \right\}_{i = 1}^N$ 和$\left\{ (\alpha_k , \beta_k) \right\}_{k = 1}^M$ 共同构成了$[a , b]$ 的一个分划.
+			\begin{align}
+				\left| F(b) - F(a) \right| 
+				&\leq \sum_{i = 1}^{N}{\left| F(b_i) - F(a_i) \right|} + \sum_{k = 1}^{M}{\left| F(\beta_k) - F(\alpha_k) \right|} \\
+				&\leq \epsilon (b - a) + \epsilon , \,\, \forall \epsilon > 0
+ 			\end{align}
+ 			Since $\epsilon > 0$ is arbitrary, letting $\epsilon \to 0$, we have
+ 			\begin{align}
+ 				F(b) = F(a)
+ 			\end{align}
+		\end{proof}
+	\end{thm}
+
+	\newpage
+	最后我们来给出\textbf{微积分基本定理}.
+	\begin{thm}\label{thm 4.7.4}
+		\textbf{Fundamental Theorem of Calculus}. \\
+		Suppose $F$ is absolutely continuous on $[a , b]$. Then $F^{'}$ exists a.e. and integrable. Moreover, 
+		\begin{align}
+			F(x) - F(a) = \int_{a}^{x}{F^{'}(y) dy} , \,\, x \in [a , b]
+		\end{align}
+		Conversely, if $f \in \mathcal{L}^{1}([a , b])$, then for the function
+		\begin{align}
+			F(x) = \int_{a}^{x}{f(y) dy}
+		\end{align}
+		It satisfies $F^{'}(x) = f(x)$ for a.e. $x \in [a , b]$.
+		
+		\vspace{4em}
+		\begin{proof}
+			根据\textbf{绝对连续函数}的\textbf{性质2}，$F \in AC([a , b]) \,\, \Rightarrow \,\, F \in BV([a , b])$ and continuous. \\
+			Then by \textbf{Thm \ref{thm 4.6.1} (连续有界变差函数几乎处处可微)},
+			\begin{center}
+				$F^{'}(x)$ exists for a.e. $x \in [a , b]$.
+			\end{center}
+			同时可证明，对\textbf{Weak Newton-Leibniz Formula (Cor \ref{cor 4.6.2})}的条件改为\textbf{BV + continuous}, 仍有
+			\begin{align}
+				\int_{a}^{b}{F^{'}(x) dx} \leq F(b) - F(a) < \infty
+			\end{align}
+			这样就说明$F^{'}$ is integrable. 
+			
+			\vspace{1em}
+			
+			Let
+			\begin{align}
+				G(x) = \int_{a}^{x}{F^{'}(y) dy}
+			\end{align}
+			Then $G \in AC([a , b])$. So is $H(x) = G(x) - F(x)$. (可以证明\textbf{绝对连续函数对加减运算封闭}) \\
+			Since $G^{'}$ exists a.e. 
+			\begin{align}
+				H^{'}(x)
+				=G^{'}(x) - F^{'}(x) 
+				= \lim_{h \to 0}{\frac{1}{h} \int_{x}^{x + h}{F^{'}(y) dy}} - F^{'}(x)
+				= F^{'}(x) - F^{'}(x)
+				= 0
+			\end{align}
+			Thus $H^{'}(x) = 0$ for a.e. $x \in [a , b]$. By \textbf{Thm \ref{thm 4.7.3}}, $H = G - F$ is constant. \\
+			Therefore
+			\begin{align}
+				&H(a) = H(x) , \,\, for \,\, a.e. \,\, x \in [a , b] \\
+				&\Rightarrow -F(a) = \int_{a}^{x}{F^{'}(y) dy} - F(x)
+			\end{align}
+			i.e.
+			\begin{align}
+				\int_{a}^{x}{F^{'}(y) dy} = F(x) - F(a) \,\, for \,\, a.e. \,\, x \in [a , b]
+			\end{align}
+		\end{proof}
+	\end{thm}
+	
 
 
 	%  ############################
